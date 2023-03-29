@@ -33,10 +33,4 @@ public class UserRoleEntity {
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
-
-//    @ManyToOne
-//    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
-//    @ToString.Exclude // không sử dụng trong toString()
-//    @JoinColumn(name="created_by")
-//    private UserEntity createdBy;
 }

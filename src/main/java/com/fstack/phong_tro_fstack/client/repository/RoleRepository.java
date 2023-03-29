@@ -1,4 +1,4 @@
-package com.fstack.phong_tro_fstack.test.repository;
+package com.fstack.phong_tro_fstack.client.repository;
 
 import com.fstack.phong_tro_fstack.base.entity.RoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

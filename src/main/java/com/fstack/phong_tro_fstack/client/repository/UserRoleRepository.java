@@ -1,4 +1,4 @@
-package com.fstack.phong_tro_fstack.test.repository;
+package com.fstack.phong_tro_fstack.client.repository;
 
 import com.fstack.phong_tro_fstack.base.entity.UserRoleEntity;
 import com.fstack.phong_tro_fstack.base.entity.compositekey.UserRoleKey;

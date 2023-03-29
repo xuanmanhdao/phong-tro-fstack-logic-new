@@ -42,9 +42,9 @@ public class UserEntity extends BaseEntity{
     @JsonIgnore
     private Set<UserRoleEntity> userRoleEntities;
 
-//    @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL)
-//    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
-//    @ToString.Exclude // không sử dụng trong toString()
-//    @JsonIgnore
-//    private Set<UserRoleEntity> createdRole;
+    @OneToMany(mappedBy = "userEntity")
+    private Set<PostEntity> postEntities;
+
+    @OneToMany(mappedBy = "userEntity")
+    private Set<RateEntity> rateEntities;
 }
