@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.32, for Win64 (x86_64)
 --
--- Host: localhost    Database: phongtrostacktest
+-- Host: localhost    Database: phongtrofstacktest
 -- ------------------------------------------------------
 -- Server version	8.0.32
 
@@ -16,28 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `address`
+-- Table structure for table `account_verification`
 --
 
-DROP TABLE IF EXISTS `address`;
+DROP TABLE IF EXISTS `account_verification`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `address` (
+CREATE TABLE `account_verification` (
   `id` bigint NOT NULL AUTO_INCREMENT,
-  `city` varchar(255) DEFAULT NULL,
-  `district` varchar(255) DEFAULT NULL,
-  `ward` varchar(255) DEFAULT NULL,
+  `created_at` datetime(6) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `token` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `address`
+-- Dumping data for table `account_verification`
 --
 
-LOCK TABLES `address` WRITE;
-/*!40000 ALTER TABLE `address` DISABLE KEYS */;
-/*!40000 ALTER TABLE `address` ENABLE KEYS */;
+LOCK TABLES `account_verification` WRITE;
+/*!40000 ALTER TABLE `account_verification` DISABLE KEYS */;
+/*!40000 ALTER TABLE `account_verification` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -49,13 +49,14 @@ DROP TABLE IF EXISTS `area`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `area` (
   `id` bigint NOT NULL AUTO_INCREMENT,
+  `city` varchar(255) NOT NULL,
+  `district` varchar(255) NOT NULL,
+  `exact_address` varchar(255) DEFAULT NULL,
   `latitude` varchar(50) DEFAULT NULL,
   `longitude` varchar(50) DEFAULT NULL,
   `name` varchar(50) NOT NULL,
-  `id_address` bigint NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FKmybvbcf3bn615qupufut3xqo2` (`id_address`),
-  CONSTRAINT `FKmybvbcf3bn615qupufut3xqo2` FOREIGN KEY (`id_address`) REFERENCES `address` (`id`)
+  `ward` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -83,7 +84,6 @@ CREATE TABLE `post` (
   `number_date` int DEFAULT NULL,
   `phone_number` varchar(12) NOT NULL,
   `phone_zalo` varchar(12) NOT NULL,
-  `short_description` varchar(255) NOT NULL,
   `status` int NOT NULL,
   `thumbnail` varchar(255) DEFAULT NULL,
   `title` varchar(50) NOT NULL,
@@ -150,7 +150,7 @@ CREATE TABLE `role` (
   `created_at` datetime(6) NOT NULL,
   `name` varchar(50) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -159,6 +159,7 @@ CREATE TABLE `role` (
 
 LOCK TABLES `role` WRITE;
 /*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'2021-10-31 11:30:45.000000','admin');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,6 +197,33 @@ LOCK TABLES `room` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `transaction`
+--
+
+DROP TABLE IF EXISTS `transaction`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `transaction` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `created_at` datetime(6) NOT NULL,
+  `deposit_amount` float NOT NULL,
+  `id_user` bigint DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK2bf2lb32im48dxm8kd3usmuy8` (`id_user`),
+  CONSTRAINT `FK2bf2lb32im48dxm8kd3usmuy8` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `transaction`
+--
+
+LOCK TABLES `transaction` WRITE;
+/*!40000 ALTER TABLE `transaction` DISABLE KEYS */;
+/*!40000 ALTER TABLE `transaction` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -211,8 +239,9 @@ CREATE TABLE `user` (
   `id_card` varchar(20) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `phone_number` varchar(12) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UK_ob8kqyqqgmefl0aco34akdtpe` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,6 +250,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,20000,'2021-10-31 11:30:45.000000','xuanmanhdao2001@gmail.com','Xuân Mạnh','0324234','123','023412');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -248,6 +278,7 @@ CREATE TABLE `user_role` (
 
 LOCK TABLES `user_role` WRITE;
 /*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
+INSERT INTO `user_role` VALUES (1,1,'2023-03-30 22:46:57.187000');
 /*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -260,4 +291,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-29 22:00:14
+-- Dump completed on 2023-03-31 21:52:04
