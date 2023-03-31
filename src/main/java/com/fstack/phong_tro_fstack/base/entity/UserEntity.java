@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserEntity extends BaseEntity{
-    @Column(name = "email", length = 50, nullable = false)
+    @Column(name = "email", length = 50, nullable = false, unique = true)
     private String email;
 
     @Column(name = "password", length = 255, nullable = false)
@@ -47,4 +47,7 @@ public class UserEntity extends BaseEntity{
 
     @OneToMany(mappedBy = "userEntity")
     private Set<RateEntity> rateEntities;
+
+    @OneToMany(mappedBy = "userEntity")
+    private Set<TransactionEntity> transactionEntities;
 }

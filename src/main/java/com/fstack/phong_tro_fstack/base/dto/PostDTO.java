@@ -14,8 +14,6 @@ public class PostDTO extends BaseDTO{
 
     private String title;
 
-    private String shortDescription;
-
     private String content;
 
     private String phoneNumber;

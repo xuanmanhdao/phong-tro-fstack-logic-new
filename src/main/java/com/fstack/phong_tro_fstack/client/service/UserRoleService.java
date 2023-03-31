@@ -11,6 +11,7 @@ import com.fstack.phong_tro_fstack.client.repository.UserRepository;
 import com.fstack.phong_tro_fstack.client.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +33,7 @@ public class UserRoleService {
         return userRoleRepository.findAll();
     }
 
+    @Transactional
     public UserRoleDTO save(UserRoleDTO userRoleDTO) {
         UserRoleEntity userRoleEntity = userRoleConverter.toEntity(userRoleDTO);
         UserEntity userEntity = userRepository.findOneById(userRoleDTO.getUserRoleKeyDTO().getIdUser());

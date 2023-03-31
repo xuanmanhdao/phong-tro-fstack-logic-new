@@ -20,9 +20,6 @@ public class PostEntity extends BaseEntity{
     @Column(name = "title", length = 50, nullable = false)
     private String title;
 
-    @Column(name = "short_description", length = 255, nullable = false)
-    private String shortDescription;
-
     @Column(name = "content", columnDefinition = "text", nullable = false)
     private String content;
 

@@ -4,13 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressDTO extends BaseDTO{
-    private String ward;
+public class TransactionDTO extends BaseDTO{
+    private Float depositAmount;
 
-    private String district;
+    private Date createdAt;
 
-    private String city;
+    private Long idUser;
 }

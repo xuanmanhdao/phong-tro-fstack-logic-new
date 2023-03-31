@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" class="no-js"> <!--<![endif]-->
+<head th:replace="client/fragments/head :: head">
+    <title th:text="${title}">This is the default description</title>
+</head>
+<body>
+<div id="preloader">
+    <div id="status">&nbsp;</div>
+</div>
+<!-- Body content -->
+<div th:replace="client/fragments/header :: header"></div>
+<!--End top header -->
+
+<div th:replace="client/fragments/navbar :: navbar"></div>
+<!-- End of nav bar -->
+
+<div th:replace="client/fragments/slider :: slider"></div>
+<!--End of slider-->
+
+<div th:replace="client/fragments/home-lager-search :: home-lager-search"></div>
+<!--End of home search-->
+
+<div layout:fragment="content"></div>
+<!-- property area -->
+
+<div th:replace="client/fragments/footer :: footer"></div>
+<!-- Footer area-->
+
+<!--<div th:fragment="scripts"></div>-->
+<script th:src="@{client/assets/js/modernizr-2.6.2.min.js}"></script>
+
+<script th:src="@{client/assets/js/jquery-1.10.2.min.js}"></script>
+<script th:src="@{client/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{client/assets/js/bootstrap-select.min.js}"></script>
+<script th:src="@{client/assets/js/bootstrap-hover-dropdown.js}"></script>
+
+<script th:src="@{client/assets/js/easypiechart.min.js}"></script>
+<script th:src="@{client/assets/js/jquery.easypiechart.min.js}"></script>
+
+<script th:src="@{client/assets/js/owl.carousel.min.js}"></script>
+
+<script th:src="@{client/assets/js/wow.js}"></script>
+
+<script th:src="@{client/assets/js/icheck.min.js}"></script>
+<script th:src="@{client/assets/js/price-range.js}"></script>
+
+<script th:src="@{client/assets/js/main.js}"></script>
+<!--Script area -->
+</body>
+</html>

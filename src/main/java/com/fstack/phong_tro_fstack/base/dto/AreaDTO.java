@@ -14,5 +14,9 @@ public class AreaDTO extends BaseDTO{
 
     private String latitude;
 
-    private Long idAddress;
+    private String ward;
+
+    private String district;
+
+    private String city;
 }

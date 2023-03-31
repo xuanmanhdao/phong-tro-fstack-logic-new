@@ -22,9 +22,17 @@ public class AreaEntity extends BaseEntity{
     @Column(name = "latitude", length = 50)
     private String latitude;
 
-    @OneToOne
-    @JoinColumn(name = "id_address", nullable = false)
-    private AddressEntity addressEntity;
+    @Column(name = "ward", length = 255, nullable = false)
+    private String ward;
+
+    @Column(name = "district", length = 255, nullable = false)
+    private String district;
+
+    @Column(name = "city", length = 255, nullable = false)
+    private String city;
+
+    @Column(name="exact_address", length = 255)
+    private String exactAddress;
 
     @OneToOne(mappedBy = "areaEntity")
     private PostEntity postEntity;
