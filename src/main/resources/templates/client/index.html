@@ -4,7 +4,7 @@
       layout:decorate="~{client/layout/default}"
       class="no-js">
 <head>
-    <title th:text="Home Page"></title>
+    <title th:text="Trang Chủ"></title>
 </head>
 <body>
 <!-- property area -->
@@ -22,7 +22,7 @@
         <div class="container slider-content">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
-                    <h2>property Searching Just Got So Easy</h2>
+                    <h2>Tìm kiếm chỉ với một cú nhấp chuột</h2>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi deserunt deleniti, ullam
                         commodi sit ipsam laboriosam velit adipisci quibusdam aliquam teneturo!</p>
 
@@ -38,12 +38,12 @@
                 <div class="search-form wow pulse">
                     <form action="" class=" form-inline">
                         <div class="col-md-12">
-                            <div class="col-md-4">
-                                <input type="text" class="form-control" placeholder="Key word">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control" placeholder="Tên hoặc địa chỉ nhà trọ">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <select id="lunchBegins" class="selectpicker" data-live-search="true"
-                                        data-live-search-style="begins" title="Select your city">
+                                        data-live-search-style="begins" title="Tỉnh/Thành Phố">
                                     <option>New york, CA</option>
                                     <option>Paris</option>
                                     <option>Casablanca</option>
@@ -52,21 +52,28 @@
                                     <option>kyoto , shibua</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
-                                <select id="basic" class="selectpicker show-tick form-control">
-                                    <option> -Status-</option>
+                            <div class="col-md-3">
+                                <select id="basic" class="selectpicker show-tick form-control"
+                                        title="Quận/Huyện">
                                     <option>Rent</option>
                                     <option>Boy</option>
                                     <option>used</option>
-
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <select id="phuong" class="selectpicker show-tick form-control"
+                                        title="Phường/Xã">
+                                    <option>Rent</option>
+                                    <option>Boy</option>
+                                    <option>used</option>
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-12 ">
+                        <div class="col-md-12">
                             <div class="search-row">
 
-                                <div class="col-sm-3">
-                                    <label for="price-range">Price range ($):</label>
+                                <div class="col-sm-6">
+                                    <label for="price-range">Khoảng giá (₫):</label>
                                     <input type="text" class="span2" value="" data-slider-min="0"
                                            data-slider-max="600" data-slider-step="5"
                                            data-slider-value="[0,450]" id="price-range"><br/>
@@ -75,118 +82,13 @@
                                 </div>
                                 <!-- End of  -->
 
-                                <div class="col-sm-3">
-                                    <label for="property-geo">Property geo (m2) :</label>
+                                <div class="col-sm-6">
+                                    <label for="property-geo">Khoảng diện tích (m2) :</label>
                                     <input type="text" class="span2" value="" data-slider-min="0"
                                            data-slider-max="600" data-slider-step="5"
                                            data-slider-value="[50,450]" id="property-geo"><br/>
                                     <b class="pull-left color">40m</b>
                                     <b class="pull-right color">12000m</b>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="col-sm-3">
-                                    <label for="price-range">Min baths :</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                           data-slider-max="600" data-slider-step="5"
-                                           data-slider-value="[250,450]" id="min-baths"><br/>
-                                    <b class="pull-left color">1</b>
-                                    <b class="pull-right color">120</b>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="col-sm-3">
-                                    <label for="property-geo">Min bed :</label>
-                                    <input type="text" class="span2" value="" data-slider-min="0"
-                                           data-slider-max="600" data-slider-step="5"
-                                           data-slider-value="[250,450]" id="min-bed"><br/>
-                                    <b class="pull-left color">1</b>
-                                    <b class="pull-right color">120</b>
-                                </div>
-                                <!-- End of  -->
-
-                            </div>
-
-                            <div class="search-row">
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Fire Place(3100)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Dual Sinks(500)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Hurricane Shutters(99)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Swimming Pool(1190)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> 2 Stories(4600)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Emergency Exit(200)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Laundry Room(10073)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> Jog Path(1503)
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- End of  -->
-
-                                <div class="col-sm-3">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> 26' Ceilings(1200)
-                                        </label>
-                                    </div>
                                 </div>
                                 <!-- End of  -->
                             </div>
@@ -207,7 +109,7 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
                     <!-- /.feature title -->
-                    <h2>Top submitted property</h2>
+                    <h2>Phòng mới</h2>
                     <p>Nulla quis dapibus nisl. Suspendisse ultricies commodo arcu nec pretium. Nullam sed arcu
                         ultricies . </p>
                 </div>
