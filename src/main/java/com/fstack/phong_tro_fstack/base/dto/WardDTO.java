@@ -8,11 +8,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WardDTO{
-    private char id;
+    private String id;
 
     private String name;
 
     private String type;
 
-    private char idDistrict;
+    private Character idDistrict;
 }

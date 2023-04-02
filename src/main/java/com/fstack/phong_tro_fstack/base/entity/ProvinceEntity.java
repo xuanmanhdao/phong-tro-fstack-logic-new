@@ -1,9 +1,8 @@
 package com.fstack.phong_tro_fstack.base.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Set;
 
@@ -12,10 +11,15 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class ProvinceEntity{
+//    @Id
+//    @Column(name = "id", columnDefinition = "Char(6)")
+//    private Character id;
+
     @Id
-    @Column(name = "id", columnDefinition = "Char(6)")
-    private char id;
+    @Column(name = "id")
+    private String id;
 
     @Column(name = "name", length = 45, nullable = false)
     private String name;
@@ -24,8 +28,11 @@ public class ProvinceEntity{
     private String type;
 
     @OneToMany(mappedBy = "provinceEntity")
+    @JsonIgnore
     private Set<DistrictEntity> districtEntities;
 
     @OneToMany(mappedBy = "provinceEntity")
+    @JsonIgnore
     private Set<AreaEntity> areaEntities;
+
 }

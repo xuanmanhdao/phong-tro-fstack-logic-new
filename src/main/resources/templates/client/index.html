@@ -42,14 +42,17 @@
                                 <input type="text" class="form-control" placeholder="Tên hoặc địa chỉ nhà trọ">
                             </div>
                             <div class="col-md-3">
-                                <select id="lunchBegins" class="selectpicker" data-live-search="true"
+<!--                                <select id="property_city__select" class="selectpicker" data-live-search="true"-->
+<!--                                        data-live-search-style="begins" title="Tỉnh/Thành Phố">-->
+<!--                                    <option>New york, CA</option>-->
+<!--                                    <option>Paris</option>-->
+<!--                                    <option>Casablanca</option>-->
+<!--                                    <option>Tokyo</option>-->
+<!--                                    <option>Marraekch</option>-->
+<!--                                    <option>kyoto , shibua</option>-->
+<!--                                </select>-->
+                                <select id="property_city__select" class="selectpicker" data-live-search="true"
                                         data-live-search-style="begins" title="Tỉnh/Thành Phố">
-                                    <option>New york, CA</option>
-                                    <option>Paris</option>
-                                    <option>Casablanca</option>
-                                    <option>Tokyo</option>
-                                    <option>Marraekch</option>
-                                    <option>kyoto , shibua</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -75,20 +78,20 @@
                                 <div class="col-sm-6">
                                     <label for="price-range">Khoảng giá (₫):</label>
                                     <input type="text" class="span2" value="" data-slider-min="0"
-                                           data-slider-max="600" data-slider-step="5"
-                                           data-slider-value="[0,450]" id="price-range"><br/>
-                                    <b class="pull-left color">2000$</b>
-                                    <b class="pull-right color">100000$</b>
+                                           data-slider-max="20000000" data-slider-step="5"
+                                           data-slider-value="[500000,2000000]" id="price-range"><br/>
+                                    <b class="pull-left color">0₫</b>
+                                    <b class="pull-right color">30000000₫</b>
                                 </div>
                                 <!-- End of  -->
 
                                 <div class="col-sm-6">
                                     <label for="property-geo">Khoảng diện tích (m2) :</label>
                                     <input type="text" class="span2" value="" data-slider-min="0"
-                                           data-slider-max="600" data-slider-step="5"
-                                           data-slider-value="[50,450]" id="property-geo"><br/>
-                                    <b class="pull-left color">40m</b>
-                                    <b class="pull-right color">12000m</b>
+                                           data-slider-max="200" data-slider-step="5"
+                                           data-slider-value="[15,30]" id="property-geo"><br/>
+                                    <b class="pull-left color">0m2</b>
+                                    <b class="pull-right color">200m2</b>
                                 </div>
                                 <!-- End of  -->
                             </div>
@@ -474,5 +477,22 @@
 
 </div>
 <!--Script area -->
+<script>
+    $(document).ready(function() {
+        $("#property_city__select").click(function() {
+            $.ajax({
+                url: "/api/v1/rest/province",
+                type: "GET",
+                success: function(response) {
+                    $("#property_city__select").html(response);
+                    console.log("Success: " + response);
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error: " + error);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>

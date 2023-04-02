@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProvinceDTO{
-    private char id;
+    private String id;
 
     private String name;
 
