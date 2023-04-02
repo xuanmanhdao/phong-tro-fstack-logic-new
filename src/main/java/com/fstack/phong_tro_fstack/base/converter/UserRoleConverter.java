@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserRoleConverter {
     public UserRoleEntity toEntity(UserRoleDTO userRoleDTO) {
-        Long idUser= userRoleDTO.getUserRoleKeyDTO().getIdUser();
+        Long idUser= userRoleDTO.getUserRoleKeyDTO().getIdUser(); 
         Long idRole= userRoleDTO.getUserRoleKeyDTO().getIdRole();
         UserRoleKey userRoleKey= new UserRoleKey();
         userRoleKey.setIdUser(idUser);
