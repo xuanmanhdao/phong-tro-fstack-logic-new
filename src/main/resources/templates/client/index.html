@@ -42,33 +42,25 @@
                                 <input type="text" class="form-control" placeholder="Tên hoặc địa chỉ nhà trọ">
                             </div>
                             <div class="col-md-3">
-<!--                                <select id="property_city__select" class="selectpicker" data-live-search="true"-->
-<!--                                        data-live-search-style="begins" title="Tỉnh/Thành Phố">-->
-<!--                                    <option>New york, CA</option>-->
-<!--                                    <option>Paris</option>-->
-<!--                                    <option>Casablanca</option>-->
-<!--                                    <option>Tokyo</option>-->
-<!--                                    <option>Marraekch</option>-->
-<!--                                    <option>kyoto , shibua</option>-->
-<!--                                </select>-->
-                                <select id="property_city__select" class="selectpicker" data-live-search="true"
-                                        data-live-search-style="begins" title="Tỉnh/Thành Phố">
+                                <select id="property_city__select" class="selectpicker"
+                                        data-live-search="true"
+                                        title="Tỉnh/Thành Phố">
+                                    <!--                                        th:field="*{selectedOption}"-->
+                                    <option disabled>--Chọn một tùy chọn--</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select id="basic" class="selectpicker show-tick form-control"
+                                <select id="property_district__select" class="selectpicker"
+                                        data-live-search="true"
                                         title="Quận/Huyện">
-                                    <option>Rent</option>
-                                    <option>Boy</option>
-                                    <option>used</option>
+                                    <option disabled>--Chọn một tùy chọn--</option>
                                 </select>
                             </div>
                             <div class="col-md-3">
-                                <select id="phuong" class="selectpicker show-tick form-control"
+                                <select id="property_ward__select" class="selectpicker"
+                                        data-live-search="true"
                                         title="Phường/Xã">
-                                    <option>Rent</option>
-                                    <option>Boy</option>
-                                    <option>used</option>
+                                    <option disabled>--Chọn một tùy chọn--</option>
                                 </select>
                             </div>
                         </div>
@@ -474,25 +466,7 @@
         </div>
     </div>
 
-
 </div>
 <!--Script area -->
-<script>
-    $(document).ready(function() {
-        $("#property_city__select").click(function() {
-            $.ajax({
-                url: "/api/v1/rest/province",
-                type: "GET",
-                success: function(response) {
-                    $("#property_city__select").html(response);
-                    console.log("Success: " + response);
-                },
-                error: function(xhr, status, error) {
-                    console.log("Error: " + error);
-                }
-            });
-        });
-    });
-</script>
 </body>
 </html>

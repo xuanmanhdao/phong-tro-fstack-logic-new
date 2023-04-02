@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <!--[if lt IE 7]>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>
-<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml" class="no-js lt-ie9"> <![endif]-->
+<html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+      class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" class="no-js"> <!--<![endif]-->
 <head th:replace="client/fragments/head :: head">
@@ -47,5 +50,80 @@
 
 <script th:src="@{client/assets/js/main.js}"></script>
 <!--Script area -->
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: "api/v1/rest/province",
+            type: "GET",
+            success: function (response) {
+                console.log("Success get province!");
+                $.each(response, function (index, option) {
+                    $("#property_city__select").append("<option value='" + option.id + "'>" + option.name + "</option>");
+                });
+                $("#property_city__select").selectpicker("refresh");
+            },
+            error: function (xhr, status, error) {
+                console.log("Error: " + error);
+            }
+        });
+
+        $("#property_city__select").change(function () {
+            let selectedOption = $(this).val();
+            clearElementSelection("property_district__select", "property_ward__select");
+            console.log("api/v1/rest/district/province/" + selectedOption);
+            $.ajax({
+                url: "api/v1/rest/district/province/" + selectedOption,
+                type: "GET",
+                success: function (response) {
+                    console.log("Success get district!");
+                    $.each(response, function (index, option) {
+                        $("#property_district__select").append("<option value='" + option.id + "'>" + option.name + "</option>");
+                    });
+                    $("#property_district__select").selectpicker("refresh");
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error: " + error);
+                }
+            });
+        });
+
+        $("#property_district__select").change(function () {
+            let selectedOption = $(this).val();
+            console.log("api/v1/rest/ward/district/" + selectedOption);
+            clearElementSelection("property_ward__select");
+            $.ajax({
+                url: "api/v1/rest/ward/district/" + selectedOption,
+                type: "GET",
+                success: function (response) {
+                    console.log("Success get ward!");
+                    $.each(response, function (index, option) {
+                        $("#property_ward__select").append("<option value='" + option.id + "'>" + option.name + "</option>");
+                    });
+                    $("#property_ward__select").selectpicker("refresh");
+                },
+                error: function (xhr, status, error) {
+                    console.log("Error: " + error);
+                }
+            });
+        });
+
+        function clearElementSelection() {
+            for (let param of arguments) {
+                console.log(param);
+                let selectElement = document.getElementById(param);
+                let selectOptions = selectElement.options;
+                for (let i = selectOptions.length - 1; i >= 0; i--) {
+                    selectOptions[i].remove(); // Xóa tùy chọn
+                }
+                let defaultOption = document.createElement("option");
+                defaultOption.text = "--Chọn một tùy chọn--";
+                defaultOption.value = "";
+                defaultOption.disabled = true;
+                defaultOption.selected = true;
+                selectElement.add(defaultOption); // Thêm tùy chọn mặc định
+            }
+        }
+    });
+</script>
 </body>
 </html>

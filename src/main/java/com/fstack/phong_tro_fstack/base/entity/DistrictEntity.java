@@ -34,4 +34,10 @@ public class DistrictEntity{
 
     @OneToMany(mappedBy = "districtEntity")
     private Set<AreaEntity> areaEntities;
+
+    public DistrictEntity(String id, String name, String type) {
+        this.id = id;
+        this.name = name;
+        this.type = type;
+    }
 }

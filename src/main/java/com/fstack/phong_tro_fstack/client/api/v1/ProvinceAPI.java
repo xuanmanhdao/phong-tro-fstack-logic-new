@@ -1,8 +1,10 @@
 package com.fstack.phong_tro_fstack.client.api.v1;
 
+import com.fstack.phong_tro_fstack.base.dto.ProvinceDTO;
 import com.fstack.phong_tro_fstack.base.entity.ProvinceEntity;
 import com.fstack.phong_tro_fstack.client.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +18,8 @@ public class ProvinceAPI {
     private ProvinceService provinceService;
 
     @GetMapping
-    public List<ProvinceEntity> getAll(){
-        return provinceService.getAll();
+    public ResponseEntity<?> getAll(){
+        List<ProvinceDTO> result =  provinceService.getAll();
+        return ResponseEntity.ok(result);
     }
 }
