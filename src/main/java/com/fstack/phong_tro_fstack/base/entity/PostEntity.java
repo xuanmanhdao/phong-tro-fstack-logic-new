@@ -45,7 +45,7 @@ public class PostEntity extends BaseEntity{
     @Column(name = "number_date")
     private Integer numberDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
     private UserEntity userEntity;
 

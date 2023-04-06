@@ -1,6 +1,7 @@
 package com.fstack.phong_tro_fstack.client.api.v1;
 
 import com.fstack.phong_tro_fstack.base.dto.PostDTO;
+import com.fstack.phong_tro_fstack.client.output.post.PostResponse;
 import com.fstack.phong_tro_fstack.client.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +18,15 @@ public class PostAPI {
     @Autowired
     private PostService postService;
 
-    @GetMapping
-    public ResponseEntity<?> findAllNumberDateOtherZeroOrderByCreatedAt() {
-        List<PostDTO> result = postService.getAllByNumberDateOtherZeroOrderByCreatedAt();
+//    @GetMapping
+//    public ResponseEntity<?> findAllNumberDateOtherZeroOrderByCreatedAt() {
+//        List<PostDTO> result = postService.getAllByNumberDateOtherZeroOrderByCreatedAt();
+//        return ResponseEntity.ok(result);
+//    }
+
+    @GetMapping()
+    public ResponseEntity<?> findAllNumberDateOtherZeroOrderByCreatedAt(){
+        List<PostResponse> result=postService.getAllByNumberDateOtherZeroOrderByCreatedAt();
         return ResponseEntity.ok(result);
     }
 

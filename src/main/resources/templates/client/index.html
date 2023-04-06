@@ -376,6 +376,31 @@
                 success: function (response) {
                     console.log("Success get post!");
                     $.each(response, function (index, option) {
+                        let arrayRoom = option.areaResponse.roomResponses;
+                        let minAcreage = arrayRoom[0]['acreage'];
+                        let maxAcreage = arrayRoom[0]['acreage'];
+                        let minPrice = arrayRoom[0]['rentPrice'];
+                        let maxPrice = arrayRoom[0]['rentPrice'];
+                        for (let i = 0; i < arrayRoom.length; i++) {
+                            if (minAcreage > arrayRoom[i]['acreage']) {
+                                minAcreage = arrayRoom[i]['acreage'];
+                            }
+
+                            if (maxAcreage < arrayRoom[i]['acreage']) {
+                                maxAcreage = arrayRoom[i]['acreage'];
+                            }
+
+                            if (minPrice > arrayRoom[i]['rentPrice']) {
+                                minPrice = arrayRoom[i]['rentPrice'];
+                            }
+
+                            if (maxPrice < arrayRoom[i]['rentPrice']) {
+                                maxPrice = arrayRoom[i]['rentPrice'];
+                            }
+                        }
+                        let formattedMinPrice = minPrice.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+                        let formattedMaxPrice = maxPrice.toLocaleString('vi-VN', {style: 'currency', currency: 'VND'});
+
                         if (index > 6) {
                             $("#post-new").append("<div class=\"col-sm-6 col-md-3 p0\">\n" +
                                 "                        <div class=\"box-tree more-proerty text-center\">\n" +
@@ -401,8 +426,8 @@
                             "                            <div class=\"item-entry overflow\">\n" +
                             "                                <h5><a th:href=\"@{client/property-1.html}\">" + option.title + " </a></h5>\n" +
                             "                                <div class=\"dot-hr\"></div>\n" +
-                            "                                <span class=\"pull-left\"><b>Diện tích :</b> 120m </span>\n" +
-                            "                                <span class=\"proerty-price pull-right\">$ 300,000</span>\n" +
+                            "                                <span class=\"pull-left\"><b>Diện tích :</b> " + minAcreage + "m2 - " + maxAcreage + "m2 </span>\n" +
+                            "                                <p class=\"proerty-price pull-left\"><b>Giá :</b> " + formattedMinPrice + " - " + formattedMaxPrice + "</p>\n" +
                             "                            </div>\n" +
                             "                        </div>\n" +
                             "                    </div>");
