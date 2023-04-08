@@ -1,8 +1,10 @@
 package com.fstack.phong_tro_fstack.client.controller;
 
 import com.fstack.phong_tro_fstack.client.dto.FileItemDTO;
+import com.fstack.phong_tro_fstack.client.output.FileResponse;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.*;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.googleapis.services.CommonGoogleClientRequestInitializer;
 import com.google.api.client.googleapis.services.GoogleClientRequestInitializer;
 import com.google.api.client.http.FileContent;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,8 +38,6 @@ import java.util.List;
 @Controller
 public class FileItemController {
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
-
-//    private static final JsonFactory JSON_FACTORY = GsonFactory.getDefaultInstance();
 
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
@@ -122,16 +123,16 @@ public class FileItemController {
 
     @GetMapping(value = "/list-files", produces = {"application/json"})
     public @ResponseBody
-    List<FileItemDTO> listFiles() throws IOException {
+    List<FileResponse> listFiles() throws IOException {
         Credential credential = flow.loadCredential(USER_IDENTIFIER_KEY);
         Drive drive = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
                 .setApplicationName("Google drive SpringBoot Fstack").build();
 
-        List<FileItemDTO> responseList = new ArrayList<>();
+        List<FileResponse> responseList = new ArrayList<>();
 
         FileList fileList = drive.files().list().setFields("files(id,name,thumbnailLink)").execute();
         for (File file : fileList.getFiles()) {
-            FileItemDTO item = new FileItemDTO();
+            FileResponse item = new FileResponse();
             item.setId(file.getId());
             item.setName(file.getName());
             item.setThumbnailLink(file.getThumbnailLink());
@@ -207,28 +208,76 @@ public class FileItemController {
         return message;
     }
 
+//    @GetMapping(value = {"/service-list-files"}, produces = {"application/json"})
+//    public @ResponseBody
+//    List<FileItemDTO> listFilesInServiceAccount() throws IOException {
+//        Credential cred = GoogleCredential.fromStream(serviceAccountKey.getInputStream());
+//
+//        GoogleClientRequestInitializer keyInitializer = new CommonGoogleClientRequestInitializer();
+//
+//        Drive drive = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, null).setHttpRequestInitializer(cred)
+//                .setGoogleClientRequestInitializer(keyInitializer).build();
+//
+//        List<FileItemDTO> responseList = new ArrayList<>();
+//
+//        FileList fileList = drive.files().list().setFields("files(id,name,thumbnailLink)").execute();
+//        for (File file : fileList.getFiles()) {
+//            FileItemDTO item = new FileItemDTO();
+//            item.setId(file.getId());
+//            item.setName(file.getName());
+//            item.setThumbnailLink(file.getThumbnailLink());
+//            responseList.add(item);
+//        }
+//
+//        return responseList;
+//    }
+
     @GetMapping(value = {"/service-list-files"}, produces = {"application/json"})
     public @ResponseBody
-    List<FileItemDTO> listFilesInServiceAccount() throws IOException {
-        Credential cred = GoogleCredential.fromStream(serviceAccountKey.getInputStream());
+    List<FileResponse> listFilesInServiceAccount() throws IOException, GeneralSecurityException {
+        GoogleCredential credential = GoogleCredential.fromStream(serviceAccountKey.getInputStream())
+                .createScoped(Collections.singleton(DriveScopes.DRIVE_READONLY));
 
-        GoogleClientRequestInitializer keyInitializer = new CommonGoogleClientRequestInitializer();
+        // Create a new Drive API client
+        HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+        JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+        Drive drive = new Drive.Builder(httpTransport, jsonFactory, credential)
+                .setApplicationName("Google drive SpringBoot Fstack").build();
+        // Get the list of files from the Drive API
+        List<FileResponse> fileItems = new ArrayList<>();
+        String nextPageToken = null;
+        do {
+            FileList files = drive.files().list().setQ("trashed = false")
+                    .setFields("nextPageToken, files(id, name, thumbnailLink)").setPageToken(nextPageToken)
+                    .execute();
+            List<File> fileList = files.getFiles();
+            if (fileList != null) {
+                for (File file : fileList) {
+                    FileResponse fileItem = new FileResponse();
+                    fileItem.setId(file.getId());
+                    fileItem.setName(file.getName());
+                    fileItem.setThumbnailLink(file.getThumbnailLink());
+                    fileItems.add(fileItem);
+                }
+            }
+            nextPageToken = files.getNextPageToken();
+        } while (nextPageToken != null);
 
-        Drive drive = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, null).setHttpRequestInitializer(cred)
-                .setGoogleClientRequestInitializer(keyInitializer).build();
+        return fileItems;
+    }
 
-        List<FileItemDTO> responseList = new ArrayList<>();
+    @GetMapping("/create-file-by-service")
+    public void createFileByService(HttpServletResponse httpServletResponse) throws IOException {
+        Credential credential = GoogleCredential.fromStream(serviceAccountKey.getInputStream()).createScoped(Collections.singleton(DriveScopes.DRIVE));
+        Drive drive = new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
+                .setApplicationName("Google drive SpringBoot Fstack").build();
+        File file = new File();
+        file.setName("sample.jpg");
+        FileContent fileContent = new FileContent("image/jpeg", new java.io.File("F:\\Pictures\\AnhMeme\\oke.jpg"));
+        File uploadedFile = drive.files().create(file, fileContent).setFields("id").execute();
 
-        FileList fileList = drive.files().list().setFields("files(id,name,thumbnailLink)").execute();
-        for (File file : fileList.getFiles()) {
-            FileItemDTO item = new FileItemDTO();
-            item.setId(file.getId());
-            item.setName(file.getName());
-            item.setThumbnailLink(file.getThumbnailLink());
-            responseList.add(item);
-        }
-
-        return responseList;
+        String fileReference = String.format("{fileID: '%s'}", uploadedFile.getId());
+        httpServletResponse.getWriter().write(fileReference);
     }
 
     @Data
