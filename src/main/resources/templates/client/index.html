@@ -381,6 +381,14 @@
                         let maxAcreage = arrayRoom[0]['acreage'];
                         let minPrice = arrayRoom[0]['rentPrice'];
                         let maxPrice = arrayRoom[0]['rentPrice'];
+
+                        let thumbnail = option.thumbnail;
+                        let webContentLink="";
+                        if (typeof thumbnail !== 'undefined' && thumbnail !== '') {
+                            let json = JSON.parse(thumbnail);
+                            webContentLink = json[0].webContentLink;
+                        }
+
                         for (let i = 0; i < arrayRoom.length; i++) {
                             if (minAcreage > arrayRoom[i]['acreage']) {
                                 minAcreage = arrayRoom[i]['acreage'];
@@ -420,7 +428,7 @@
                         $("#post-new").append("<div class=\"col-sm-6 col-md-3 p0\">\n" +
                             "                        <div class=\"box-two proerty-item\">\n" +
                             "                            <div class=\"item-thumb\">\n" +
-                            "                                <a th:href=\"@{client/property-1.html}\"><img src="+option.thumbnail+"></a>\n" +
+                            "                                <a th:href=\"@{client/property-1.html}\"><img src=" + webContentLink + "></a>\n" +
                             "                            </div>\n" +
                             "                            <div class=\"item-entry overflow\">\n" +
                             "                                <h5><a th:href=\"@{client/property-1.html}\">" + option.title + " </a></h5>\n" +

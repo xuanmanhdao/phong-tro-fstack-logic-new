@@ -5,8 +5,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @Service
 public interface GoogleDriveService {
-    FileResponse uploadFiles(MultipartFile file) throws IOException;
+    FileResponse uploadFile(MultipartFile file) throws IOException;
+
+    List<FileResponse> getAllFile() throws IOException;
+
+    void deleteFile(String fileId) throws IOException;
 }

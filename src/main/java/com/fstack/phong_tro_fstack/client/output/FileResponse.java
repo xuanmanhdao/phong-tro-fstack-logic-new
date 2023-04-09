@@ -12,5 +12,5 @@ public class FileResponse {
     private String name;
     private String thumbnailLink;
     private String webViewLink;
-    private String webContentLink;
+    private String webContentLink; // Thuoc tinh dung de truyen vao tag img and tag iframe html
 }

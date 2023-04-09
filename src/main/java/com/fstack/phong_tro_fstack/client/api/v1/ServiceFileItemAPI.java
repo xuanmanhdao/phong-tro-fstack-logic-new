@@ -19,6 +19,12 @@ public class ServiceFileItemAPI {
     @Autowired
     private GoogleDriveService googleDriveService;
 
+    @GetMapping()
+    public ResponseEntity<?> getAllFile() throws IOException {
+        List<FileResponse> result = googleDriveService.getAllFile();
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
     @PostMapping()
     public ResponseEntity<?> uploadFileOnService(@RequestParam("files") MultipartFile[] files) {
         // Kiểm tra xem file có tồn tại không
@@ -31,7 +37,7 @@ public class ServiceFileItemAPI {
                     return ResponseEntity.badRequest().body("File không đúng định dạng ảnh");
                 } else {
                     try {
-                        FileResponse fileResponse = googleDriveService.uploadFiles(file);
+                        FileResponse fileResponse = googleDriveService.uploadFile(file);
                         fileResponseList.add(fileResponse);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -39,7 +45,13 @@ public class ServiceFileItemAPI {
                     }
                 }
             }
-            return ResponseEntity.ok().body(fileResponseList);
+            return ResponseEntity.status(HttpStatus.CREATED).body(fileResponseList);
         }
+    }
+
+    @DeleteMapping("/{fileId}")
+    public ResponseEntity<?> deleteFile(@PathVariable(name = "fileId") String fileId) throws IOException {
+        googleDriveService.deleteFile(fileId);
+        return ResponseEntity.status(HttpStatus.OK).body("File has been deleted");
     }
 }
