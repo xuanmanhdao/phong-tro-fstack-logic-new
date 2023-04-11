@@ -12,21 +12,22 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class UserRoleEntity {
     @EmbeddedId
     private UserRoleKey userRoleKey;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("idUser")
     @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
-    @ToString.Exclude // không sử dụng trong toString()
+//    @ToString.Exclude // không sử dụng trong toString()
     @JoinColumn(name = "id_user")
     private UserEntity userEntity;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("idRole")
     @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
-    @ToString.Exclude // không sử dụng trong toString()
+//    @ToString.Exclude // không sử dụng trong toString()
     @JoinColumn(name = "id_role")
     private RoleEntity roleEntity;
 

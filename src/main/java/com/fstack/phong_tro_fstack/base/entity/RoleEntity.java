@@ -14,6 +14,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class RoleEntity extends BaseEntity{
     @Column(name = "name", length = 50, nullable = false)
     private String name;
@@ -23,9 +24,9 @@ public class RoleEntity extends BaseEntity{
     private Date createdAt;
 
     @OneToMany(mappedBy = "roleEntity", cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
-    @ToString.Exclude // không sử dụng trong toString()
-    @JsonIgnore
+//    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
+//    @ToString.Exclude // không sử dụng trong toString()
+//    @JsonIgnore
     private Set<UserRoleEntity> userRoleEntities;
 
 //	public RoleEntity(Long id, String name, Set<UserRoleEntity> userRoleEntities) {

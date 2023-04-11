@@ -21,7 +21,7 @@ public class TransactionEntity extends BaseEntity{
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
     private UserEntity userEntity;
 }
