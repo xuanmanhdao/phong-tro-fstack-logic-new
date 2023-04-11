@@ -28,11 +28,11 @@ public class RoleEntity extends BaseEntity{
     @JsonIgnore
     private Set<UserRoleEntity> userRoleEntities;
 
-	public RoleEntity(Long id, String name, Set<UserRoleEntity> userRoleEntities) {
-		super(id);
-		this.name = name;
-		this.userRoleEntities = userRoleEntities;
-	}
-    
+//	public RoleEntity(Long id, String name, Set<UserRoleEntity> userRoleEntities) {
+//		super(id);
+//		this.name = name;
+//		this.userRoleEntities = userRoleEntities;
+//	}
+//    
     
 }

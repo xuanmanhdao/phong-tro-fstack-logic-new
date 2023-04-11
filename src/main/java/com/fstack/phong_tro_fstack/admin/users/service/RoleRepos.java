@@ -18,10 +18,4 @@ public interface RoleRepos extends CrudRepository<RoleEntity, Long> {
 			+ "WHERE ur.id_user = ?" , nativeQuery = true)
 	List<Object[]> findByUserRole(long id);
 	
-//	@Query(value = "SELECT r.id, r.name "
-//			+ "FROM user_role ur "
-//			+ "INNER JOIN role r ON ur.id_role = r.id "
-//			+ "WHERE ur.id_user = ?" , nativeQuery = true)
-//	List<Object[]> findByUserRole(long id);
-
 }

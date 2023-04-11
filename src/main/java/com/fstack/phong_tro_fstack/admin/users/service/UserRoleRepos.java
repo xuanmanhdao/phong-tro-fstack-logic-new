@@ -14,12 +14,9 @@ import com.fstack.phong_tro_fstack.base.entity.UserEntity;
 import com.fstack.phong_tro_fstack.base.entity.UserRoleEntity;
 
 @Repository
-public interface UserRoleRepos extends CrudRepository<UserEntity, Long>{
+public interface UserRoleRepos extends CrudRepository<UserRoleEntity, Long>{
 	
-	@Query(value =  "SELECT u.id, u.email,u.full_name, r.id , r.name "
-			+ "FROM user_role ur "
-			+ "INNER JOIN user u ON u.id = ur.id_user "
-			+ "INNER JOIN role r on r.id = ur.id_role" , nativeQuery = true)
-	List<Object[]> findAllUserRole();
+	
+//	@Query(value = "")
 
 }

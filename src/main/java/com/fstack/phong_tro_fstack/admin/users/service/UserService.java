@@ -1,6 +1,8 @@
 package com.fstack.phong_tro_fstack.admin.users.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,31 +11,35 @@ import java.util.Optional;
 import javax.management.relation.Role;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.fstack.phong_tro_fstack.admin.users.moders.RoleDtoModel;
 import com.fstack.phong_tro_fstack.admin.users.moders.UserDtoModel;
-import com.fstack.phong_tro_fstack.admin.users.moders.UserRoleDTO;
 import com.fstack.phong_tro_fstack.base.entity.RoleEntity;
 import com.fstack.phong_tro_fstack.base.entity.UserEntity;
+import com.fstack.phong_tro_fstack.base.entity.UserRoleEntity;
 
 @Service
 public class UserService {
 	
 	@Autowired
-	UserRoleRepos userRoleRepos;
+	UserRepos userRepos;
 	
 	@Autowired
 	RoleRepos roleRepos;
 	
+	@Autowired
+	UserRoleRepos userRoleRepos;
 	
+	// lấy ra user với từng role tương ứng
 	public UserDtoModel getUserRole(long id) {
 		
-		Optional<UserEntity> userEntity = userRoleRepos.findById(id);
+		Optional<UserEntity> userEntity = userRepos.findById(id);
 		return getConverUserRoleDTO(userEntity.get());
 		
 	}
-	
+	// lấy ra user với danh sách uer
 	private UserDtoModel getConverUserRoleDTO(UserEntity userEntity) {
 		UserDtoModel userDtoModel = new UserDtoModel();
 		userDtoModel.setId(userEntity.getId());
@@ -42,26 +48,13 @@ public class UserService {
 		userDtoModel.setListRole(listRoleDto(userEntity.getId()));
 		return userDtoModel;
 	}
-	
-//	private List<RoleDtoModel> getListRoleUser(long id){
-//		List<RoleEntity> listRolEmtity = roleRepos.findByUserRole(id);
-//		List<RoleDtoModel> listRoleDtoModels = new ArrayList<>();
-//		for(int i=0 ;i<listRolEmtity.size();i++) {
-//			RoleDtoModel roleDtoModel = new RoleDtoModel();
-//			roleDtoModel.setIdRole(listRolEmtity.get(i).getId());
-//			roleDtoModel.setNameRole(listRolEmtity.get(i).getName());		
-//			listRoleDtoModels.add(roleDtoModel);
-//		}
-//		return listRoleDtoModels;
-//	}
-	
+	// lấy ra các role của user
 	private List<RoleDtoModel> listRoleDto(long id){
 		
 		List<Object[]> listObject = roleRepos.findByUserRole(id);
 		List<RoleDtoModel> listRoleDtoModels = new ArrayList<>();
 		for(Object[] result : listObject) {
-			//RoleEntity roleEntity = (RoleEntity) result[0]; // chể
-			
+	
 			RoleDtoModel roleDtoModel = new RoleDtoModel();
 			roleDtoModel.setIdRole((Long) result[0]);
 			roleDtoModel.setNameRole(result[1].toString());
@@ -71,16 +64,14 @@ public class UserService {
 	}
 	
 	
-	////
+	//// trả về danh sách list user với role
 	
 	public List<UserDtoModel> getListUserRole(){
-		List<Object[]> listObject = userRoleRepos.findAllUserRole();
+		List<Object[]> listObject = userRepos.findAllUserRole();
 		Map<Long, UserDtoModel> map = new HashMap<>();
 		for(Object[] result : listObject) {
 			Long id = (Long) result[0];
 			if(map.containsKey(id)) {// 
-//				map.put(null, null)
-
 				RoleDtoModel roleDtoModel = new RoleDtoModel();
 				roleDtoModel.setIdRole((Long)result[3]);
 				roleDtoModel.setNameRole(result[4].toString());
@@ -95,20 +86,17 @@ public class UserService {
 		
 		List<UserDtoModel> listTRR = new ArrayList<>(map.values());
 		
-		
-		
-		
 		return listTRR;
-		
 	}
 	
 	
 	
-	
-	
-	
-	
-	
-	
-
+	public UserRoleEntity insertUserRole(UserRoleEntity userRoleEntity) {
+//		 LocalDateTime currentTime = LocalDateTime.now();
+		 
+		 Date dateNow = new Date();
+		 userRoleEntity.setCreatedAt(dateNow);
+		UserRoleEntity userRoleSave = userRoleRepos.save(userRoleEntity);
+		return userRoleSave;
+	}
 }
