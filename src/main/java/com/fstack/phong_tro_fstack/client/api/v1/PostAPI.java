@@ -1,6 +1,7 @@
 package com.fstack.phong_tro_fstack.client.api.v1;
 
 import com.fstack.phong_tro_fstack.base.dto.PostDTO;
+import com.fstack.phong_tro_fstack.client.output.post.PagedPostResponse;
 import com.fstack.phong_tro_fstack.client.output.post.PostResponse;
 import com.fstack.phong_tro_fstack.client.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,11 @@ public class PostAPI {
       @Param("acreage") Optional<String> acreage,
       @Param("minAcreage") Optional<Float> minAcreage,
       @Param("maxAcreage") Optional<Float> maxAcreage,
-      @Param("exactAddress") Optional<String> exactAddress
+      @Param("exactAddress") Optional<String> exactAddress,
+      @Param(value = "pageNumber") Optional<Integer> pageNumber,
+      @Param(value = "pageSize") Optional<Integer> pageSize
   ) {
-    List<PostResponse> result = postService.getAllByNumberDateOtherZeroOrderByCreatedAt(
+    PagedPostResponse result = postService.getAllByNumberDateOtherZeroOrderByCreatedAt(
         idProvince,
         idDistrict,
         idWard,
@@ -50,7 +53,9 @@ public class PostAPI {
         acreage,
         minAcreage,
         maxAcreage,
-        exactAddress
+        exactAddress,
+        pageNumber,
+        pageSize
     );
     return ResponseEntity.ok(result);
   }

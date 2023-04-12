@@ -6,6 +6,7 @@ import com.fstack.phong_tro_fstack.base.entity.PostEntity;
 import com.fstack.phong_tro_fstack.client.output.AreaResponse;
 import com.fstack.phong_tro_fstack.client.output.RoomResponse;
 import com.fstack.phong_tro_fstack.client.output.UserResponse;
+import com.fstack.phong_tro_fstack.client.output.post.PagedPostResponse;
 import com.fstack.phong_tro_fstack.client.output.post.PostResponse;
 import com.fstack.phong_tro_fstack.client.repository.PostRepository;
 import com.fstack.phong_tro_fstack.client.service.PostService;
@@ -39,7 +40,7 @@ public class PostServiceImpl implements PostService {
 //    }
 
   @Override
-  public List<PostResponse> getAllByNumberDateOtherZeroOrderByCreatedAt(
+  public PagedPostResponse getAllByNumberDateOtherZeroOrderByCreatedAt(
       Optional<String> idProvince,
       Optional<String> idDistrict,
       Optional<String> idWard,
@@ -49,7 +50,9 @@ public class PostServiceImpl implements PostService {
       Optional<String> acreage,
       Optional<Float> minAcreage,
       Optional<Float> maxAcreage,
-      Optional<String> exactAddress
+      Optional<String> exactAddress,
+      Optional<Integer> pageNumber,
+      Optional<Integer> pageSize
   ) {
     List<Object[]> queryResults = postRepository.getAllPostEnable(idProvince, idDistrict, idWard,
         rentPrice, minPrice, maxPrice, acreage, minAcreage, maxAcreage, exactAddress);
@@ -112,6 +115,19 @@ public class PostServiceImpl implements PostService {
       }
     });
 
-    return result;
+    int totalRecordResult = result.size();
+    int pageNumberRequest = pageNumber.orElse(1);// số trang cần lấy
+    int pageSizeRequest = pageSize.orElse(9);// kích thước trang
+    int totalPage = (int) Math.ceil((double) totalRecordResult / pageSizeRequest);
+    int startIndex = (pageNumberRequest - 1) * pageSizeRequest;
+    int endIndex = Math.min(startIndex + pageSizeRequest, totalRecordResult);
+
+    PagedPostResponse resultResponse = new PagedPostResponse();
+    resultResponse.setPostResponses(result.subList(startIndex, endIndex));
+    resultResponse.setTotalPage(totalPage);
+    resultResponse.setPageNumber(pageNumberRequest);
+    resultResponse.setPageSize(pageSizeRequest);
+
+    return resultResponse;
   }
 }

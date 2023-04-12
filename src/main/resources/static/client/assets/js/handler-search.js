@@ -5,7 +5,11 @@ $(document).ready(function () {
     type: "GET",
     success: function (response) {
       console.log("Success get post!");
-      $.each(response, function (index, option) {
+      console.log(response);
+      let result = "";
+      $.each(response.postResponses, function (index, option) {
+        console.log(option);
+        console.log(index);
         let arrayRoom = option.areaResponse.roomResponses;
         let minAcreage = arrayRoom[0]['acreage'];
         let maxAcreage = arrayRoom[0]['acreage'];
@@ -51,7 +55,7 @@ $(document).ready(function () {
               "                            </div>\n" +
               "                            <div class=\"more-entry overflow\">\n"
               +
-              "                                <h5><a th:href=\"@{client/property-1.html}\">CAN'T DECIDE ? </a></h5>\n"
+              "                                <h5><a href=\"@{client/property-1.html}\">CAN'T DECIDE ? </a></h5>\n"
               +
               "                                <h5 class=\"tree-sub-ttl\">Show all properties</h5>\n"
               +
@@ -63,25 +67,29 @@ $(document).ready(function () {
           return false;
         }
 
-        $("#post-new").append("<div class=\"col-sm-6 col-md-3 p0\">\n" +
-            "                        <div class=\"box-two proerty-item\">\n" +
-            "                            <div class=\"item-thumb\">\n" +
-            "                                <a th:href=\"@{client/property-1.html}\"><img src="
-            + webContentLink + "></a>\n" +
-            "                            </div>\n" +
-            "                            <div class=\"item-entry overflow\">\n"
-            +
-            "                                <h5><a th:href=\"@{client/property-1.html}\">"
-            + option.title + " </a></h5>\n" +
-            "                                <div class=\"dot-hr\"></div>\n" +
-            "                                <span class=\"pull-left\"><b>Diện tích :</b> "
-            + minAcreage + "m2 - " + maxAcreage + "m2 </span>\n" +
-            "                                <p class=\"proerty-price pull-left\"><b>Giá :</b> "
-            + formattedMinPrice + " - " + formattedMaxPrice + "</p>\n" +
-            "                            </div>\n" +
-            "                        </div>\n" +
-            "                    </div>");
+        let divAdd = `<div class="col-sm-6 col-md-3 p0">
+                          <div class="box-two proerty-item">
+                              <div class="item-thumb">
+                                  <a href="/client/property-1.html">
+                                      <img src="${webContentLink}">
+                                  </a>
+                              </div>
+                              <div class="item-entry overflow">
+                                  <h5>
+                                      <a href="/client/property-1.html">
+                                         ${option.title}
+                                      </a>
+                                  </h5>
+                                  <div class="dot-hr"></div>
+                                  <span class="pull-left"><b>Diện tích: </b>${minAcreage}m2 - ${maxAcreage}m2</span>
+                                  <p class="proerty-price pull-left"><b>Giá: </b>${formattedMinPrice} - ${formattedMaxPrice}</p>
+                              </div>
+                          </div>
+                      </div>`;
+        result += divAdd;
       });
+      console.log(result);
+      $("#post-new").append(result);
     },
     error: function (xhr, status, error) {
       console.log("Error: " + error);
@@ -212,7 +220,105 @@ $(document).ready(function () {
         ...(maxAcreage && {maxAcreage})
       },
       success: function (response) {
+        console.log("Success search post !");
         console.log(response);
+        $("#post-new").empty();
+        let result = "";
+        if (response.length === 0) {
+          $("#post-new").append(
+              "<div class=\"row justify-content-center mt-5\">\n"
+              + "    <div class=\"col-md-12\">\n"
+              + "      <div class=\"alert alert-danger text-center\" role=\"alert\">\n"
+              + "        <h4 class=\"alert-heading\">Không tìm thấy kết quả</h4>\n"
+              + "        <p>Xin lỗi, chúng tôi không tìm thấy kết quả phù hợp với yêu cầu của bạn.</p>\n"
+              + "        <hr>\n"
+              + "        <p class=\"mb-0\">Vui lòng thử lại với các tiêu chí tìm kiếm khác hoặc liên hệ với chúng tôi nếu bạn cần hỗ trợ.</p>\n"
+              + "      </div>\n"
+              + "    </div>\n"
+              + "  </div>");
+        }
+        $.each(response.postResponses, function (index, option) {
+          console.log(option);
+          console.log(index);
+          let arrayRoom = option.areaResponse.roomResponses;
+          let minAcreage = arrayRoom[0]['acreage'];
+          let maxAcreage = arrayRoom[0]['acreage'];
+          let minPrice = arrayRoom[0]['rentPrice'];
+          let maxPrice = arrayRoom[0]['rentPrice'];
+
+          let thumbnail = option.thumbnail;
+          let webContentLink = "";
+
+          if (typeof thumbnail !== 'undefined' && thumbnail !== '') {
+            let json = JSON.parse(thumbnail);
+            webContentLink = json[0].webContentLink;
+          }
+
+          for (let i = 0; i < arrayRoom.length; i++) {
+            if (minAcreage > arrayRoom[i]['acreage']) {
+              minAcreage = arrayRoom[i]['acreage'];
+            }
+
+            if (maxAcreage < arrayRoom[i]['acreage']) {
+              maxAcreage = arrayRoom[i]['acreage'];
+            }
+
+            if (minPrice > arrayRoom[i]['rentPrice']) {
+              minPrice = arrayRoom[i]['rentPrice'];
+            }
+
+            if (maxPrice < arrayRoom[i]['rentPrice']) {
+              maxPrice = arrayRoom[i]['rentPrice'];
+            }
+          }
+          let formattedMinPrice = minPrice.toLocaleString('vi-VN',
+              {style: 'currency', currency: 'VND'});
+          let formattedMaxPrice = maxPrice.toLocaleString('vi-VN',
+              {style: 'currency', currency: 'VND'});
+
+          if (index > 6) {
+            $("#post-new").append("<div class=\"col-sm-6 col-md-3 p0\">\n" +
+                "                        <div class=\"box-tree more-proerty text-center\">\n"
+                +
+                "                            <div class=\"item-tree-icon\">\n" +
+                "                                <i class=\"fa fa-th\"></i>\n" +
+                "                            </div>\n" +
+                "                            <div class=\"more-entry overflow\">\n"
+                +
+                "                                <h5><a th:href=\"@{client/property-1.html}\">CAN'T DECIDE ? </a></h5>\n"
+                +
+                "                                <h5 class=\"tree-sub-ttl\">Show all properties</h5>\n"
+                +
+                "                                <button class=\"btn border-btn more-black\" value=\"All properties\">All properties</button>\n"
+                +
+                "                            </div>\n" +
+                "                        </div>\n" +
+                "                    </div>");
+            return false;
+          }
+
+          let divAdd = `<div class="col-sm-6 col-md-3 p0">
+                          <div class="box-two proerty-item">
+                              <div class="item-thumb">
+                                  <a href="/client/property-1.html">
+                                      <img src="${webContentLink}">
+                                  </a>
+                              </div>
+                              <div class="item-entry overflow">
+                                  <h5>
+                                      <a href="/client/property-1.html">
+                                         ${option.title}
+                                      </a>
+                                  </h5>
+                                  <div class="dot-hr"></div>
+                                  <span class="pull-left"><b>Diện tích: </b>${minAcreage}m2 - ${maxAcreage}m2</span>
+                                  <p class="proerty-price pull-left"><b>Giá: </b>${formattedMinPrice} - ${formattedMaxPrice}</p>
+                              </div>
+                          </div>
+                      </div>`;
+          result += divAdd;
+        });
+        $("#post-new").append(result);
       },
       error: function (xhr) {
         console.log(xhr.responseText);
