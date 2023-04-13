@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{client/layout/default}"
+      class="no-js">
+<head>
+  <title th:text="Bài Đăng"></title>
+</head>
+<body>
+<!-- property area -->
+<div layout:fragment="content">
+  <div class="page-head">
+    <div class="container">
+      <div class="row">
+        <div class="page-head-content">
+          <h1 class="page-title">Bài đăng mới nhất</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End page header -->
+
+  <!-- property area -->
+  <div class="properties-area recent-property" style="background-color: #FFF;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 padding-top-40 properties-page">
+          <div class="section clear">
+            <div class="col-xs-10 page-subheader sorting pl0">
+              <ul class="sort-by-list">
+                <li class="active">
+                  <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date"
+                     data-order="ASC">
+                    Property Date <i class="fa fa-sort-amount-asc"></i>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price"
+                     data-order="DESC">
+                    Property Price <i class="fa fa-sort-numeric-desc"></i>
+                  </a>
+                </li>
+              </ul><!--/ .sort-by-list-->
+              <div class="items-per-page">
+                <label for="items_per_page"><b>Property per page :</b></label>
+                <div class="sel">
+                  <select id="items_per_page" name="per_page">
+                    <option value="3">3</option>
+                    <option value="6">6</option>
+                    <option value="9">9</option>
+                    <option selected="selected" value="12">12</option>
+                    <option value="15">15</option>
+                    <option value="30">30</option>
+                    <option value="45">45</option>
+                    <option value="60">60</option>
+                  </select>
+                </div><!--/ .sel-->
+              </div><!--/ .items-per-page-->
+            </div>
+
+            <div class="col-xs-2 layout-switcher">
+              <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i> </a>
+              <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i>
+              </a>
+            </div><!--/ .layout-switcher-->
+          </div>
+
+          <div class="section clear">
+            <div id="list-type" class="proerty-th">
+              <div id="post-new">
+                <div class="col-sm-6 col-md-4 p0">
+                  <div class="box-two proerty-item">
+                    <div class="item-thumb">
+                      <a href="property-1.html"><img src="assets/img/demo/property-3.jpg"></a>
+                    </div>
+
+                    <div class="item-entry overflow">
+                      <h5><a href="property-1.html"> Super nice villa </a></h5>
+                      <div class="dot-hr"></div>
+                      <span class="pull-left"><b> Area :</b> 120m </span>
+                      <span class="proerty-price pull-right"> $ 300,000</span>
+                      <p style="display: none;">Chào các bạn, Mình có một phòng trọ cần cho thuê ở
+                        khu
+                        vực trung tâm thành phố. Phòng rộng rãi, thoáng mát, có cửa sổ và ban công,
+                        phù hợp cho sinh viên hoặc người đi làm......</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="pull-right">
+              <div class="pagination">
+                <ul>
+                  <li><a href="#">Prev</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">Next</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 pl0 padding-top-40">
+          <div class="blog-asside-right pl0">
+            <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+              <div class="panel-heading">
+                <h3 class="panel-title">Smart search</h3>
+              </div>
+              <div class="panel-body search-widget">
+                <form class="form-inline" id="form-search">
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <input type="text" id="exact-address" class="form-control"
+                               placeholder="Số nhà, địa chỉ cụ thể nhà trọ">
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <select id="property_city__select" class="selectpicker"
+                                data-live-search="true"
+                                title="Tỉnh/Thành Phố">
+                          <option disabled>--Chọn một tùy chọn--</option>
+                        </select>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <select id="property_district__select" class="selectpicker"
+                                data-live-search="true"
+                                title="Quận/Huyện">
+                          <option disabled>--Chọn một tùy chọn--</option>
+                        </select>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <select id="property_ward__select" class="selectpicker"
+                                data-live-search="true"
+                                title="Phường/Xã">
+                          <option disabled>--Chọn một tùy chọn--</option>
+                        </select>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="padding-5">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label for="price-range">Khoảng giá (₫):</label>
+                        <input type="text" class="span2" value="" data-slider-min="0"
+                               data-slider-max="10000000" data-slider-step="5"
+                               data-slider-value="[500000,2000000]" id="price-range"><br/>
+                        <b class="pull-left color">0₫</b>
+                        <b class="pull-right color">10.000.000₫</b>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="padding-5">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label for="acreage-range">Khoảng diện tích (m2) :</label>
+                        <input type="text" class="span2" value="" data-slider-min="0"
+                               data-slider-max="200" data-slider-step="5"
+                               data-slider-value="[15,30]" id="acreage-range"><br/>
+                        <b class="pull-left color">0m2</b>
+                        <b class="pull-right color">200m2</b>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <input class="button btn largesearch-btn" value="Search" type="submit">
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+
+            <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+              <div class="panel-heading">
+                <h3 class="panel-title">Recommended</h3>
+              </div>
+              <div class="panel-body recent-property-widget">
+                <ul>
+                  <li>
+                    <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                      <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                      <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                      <h6><a href="single.html">Super nice villa </a></h6>
+                      <span class="property-price">3000000$</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
+                      <a href="single.html"><img src="assets/img/demo/small-property-1.jpg"></a>
+                      <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                      <h6><a href="single.html">Super nice villa </a></h6>
+                      <span class="property-price">3000000$</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                      <a href="single.html"><img src="assets/img/demo/small-property-3.jpg"></a>
+                      <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                      <h6><a href="single.html">Super nice villa </a></h6>
+                      <span class="property-price">3000000$</span>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                      <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                      <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                      <h6><a href="single.html">Super nice villa </a></h6>
+                      <span class="property-price">3000000$</span>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Script area -->
+  <script th:src="@{client/assets/js/modernizr-2.6.2.min.js}"></script>
+  <script th:src="@{client/assets/js/jquery-1.10.2.min.js}"></script>
+  <script th:src="@{client/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{client/assets/js/bootstrap-select.min.js}"></script>
+  <script th:src="@{client/assets/js/bootstrap-hover-dropdown.js}"></script>
+  <script th:src="@{client/assets/js/easypiechart.min.js}"></script>
+  <script th:src="@{client/assets/js/jquery.easypiechart.min.js}"></script>
+  <script th:src="@{client/assets/js/owl.carousel.min.js}"></script>
+  <script th:src="@{client/assets/js/wow.js}"></script>
+  <script th:src="@{client/assets/js/icheck.min.js}"></script>
+  <script th:src="@{client/assets/js/price-range.js}"></script>
+  <script th:src="@{client/assets/js/main.js}"></script>
+
+  <!--Script handler area -->
+  <script th:src="@{client/assets/js/handler-search-show-posts.js}"></script>
+</div>
+</body>
+</html>
