@@ -1,12 +1,14 @@
 package com.fstack.phong_tro_fstack.client.controller;
 
 import com.fstack.phong_tro_fstack.client.output.post.PagedPostResponse;
+import com.fstack.phong_tro_fstack.client.output.post.PostResponse;
 import com.fstack.phong_tro_fstack.client.service.PostService;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -48,6 +50,17 @@ public class PostController {
         pageSize
     );
     modelAndView.addObject("postsResponse", data);
+    return modelAndView;
+  }
+
+  @GetMapping("/area/{idArea}")
+  public ModelAndView showDetailPost(
+      @PathVariable("idArea") Optional<Long> idArea
+  ) {
+    System.out.println("id area: " + idArea);
+    ModelAndView modelAndView = new ModelAndView("client/detail-post");
+    PostResponse data = postService.getDetailPost(idArea);
+    modelAndView.addObject("postResponse", data);
     return modelAndView;
   }
 }

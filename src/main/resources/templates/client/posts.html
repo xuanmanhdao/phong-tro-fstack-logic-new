@@ -3,8 +3,35 @@
       xmlns:layout="http://www.w3.org/1999/xhtml"
       layout:decorate="~{client/layout/default}"
       class="no-js">
-<head>
-  <title th:text="Bài Đăng"></title>
+<head layout:fragment="head-content">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="GARO is a real-estate template">
+  <meta name="author" content="Kimarotec">
+  <meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tất cả bài đăng</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+
+  <!-- Place favicon.ico  the root directory -->
+  <link rel="shortcut icon" th:href="@{/client/favicon.ico}" type="image/x-icon">
+  <link rel="icon" th:href="@{/client/favicon.ico}" type="image/x-icon">
+
+  <link rel="stylesheet" th:href="@{/client/assets/css/normalize.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/font-awesome.min.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/fontello.css}">
+  <link th:href="@{/client/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css}" rel="stylesheet">
+  <link th:href="@{/client/assets/fonts/icon-7-stroke/css/helper.css}" rel="stylesheet">
+  <link th:href="@{/client/assets/css/animate.css}" rel="stylesheet" media="screen">
+  <link rel="stylesheet" th:href="@{/client/assets/css/bootstrap-select.min.css}">
+  <link rel="stylesheet" th:href="@{/client/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/icheck.min_all.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/price-range.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.carousel.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.theme.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.transitions.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/style.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/responsive.css}">
 </head>
 <body>
 <!-- property area -->
@@ -182,7 +209,7 @@
                 <ul>
                   <li>
                     <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                      <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                      <a href="single.html"><img th:src="@{/client/assets/img/demo/small-property-2.jpg}"></a>
                       <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -195,7 +222,7 @@
                   </li>
                   <li>
                     <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
-                      <a href="single.html"><img src="assets/img/demo/small-property-1.jpg"></a>
+                      <a href="single.html"><img th:src="@{/client/assets/img/demo/small-property-1.jpg}"></a>
                       <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -208,7 +235,7 @@
                   </li>
                   <li>
                     <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                      <a href="single.html"><img src="assets/img/demo/small-property-3.jpg"></a>
+                      <a href="single.html"><img th:src="@{/client/assets/img/demo/small-property-3.jpg}"></a>
                       <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -222,7 +249,7 @@
 
                   <li>
                     <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                      <a href="single.html"><img src="assets/img/demo/small-property-2.jpg"></a>
+                      <a href="single.html"><img th:src="@{/client/assets/img/demo/small-property-2.jpg}"></a>
                       <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -244,26 +271,38 @@
   </div>
 
   <!--Script area -->
-  <script th:src="@{client/assets/js/modernizr-2.6.2.min.js}"></script>
-  <script th:src="@{client/assets/js/jquery-1.10.2.min.js}"></script>
-  <script th:src="@{client/bootstrap/js/bootstrap.min.js}"></script>
-  <script th:src="@{client/assets/js/bootstrap-select.min.js}"></script>
-  <script th:src="@{client/assets/js/bootstrap-hover-dropdown.js}"></script>
-  <script th:src="@{client/assets/js/easypiechart.min.js}"></script>
-  <script th:src="@{client/assets/js/jquery.easypiechart.min.js}"></script>
-  <script th:src="@{client/assets/js/owl.carousel.min.js}"></script>
-  <script th:src="@{client/assets/js/wow.js}"></script>
-  <script th:src="@{client/assets/js/icheck.min.js}"></script>
-  <script th:src="@{client/assets/js/price-range.js}"></script>
-  <script th:src="@{client/assets/js/main.js}"></script>
+  <script th:src="@{/client/assets/js/modernizr-2.6.2.min.js}"></script>
+  <script th:src="@{/client/assets/js/jquery-1.10.2.min.js}"></script>
+  <script th:src="@{/client/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{/client/assets/js/bootstrap-select.min.js}"></script>
+  <script th:src="@{/client/assets/js/bootstrap-hover-dropdown.js}"></script>
+  <script th:src="@{/client/assets/js/easypiechart.min.js}"></script>
+  <script th:src="@{/client/assets/js/jquery.easypiechart.min.js}"></script>
+  <script th:src="@{/client/assets/js/owl.carousel.min.js}"></script>
+  <script th:src="@{/client/assets/js/wow.js}"></script>
+  <script th:src="@{/client/assets/js/icheck.min.js}"></script>
+  <script th:src="@{/client/assets/js/price-range.js}"></script>
+  <script th:src="@{/client/assets/js/main.js}"></script>
 
   <!--Script handler area -->
-  <script th:src="@{client/assets/js/handler-search-show-posts.js}"></script>
+  <script th:src="@{/client/assets/js/handler-search-show-posts.js}"></script>
   <script th:inline="javascript">
     let dataResponse = /*[[${postsResponse.postResponses}]]*/'';
     let result = "";
     let maxLengthShortDescription = 130;
     let maxLengthTitle = 32;
+    if (dataResponse.length === 0) {
+      let errorMessage = `<div class="row justify-content-center mt-5">
+                                 <div class="col-md-12">
+                                       <div class="alert alert-danger text-center" role="alert">
+                                            <h4 class="alert-heading">Không tìm thấy kết quả</h4>
+                                            <p>Xin lỗi, chúng tôi không tìm thấy kết quả phù hợp với yêu cầu của bạn.</p>
+                                            <p class="mb-0">Vui lòng thử lại với các tiêu chí tìm kiếm khác hoặc liên hệ với chúng tôi nếu bạn cần hỗ trợ.</p>
+                                       </div>
+                                 </div>
+                              </div>`;
+      $("#post-new").append(errorMessage);
+    }
     $.each(dataResponse, function (index, option) {
       let postTitle = option.title;
       let postContent = option.content;
@@ -314,13 +353,13 @@
       let divAdd = `<div class="col-sm-6 col-md-4 p0">
                        <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                 <a href="post/area/${postArea.id}">
+                                 <a href="/show-posts/area/${postArea.id}">
                                      <img src="${webContentLink}">
                                  </a>
                             </div>
                             <div class="item-entry overflow">
                                   <h5>
-                                      <a href="post/area/${postArea.id}" class="post_title">
+                                      <a href="/show-posts/area/${postArea.id}" class="post_title">
                                            ${postTitle}
                                       </a>
                                   </h5>

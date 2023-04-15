@@ -9,7 +9,20 @@ $(document).ready(function () {
       let searchRequest = response.searchRequest;
       console.log(searchRequest);
       let result = "";
+      if (response.postResponses.length === 0) {
+        let errorMessage = `<div class="row justify-content-center mt-5">
+                                 <div class="col-md-12">
+                                       <div class="alert alert-danger text-center" role="alert">
+                                            <h4 class="alert-heading">Không tìm thấy kết quả</h4>
+                                            <p>Xin lỗi, chúng tôi không tìm thấy kết quả phù hợp với yêu cầu của bạn.</p>
+                                            <p class="mb-0">Vui lòng thử lại với các tiêu chí tìm kiếm khác hoặc liên hệ với chúng tôi nếu bạn cần hỗ trợ.</p>
+                                       </div>
+                                 </div>
+                              </div>`;
+        $("#post-new").append(errorMessage);
+      }
       $.each(response.postResponses, function (index, option) {
+        let postArea=option.areaResponse;
         let arrayRoom = option.areaResponse.roomResponses;
         let minAcreage = arrayRoom[0]['acreage'];
         let maxAcreage = arrayRoom[0]['acreage'];
@@ -70,13 +83,13 @@ $(document).ready(function () {
         let divAdd = `<div class="col-sm-6 col-md-3 p0">
                           <div class="box-two proerty-item">
                               <div class="item-thumb">
-                                  <a href="/client/property-1.html">
+                                  <a href="/show-posts/area/${postArea.id}">
                                       <img src="${webContentLink}">
                                   </a>
                               </div>
                               <div class="item-entry overflow">
                                   <h5>
-                                      <a href="/client/property-1.html">
+                                      <a href="/show-posts/area/${postArea.id}">
                                          ${option.title}
                                       </a>
                                   </h5>
@@ -116,7 +129,7 @@ $(document).ready(function () {
     clearElementSelection("property_district__select", "property_ward__select");
     console.log("api/v1/rest/district/province/" + selectedOption);
     $.ajax({
-      url: "api/v1/rest/district/province/" + selectedOption,
+      url: "/api/v1/rest/district/province/" + selectedOption,
       type: "GET",
       success: function (response) {
         console.log("Success get district!");
@@ -137,7 +150,7 @@ $(document).ready(function () {
     console.log("api/v1/rest/ward/district/" + selectedOption);
     clearElementSelection("property_ward__select");
     $.ajax({
-      url: "api/v1/rest/ward/district/" + selectedOption,
+      url: "/api/v1/rest/ward/district/" + selectedOption,
       type: "GET",
       success: function (response) {
         console.log("Success get ward!");
@@ -225,20 +238,20 @@ $(document).ready(function () {
         console.log(searchRequest);
         $("#post-new").empty();
         let result = "";
-        if (response.length === 0) {
-          $("#post-new").append(
-              "<div class=\"row justify-content-center mt-5\">\n"
-              + "    <div class=\"col-md-12\">\n"
-              + "      <div class=\"alert alert-danger text-center\" role=\"alert\">\n"
-              + "        <h4 class=\"alert-heading\">Không tìm thấy kết quả</h4>\n"
-              + "        <p>Xin lỗi, chúng tôi không tìm thấy kết quả phù hợp với yêu cầu của bạn.</p>\n"
-              + "        <hr>\n"
-              + "        <p class=\"mb-0\">Vui lòng thử lại với các tiêu chí tìm kiếm khác hoặc liên hệ với chúng tôi nếu bạn cần hỗ trợ.</p>\n"
-              + "      </div>\n"
-              + "    </div>\n"
-              + "  </div>");
+        if (response.postResponses.length === 0) {
+          let errorMessage = `<div class="row justify-content-center mt-5">
+                                 <div class="col-md-12">
+                                       <div class="alert alert-danger text-center" role="alert">
+                                            <h4 class="alert-heading">Không tìm thấy kết quả</h4>
+                                            <p>Xin lỗi, chúng tôi không tìm thấy kết quả phù hợp với yêu cầu của bạn.</p>
+                                            <p class="mb-0">Vui lòng thử lại với các tiêu chí tìm kiếm khác hoặc liên hệ với chúng tôi nếu bạn cần hỗ trợ.</p>
+                                       </div>
+                                 </div>
+                              </div>`;
+          $("#post-new").append(errorMessage);
         }
         $.each(response.postResponses, function (index, option) {
+          let postArea=option.areaResponse;
           let arrayRoom = option.areaResponse.roomResponses;
           let minAcreage = arrayRoom[0]['acreage'];
           let maxAcreage = arrayRoom[0]['acreage'];
@@ -299,13 +312,13 @@ $(document).ready(function () {
           let divAdd = `<div class="col-sm-6 col-md-3 p0">
                           <div class="box-two proerty-item">
                               <div class="item-thumb">
-                                  <a href="/client/property-1.html">
+                                  <a href="/show-posts/area/${postArea.id}">
                                       <img src="${webContentLink}">
                                   </a>
                               </div>
                               <div class="item-entry overflow">
                                   <h5>
-                                      <a href="/client/property-1.html">
+                                      <a href="/show-posts/area/${postArea.id}">
                                          ${option.title}
                                       </a>
                                   </h5>

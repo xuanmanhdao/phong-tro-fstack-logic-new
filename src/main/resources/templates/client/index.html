@@ -3,8 +3,37 @@
       xmlns:layout="http://www.w3.org/1999/xhtml"
       layout:decorate="~{client/layout/default}"
       class="no-js">
-<head>
-  <title th:text="Trang Chủ"></title>
+<head layout:fragment="head-content">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="GARO is a real-estate template">
+  <meta name="author" content="Kimarotec">
+  <meta name="keyword"
+        content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trang chủ</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet'
+        type='text/css'>
+
+  <!-- Place favicon.ico  the root directory -->
+  <link rel="shortcut icon" th:href="@{/client/favicon.ico}" type="image/x-icon">
+  <link rel="icon" th:href="@{/client/favicon.ico}" type="image/x-icon">
+
+  <link rel="stylesheet" th:href="@{/client/assets/css/normalize.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/font-awesome.min.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/fontello.css}">
+  <link th:href="@{/client/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css}" rel="stylesheet">
+  <link th:href="@{/client/assets/fonts/icon-7-stroke/css/helper.css}" rel="stylesheet">
+  <link th:href="@{/client/assets/css/animate.css}" rel="stylesheet" media="screen">
+  <link rel="stylesheet" th:href="@{/client/assets/css/bootstrap-select.min.css}">
+  <link rel="stylesheet" th:href="@{/client/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/icheck.min_all.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/price-range.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.carousel.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.theme.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.transitions.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/style.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/responsive.css}">
 </head>
 <body>
 <!-- property area -->
@@ -13,10 +42,10 @@
     <div class="slider">
       <div id="bg-slider" class="owl-carousel owl-theme">
 
-        <div class="item"><img th:src="@{client/assets/img/slide1/slider-image-2.jpg}"
+        <div class="item"><img th:src="@{/client/assets/img/slide1/slider-image-2.jpg}"
                                alt="The Last of us">
         </div>
-        <div class="item"><img th:src="@{client/assets/img/slide1/slider-image-1.jpg}" alt="GTA V">
+        <div class="item"><img th:src="@{/client/assets/img/slide1/slider-image-1.jpg}" alt="GTA V">
         </div>
 
       </div>
@@ -212,7 +241,7 @@
                   <h4><strong>Anh Khánh, </strong><i>Chủ hệ thống phòng trọ tại Hà Nội</i></h4>
                 </div>
                 <div class="client-face wow fadeInRight" data-wow-delay=".9s">
-                  <img th:src="@{client/assets/img/client-face1.png}" alt="">
+                  <img th:src="@{/client/assets/img/client-face1.png}" alt="">
                 </div>
               </div>
               <div class="item">
@@ -223,7 +252,7 @@
                   <h4><strong>Anh Khánh, </strong><i>Chủ hệ thống phòng trọ tại Hà Nội</i></h4>
                 </div>
                 <div class="client-face">
-                  <img th:src="@{client/assets/img/client-face2.png}" alt="">
+                  <img th:src="@{/client/assets/img/client-face2.png}" alt="">
                 </div>
               </div>
               <div class="item">
@@ -234,7 +263,7 @@
                   <h4><strong>Anh Khánh, </strong><i>Chủ hệ thống phòng trọ tại Hà Nội</i></h4>
                 </div>
                 <div class="client-face">
-                  <img th:src="@{client/assets/img/client-face1.png}" alt="">
+                  <img th:src="@{/client/assets/img/client-face1.png}" alt="">
                 </div>
               </div>
               <div class="item">
@@ -245,7 +274,7 @@
                   <h4><strong>Anh Khánh, </strong><i>Chủ hệ thống phòng trọ tại Hà Nội</i></h4>
                 </div>
                 <div class="client-face">
-                  <img th:src="@{client/assets/img/client-face2.png}" alt="">
+                  <img th:src="@{/client/assets/img/client-face2.png}" alt="">
                 </div>
               </div>
             </div>
@@ -362,27 +391,27 @@
     </div>
   </div>
   <!--Script area -->
-  <script th:src="@{client/assets/js/modernizr-2.6.2.min.js}"></script>
+  <script th:src="@{/client/assets/js/modernizr-2.6.2.min.js}"></script>
 
-  <script th:src="@{client/assets/js/jquery-1.10.2.min.js}"></script>
-  <script th:src="@{client/bootstrap/js/bootstrap.min.js}"></script>
-  <script th:src="@{client/assets/js/bootstrap-select.min.js}"></script>
-  <script th:src="@{client/assets/js/bootstrap-hover-dropdown.js}"></script>
+  <script th:src="@{/client/assets/js/jquery-1.10.2.min.js}"></script>
+  <script th:src="@{/client/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{/client/assets/js/bootstrap-select.min.js}"></script>
+  <script th:src="@{/client/assets/js/bootstrap-hover-dropdown.js}"></script>
 
-  <script th:src="@{client/assets/js/easypiechart.min.js}"></script>
-  <script th:src="@{client/assets/js/jquery.easypiechart.min.js}"></script>
+  <script th:src="@{/client/assets/js/easypiechart.min.js}"></script>
+  <script th:src="@{/client/assets/js/jquery.easypiechart.min.js}"></script>
 
-  <script th:src="@{client/assets/js/owl.carousel.min.js}"></script>
+  <script th:src="@{/client/assets/js/owl.carousel.min.js}"></script>
 
-  <script th:src="@{client/assets/js/wow.js}"></script>
+  <script th:src="@{/client/assets/js/wow.js}"></script>
 
-  <script th:src="@{client/assets/js/icheck.min.js}"></script>
-  <script th:src="@{client/assets/js/price-range.js}"></script>
+  <script th:src="@{/client/assets/js/icheck.min.js}"></script>
+  <script th:src="@{/client/assets/js/price-range.js}"></script>
 
-  <script th:src="@{client/assets/js/main.js}"></script>
+  <script th:src="@{/client/assets/js/main.js}"></script>
 
   <!--Script handler area -->
-  <script th:src="@{client/assets/js/handler-search.js}"></script>
+  <script th:src="@{/client/assets/js/handler-search.js}"></script>
 </div>
 </body>
 </html>

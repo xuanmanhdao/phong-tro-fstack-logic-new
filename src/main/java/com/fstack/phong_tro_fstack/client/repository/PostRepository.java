@@ -50,4 +50,26 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
       @Param("maxAcreage") Optional<Float> maxAcreage,
       @Param("exactAddress") Optional<String> exactAddress
   );
+
+  @Query(value = "SELECT p.id, p.thumbnail, p.title, p.content, p.created_at, " +
+      "p.updated_at, p.number_date, p.phone_zalo, p.phone_number, p.status, " +
+      "u.id as 'user_id', u.full_name, " +
+      "a.id as 'area_id', a.exact_address, a.latitude, a.longitude, a.name, " +
+      "r.id as 'room_id', r.name, r.description, r.acreage, r.rent_price, r.electric_service, r.water_service, r.image, r.video, "
+      +
+      "prov.id as 'province_id', prov.name, " +
+      "d.id as 'district_id', d.name, " +
+      "w.id as 'ward_id', w.name " +
+      "FROM post p " +
+      "inner join user u on p.id_user = u.id " +
+      "inner join area a on p.id_area = a.id " +
+      "inner join room r on a.id = r.id_area " +
+      "inner join district d on a.id_district=d.id " +
+      "inner join province prov on a.id_province=prov.id " +
+      "inner join ward w on a.id_ward=w.id " +
+      "where p.number_date <> 0 " +
+      "AND (:idArea IS NULL OR a.id = :idArea) ", nativeQuery = true)
+  List<Object[]> getDetailPost(
+      @Param("idArea") Optional<Long> idArea
+  );
 }

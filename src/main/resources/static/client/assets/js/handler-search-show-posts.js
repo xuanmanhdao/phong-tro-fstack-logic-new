@@ -2,7 +2,7 @@ $(document).ready(function () {
   $('#acreage-range').slider();
 
   $.ajax({
-    url: "api/v1/rest/province",
+    url: "/api/v1/rest/province",
     type: "GET",
     success: function (response) {
       console.log("Success get province!");
@@ -22,7 +22,7 @@ $(document).ready(function () {
     clearElementSelection("property_district__select", "property_ward__select");
     console.log("api/v1/rest/district/province/" + selectedOption);
     $.ajax({
-      url: "api/v1/rest/district/province/" + selectedOption,
+      url: "/api/v1/rest/district/province/" + selectedOption,
       type: "GET",
       success: function (response) {
         console.log("Success get district!");
@@ -43,7 +43,7 @@ $(document).ready(function () {
     console.log("api/v1/rest/ward/district/" + selectedOption);
     clearElementSelection("property_ward__select");
     $.ajax({
-      url: "api/v1/rest/ward/district/" + selectedOption,
+      url: "/api/v1/rest/ward/district/" + selectedOption,
       type: "GET",
       success: function (response) {
         console.log("Success get ward!");
