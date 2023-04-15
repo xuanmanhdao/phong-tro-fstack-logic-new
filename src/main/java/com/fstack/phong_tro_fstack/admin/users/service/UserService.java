@@ -32,6 +32,14 @@ public class UserService {
 	@Autowired
 	UserRoleRepos userRoleRepos;
 	
+	@Autowired
+	LoginRespos loginRespos;
+	
+	
+	public Long getId(String email, String pass) {
+		return loginRespos.findIDUser(email, pass);
+	}
+	
 	// lấy ra user với từng role tương ứng
 	public UserDtoModel getUserRole(long id) {
 		
@@ -80,7 +88,7 @@ public class UserService {
 			}else {
 				List<RoleDtoModel> listRoleDTO = new ArrayList<>();
 				listRoleDTO.add(new RoleDtoModel((Long)result[3],result[4].toString() ));
-				map.put(id, new UserDtoModel(id,result[1].toString(),result[2].toString(), listRoleDTO ));
+				map.put(id, new UserDtoModel(id,result[1].toString(),result[2].toString(), result[5].toString(), listRoleDTO ));
 			}
 		}
 		

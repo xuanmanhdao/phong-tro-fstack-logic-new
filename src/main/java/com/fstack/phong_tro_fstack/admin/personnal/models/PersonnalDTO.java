@@ -1,6 +1,4 @@
-package com.fstack.phong_tro_fstack.admin.users.moders;
-
-import java.util.List;
+package com.fstack.phong_tro_fstack.admin.personnal.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,16 +7,20 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDtoModel {
+public class PersonnalDTO {
 	
-	private long id;
+	private Long id;
 	
 	private String email;
 	
 	private String fullName;
 	
+	private float bankAccount;
+	
 	private String phoneNumber;
 	
-	private List<RoleDtoModel> listRole;
+	private long idRole;
+	
+	private String nameRole;
 
 }

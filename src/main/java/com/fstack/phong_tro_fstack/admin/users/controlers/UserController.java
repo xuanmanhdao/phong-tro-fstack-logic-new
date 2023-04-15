@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fstack.phong_tro_fstack.admin.users.moders.RoleDtoModel;
 import com.fstack.phong_tro_fstack.admin.users.moders.UserDtoModel;
 import com.fstack.phong_tro_fstack.admin.users.moders.UserLogin;
 import com.fstack.phong_tro_fstack.admin.users.moders.UserLoginDTO;
+import com.fstack.phong_tro_fstack.admin.users.moders.UserLoginResult;
 import com.fstack.phong_tro_fstack.admin.users.service.UserService;
 import com.fstack.phong_tro_fstack.base.dto.UserRoleDTO;
 import com.fstack.phong_tro_fstack.base.entity.UserRoleEntity;
@@ -31,9 +33,26 @@ public class UserController {
 	 @Autowired
 	 private UserRoleService userRoleService;
 	
-	@GetMapping("/getUserRole/id={id}")
-	public UserDtoModel getUserRole(@PathVariable long id){
-		return userService.getUserRole(id);
+	@PostMapping("/getUserRole")
+	public UserLoginResult getUserRole(@RequestBody JsonNode json){
+		
+		UserLoginResult userLoginResult = new UserLoginResult();
+		
+		UserLogin userLogin = new UserLogin(json.get("email").asText(),json.get("pass").asText());
+		Long id = userService.getId(userLogin.getEmail(), userLogin.getPassword());
+		if(id==null) {
+			userLoginResult.setCode(402);
+			userLoginResult.setMessent("Tên đăng nhập hoặc mật khẩu không đúng");
+			userLoginResult.setUserDtoModel(null);
+			return userLoginResult;
+		}else
+		{
+			userLoginResult.setCode(200);
+			userLoginResult.setMessent("Đăng nhập thành công");
+			userLoginResult.setUserDtoModel(userService.getUserRole(id));
+			return userLoginResult;
+		}
+		
 	}
 	
 	
