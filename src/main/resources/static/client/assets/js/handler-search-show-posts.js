@@ -76,11 +76,9 @@ $(document).ready(function () {
     let maxPrice = priceMinMaxCurrent[1];
 
     if (minPrice === '') {
-      console.log("da vao 1");
       minPrice = minPriceDefault;
     }
     if (typeof maxPrice === 'undefined') {
-      console.log("da vao 2");
       maxPrice = maxPriceDefault;
     }
 
@@ -94,139 +92,30 @@ $(document).ready(function () {
     let maxAcreage = acreageMinMaxCurrent[1];
 
     if (minAcreage === '') {
-      console.log("da vao 3");
       minAcreage = minAcreageDefault;
     }
     if (typeof maxAcreage === 'undefined') {
-      console.log("da vao 4");
       maxAcreage = maxAcreageDefault;
     }
 
-    console.log("Default price: " + priceMinMaxDefault);
-    console.log("Default min: " + minPriceDefault);
-    console.log("Default max: " + maxPriceDefault);
-    console.log(minPrice);
-    console.log(maxPrice);
-    console.log(minAcreage);
-    console.log(maxAcreage);
-    $.ajax({
-      url: "/api/v1/rest/post",
-      type: "GET",
-      data: {
-        ...(idProvince && {idProvince}),
-        ...(idDistrict && {idDistrict}),
-        ...(idWard && {idWard}),
-        ...(exactAddress && {exactAddress}),
-        ...(rentPrice && {rentPrice}),
-        ...(minPrice && {minPrice}),
-        ...(maxPrice && {maxPrice}),
-        ...(acreage && {acreage}),
-        ...(minAcreage && {minAcreage}),
-        ...(maxAcreage && {maxAcreage})
-      },
-      success: function (response) {
-        console.log("Success search post !");
-        console.log(response);
-        $("#post-new").empty();
-        let result = "";
-        if (response.length === 0) {
-          $("#post-new").append(
-              "<div class=\"row justify-content-center mt-5\">\n"
-              + "    <div class=\"col-md-12\">\n"
-              + "      <div class=\"alert alert-danger text-center\" role=\"alert\">\n"
-              + "        <h4 class=\"alert-heading\">Không tìm thấy kết quả</h4>\n"
-              + "        <p>Xin lỗi, chúng tôi không tìm thấy kết quả phù hợp với yêu cầu của bạn.</p>\n"
-              + "        <hr>\n"
-              + "        <p class=\"mb-0\">Vui lòng thử lại với các tiêu chí tìm kiếm khác hoặc liên hệ với chúng tôi nếu bạn cần hỗ trợ.</p>\n"
-              + "      </div>\n"
-              + "    </div>\n"
-              + "  </div>");
-        }
-        $.each(response.postResponses, function (index, option) {
-          let arrayRoom = option.areaResponse.roomResponses;
-          let minAcreage = arrayRoom[0]['acreage'];
-          let maxAcreage = arrayRoom[0]['acreage'];
-          let minPrice = arrayRoom[0]['rentPrice'];
-          let maxPrice = arrayRoom[0]['rentPrice'];
+    let requestSearch = {
+      ...(idProvince && { idProvince }),
+      ...(idDistrict && { idDistrict }),
+      ...(idWard && { idWard }),
+      ...(exactAddress && { exactAddress }),
+      ...(rentPrice && { rentPrice }),
+      ...(minPrice && { minPrice }),
+      ...(maxPrice && { maxPrice }),
+      ...(acreage && { acreage }),
+      ...(minAcreage && { minAcreage }),
+      ...(maxAcreage && { maxAcreage })
+    };
 
-          let thumbnail = option.thumbnail;
-          let webContentLink = "";
+    let searchParams= new URLSearchParams(requestSearch);
+    let queryString=searchParams.toString();
+    console.log(queryString);
 
-          if (typeof thumbnail !== 'undefined' && thumbnail !== '') {
-            let json = JSON.parse(thumbnail);
-            webContentLink = json[0].webContentLink;
-          }
-
-          for (let i = 0; i < arrayRoom.length; i++) {
-            if (minAcreage > arrayRoom[i]['acreage']) {
-              minAcreage = arrayRoom[i]['acreage'];
-            }
-
-            if (maxAcreage < arrayRoom[i]['acreage']) {
-              maxAcreage = arrayRoom[i]['acreage'];
-            }
-
-            if (minPrice > arrayRoom[i]['rentPrice']) {
-              minPrice = arrayRoom[i]['rentPrice'];
-            }
-
-            if (maxPrice < arrayRoom[i]['rentPrice']) {
-              maxPrice = arrayRoom[i]['rentPrice'];
-            }
-          }
-          let formattedMinPrice = minPrice.toLocaleString('vi-VN',
-              {style: 'currency', currency: 'VND'});
-          let formattedMaxPrice = maxPrice.toLocaleString('vi-VN',
-              {style: 'currency', currency: 'VND'});
-
-          if (index > 6) {
-            let divAdd = `<div class="col-sm-6 col-md-3 p0">
-                            <div class="box-tree more-proerty text-center">
-                                <div class="item-tree-icon">
-                                    <i class="fa fa-th"></i>
-                                </div>
-                                <div class="more-entry overflow">
-                                    <h5>
-                                      <a href="/client/property-1.html">
-                                         CAN'T DECIDE ?
-                                      </a>
-                                    </h5>
-                                    <h5 class="tree-sub-ttl">Show all properties</h5>
-                                    <button class="btn border-btn more-black" value="All properties">All properties</button>
-                                </div>
-                            </div>
-                        </div>`;
-            result += divAdd;
-            return false;
-          }
-
-          let divAdd = `<div class="col-sm-6 col-md-3 p0">
-                          <div class="box-two proerty-item">
-                              <div class="item-thumb">
-                                  <a href="/client/property-1.html">
-                                      <img src="${webContentLink}">
-                                  </a>
-                              </div>
-                              <div class="item-entry overflow">
-                                  <h5>
-                                      <a href="/client/property-1.html">
-                                         ${option.title}
-                                      </a>
-                                  </h5>
-                                  <div class="dot-hr"></div>
-                                  <span class="pull-left"><b>Diện tích: </b>${minAcreage}m2 - ${maxAcreage}m2</span>
-                                  <p class="proerty-price pull-left"><b>Giá: </b>${formattedMinPrice} - ${formattedMaxPrice}</p>
-                              </div>
-                          </div>
-                      </div>`;
-          result += divAdd;
-        });
-        $("#post-new").append(result);
-      },
-      error: function (xhr) {
-        console.log(xhr.responseText);
-      }
-    });
+    window.location.href = `/show-posts?${queryString}`;
   });
 
   function clearElementSelection() {

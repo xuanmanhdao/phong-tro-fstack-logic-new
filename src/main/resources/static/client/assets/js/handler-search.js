@@ -6,6 +6,8 @@ $(document).ready(function () {
     success: function (response) {
       console.log("Success get post!");
       console.log(response);
+      let searchRequest = response.searchRequest;
+      console.log(searchRequest);
       let result = "";
       $.each(response.postResponses, function (index, option) {
         let arrayRoom = option.areaResponse.roomResponses;
@@ -52,7 +54,7 @@ $(document).ready(function () {
                                 </div>
                                 <div class="more-entry overflow">
                                     <h5>
-                                      <a href="/show-posts">
+                                      <a href="/show-posts?${searchRequest}">
                                          CAN'T DECIDE ?
                                       </a>
                                     </h5>
@@ -219,6 +221,8 @@ $(document).ready(function () {
       success: function (response) {
         console.log("Success search post !");
         console.log(response);
+        let searchRequest = response.searchRequest;
+        console.log(searchRequest);
         $("#post-new").empty();
         let result = "";
         if (response.length === 0) {
@@ -279,7 +283,7 @@ $(document).ready(function () {
                                 </div>
                                 <div class="more-entry overflow">
                                     <h5>
-                                      <a href="/client/property-1.html">
+                                      <a href="/show-posts?${searchRequest}">
                                          CAN'T DECIDE ?
                                       </a>
                                     </h5>

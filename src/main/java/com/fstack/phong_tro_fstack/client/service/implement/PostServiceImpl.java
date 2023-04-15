@@ -122,11 +122,70 @@ public class PostServiceImpl implements PostService {
     int startIndex = (pageNumberRequest - 1) * pageSizeRequest;
     int endIndex = Math.min(startIndex + pageSizeRequest, totalRecordResult);
 
+    StringBuilder searchRequestBuilder = new StringBuilder();
+    String separator = "&";
+    if (idProvince.isPresent()) {
+      searchRequestBuilder.append("idProvince=").append(idProvince.get()).append(separator);
+    }
+
+    if (idDistrict.isPresent()) {
+      searchRequestBuilder.append("idDistrict=").append(idDistrict.get()).append(separator);
+    }
+
+    if (idWard.isPresent()) {
+      searchRequestBuilder.append("idWard=").append(idWard.get()).append(separator);
+    }
+
+    if (rentPrice.isPresent()) {
+      searchRequestBuilder.append("rentPrice=").append(rentPrice.get()).append(separator);
+    }
+
+    if (minPrice.isPresent()) {
+      searchRequestBuilder.append("minPrice=").append(minPrice.get()).append(separator);
+    }
+
+    if (maxPrice.isPresent()) {
+      searchRequestBuilder.append("maxPrice=").append(maxPrice.get()).append(separator);
+    }
+
+    if (acreage.isPresent()) {
+      searchRequestBuilder.append("acreage=").append(acreage.get()).append(separator);
+    }
+
+    if (minAcreage.isPresent()) {
+      searchRequestBuilder.append("minAcreage=").append(minAcreage.get()).append(separator);
+    }
+
+    if (maxAcreage.isPresent()) {
+      searchRequestBuilder.append("maxAcreage=").append(maxAcreage.get()).append(separator);
+    }
+
+    if (exactAddress.isPresent()) {
+      searchRequestBuilder.append("exactAddress=").append(exactAddress.get()).append(separator);
+    }
+
+//    if (pageNumber.isPresent()) {
+//      searchRequestBuilder.append("pageNumber=").append(pageNumber.get()).append(separator);
+//    }
+//
+//    if (pageSize.isPresent()) {
+//      searchRequestBuilder.append("pageSize=").append(pageSize.get()).append(separator);
+//    }
+
+// remove the last separator if it exists
+    if (searchRequestBuilder.length() > 0
+        && searchRequestBuilder.charAt(searchRequestBuilder.length() - 1) == '&') {
+      searchRequestBuilder.deleteCharAt(searchRequestBuilder.length() - 1);
+    }
+
+    String searchRequest = searchRequestBuilder.toString();
+
     PagedPostResponse resultResponse = new PagedPostResponse();
     resultResponse.setPostResponses(result.subList(startIndex, endIndex));
     resultResponse.setTotalPage(totalPage);
     resultResponse.setPageNumber(pageNumberRequest);
     resultResponse.setPageSize(pageSizeRequest);
+    resultResponse.setSearchRequest(searchRequest);
 
     return resultResponse;
   }

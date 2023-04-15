@@ -13,4 +13,5 @@ public class PagedPostResponse {
     private int totalPage;
     private int pageNumber;
     private int pageSize;
+    private String searchRequest;
 }

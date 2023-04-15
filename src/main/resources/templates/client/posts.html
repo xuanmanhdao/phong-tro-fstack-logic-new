@@ -47,8 +47,8 @@
                   <select id="items_per_page" name="per_page">
                     <option value="3">3</option>
                     <option value="6">6</option>
-                    <option value="9">9</option>
-                    <option selected="selected" value="12">12</option>
+                    <option selected="selected" value="9">9</option>
+                    <option value="12">12</option>
                     <option value="15">15</option>
                     <option value="30">30</option>
                     <option value="45">45</option>
@@ -67,39 +67,13 @@
 
           <div class="section clear">
             <div id="list-type" class="proerty-th">
-              <div id="post-new">
-                <div class="col-sm-6 col-md-4 p0">
-                  <div class="box-two proerty-item">
-                    <div class="item-thumb">
-                      <a href="property-1.html"><img src="assets/img/demo/property-3.jpg"></a>
-                    </div>
-
-                    <div class="item-entry overflow">
-                      <h5><a href="property-1.html"> Super nice villa </a></h5>
-                      <div class="dot-hr"></div>
-                      <span class="pull-left"><b> Area :</b> 120m </span>
-                      <span class="proerty-price pull-right"> $ 300,000</span>
-                      <p style="display: none;">Chào các bạn, Mình có một phòng trọ cần cho thuê ở
-                        khu
-                        vực trung tâm thành phố. Phòng rộng rãi, thoáng mát, có cửa sổ và ban công,
-                        phù hợp cho sinh viên hoặc người đi làm......</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div id="post-new"></div>
             </div>
           </div>
           <div class="section">
             <div class="pull-right">
               <div class="pagination">
-                <ul>
-                  <li><a href="#">Prev</a></li>
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">Next</a></li>
-                </ul>
+                <ul id="post_pagination"></ul>
               </div>
             </div>
           </div>
@@ -279,6 +253,87 @@
 
   <!--Script handler area -->
   <script th:src="@{client/assets/js/handler-search-show-posts.js}"></script>
+  <script th:inline="javascript">
+    let dataResponse = /*[[${postsResponse.postResponses}]]*/'';
+    let result = "";
+    $.each(dataResponse, function (index, option) {
+      let postTitle = option.title;
+      let postContent = option.content;
+      let thumbnail = option.thumbnail;
+      let webContentLink = "";
+      if (typeof thumbnail !== 'undefined' && thumbnail !== '') {
+        let json = JSON.parse(thumbnail);
+        webContentLink = json[0].webContentLink;
+      }
+
+      let postArea = option.areaResponse;
+      let postArrayRoom = postArea.roomResponses;
+      let minAcreage = postArrayRoom[0]['acreage'];
+      let maxAcreage = postArrayRoom[0]['acreage'];
+      let minPrice = postArrayRoom[0]['rentPrice'];
+      let maxPrice = postArrayRoom[0]['rentPrice'];
+      for (let i = 0; i < postArrayRoom.length; i++) {
+        if (minAcreage > postArrayRoom[i]['acreage']) {
+          minAcreage = postArrayRoom[i]['acreage'];
+        }
+
+        if (maxAcreage < postArrayRoom[i]['acreage']) {
+          maxAcreage = postArrayRoom[i]['acreage'];
+        }
+
+        if (minPrice > postArrayRoom[i]['rentPrice']) {
+          minPrice = postArrayRoom[i]['rentPrice'];
+        }
+
+        if (maxPrice < postArrayRoom[i]['rentPrice']) {
+          maxPrice = postArrayRoom[i]['rentPrice'];
+        }
+      }
+      let formattedMinPrice = minPrice.toLocaleString('vi-VN',
+          {style: 'currency', currency: 'VND'});
+      let formattedMaxPrice = maxPrice.toLocaleString('vi-VN',
+          {style: 'currency', currency: 'VND'});
+
+      let divAdd = `<div class="col-sm-6 col-md-4 p0">
+                       <div class="box-two proerty-item">
+                            <div class="item-thumb">
+                                 <a href="post/area/${postArea.id}">
+                                     <img src="${webContentLink}">
+                                 </a>
+                            </div>
+                            <div class="item-entry overflow">
+                                  <h5>
+                                      <a href="post/area/${postArea.id}" class="post_title">
+                                           ${postTitle}
+                                      </a>
+                                  </h5>
+                                  <div class="dot-hr"></div>
+                                  <span class="pull-left"><b>Diện tích: </b>${minAcreage}m2 - ${maxAcreage}m2</span>
+                                  <span class="proerty-price pull-left"><b>Giá: </b>${formattedMinPrice} - ${formattedMaxPrice}</span>
+                                  <p style="display: none;" class="post_short-description">${postContent}</p>
+                            </div>
+                       </div>
+                  </div>`;
+      result += divAdd;
+    });
+    $("#post-new").append(result);
+
+    let totalPageResponse =/*[[${postsResponse.totalPage}]]*/;
+    let pageNumberResponse =/*[[${postsResponse.pageNumber}]]*/;
+    let pageSizeResponse =/*[[${postsResponse.pageSize}]]*/;
+    let searchRequest =/*[[${postsResponse.searchRequest}]]*/;
+
+    let pagingPrev = `<li><a href="javascript:void(0);" id="prevPage">Prev</a></li>`;
+    let pagingNext = `<li><a href="javascript:void(0);" id="nextPage">Next</a></li>`;
+    let pagingContent = '';
+    for (let i = 1; i <= totalPageResponse; i++) {
+      let pagingRequest = `/show-posts?${searchRequest}&pageNumber=${i}`;
+      pagingContent += `<li><a href="${pagingRequest}">${i}</a></li>`;
+    }
+    let paging = pagingPrev + pagingContent + pagingNext;
+    let ulParent = document.getElementById("post_pagination");
+    ulParent.innerHTML = paging;
+  </script>
 </div>
 </body>
 </html>
