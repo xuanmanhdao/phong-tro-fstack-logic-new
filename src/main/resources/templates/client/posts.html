@@ -9,6 +9,12 @@
 <body>
 <!-- property area -->
 <div layout:fragment="content">
+  <style>
+    .active-page {
+      background-color: #f5f5f5;
+      color: #1f2222
+    }
+  </style>
   <div class="page-head">
     <div class="container">
       <div class="row">
@@ -256,9 +262,20 @@
   <script th:inline="javascript">
     let dataResponse = /*[[${postsResponse.postResponses}]]*/'';
     let result = "";
+    let maxLengthShortDescription = 130;
+    let maxLengthTitle = 32;
     $.each(dataResponse, function (index, option) {
       let postTitle = option.title;
       let postContent = option.content;
+      if (postTitle.length > maxLengthTitle) {
+        let shortTitle = postTitle.substring(0, maxLengthTitle) + "...";
+        postTitle = shortTitle;
+      }
+      if (postContent.length > maxLengthShortDescription) {
+        let shortDescription = postContent.substring(0, maxLengthShortDescription) + ".....";
+        postContent = shortDescription;
+      }
+
       let thumbnail = option.thumbnail;
       let webContentLink = "";
       if (typeof thumbnail !== 'undefined' && thumbnail !== '') {
@@ -323,12 +340,27 @@
     let pageSizeResponse =/*[[${postsResponse.pageSize}]]*/;
     let searchRequest =/*[[${postsResponse.searchRequest}]]*/;
 
-    let pagingPrev = `<li><a href="javascript:void(0);" id="prevPage">Prev</a></li>`;
-    let pagingNext = `<li><a href="javascript:void(0);" id="nextPage">Next</a></li>`;
+    let pagingPrev = `<li><a href="javascript:void(0);" id="prevPage">Trước</a></li>`;
+    let pagingNext = `<li><a href="javascript:void(0);" id="nextPage">Sau</a></li>`;
+
+    if (pageNumberResponse > 1) {
+      // Thay đổi URL khi nhấn thẻ a trang trước
+      pagingPrev=`<li><a href="/show-posts?${searchRequest}&pageNumber=${pageNumberResponse - 1}" id="prevPage">Trước</a></li>`;
+    }
+    if (pageNumberResponse < totalPageResponse) {
+      // Thay đổi URL khi nhấn thẻ a trang sau
+      pagingNext=`<li><a href="/show-posts?${searchRequest}&pageNumber=${pageNumberResponse + 1}" id="nextPage">Sau</a></li>`;
+    }
+
     let pagingContent = '';
     for (let i = 1; i <= totalPageResponse; i++) {
       let pagingRequest = `/show-posts?${searchRequest}&pageNumber=${i}`;
-      pagingContent += `<li><a href="${pagingRequest}">${i}</a></li>`;
+      if (i === pageNumberResponse) {
+        console.log("Trang hien tai: " + i);
+        pagingContent += `<li><a href="javascript:void(0);" class="active-page">${i}</a></li>`;
+      } else {
+        pagingContent += `<li><a href="${pagingRequest}">${i}</a></li>`;
+      }
     }
     let paging = pagingPrev + pagingContent + pagingNext;
     let ulParent = document.getElementById("post_pagination");
