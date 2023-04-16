@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.fstack.phong_tro_fstack.admin.personnal.models.PersonnalDTO;
 import com.fstack.phong_tro_fstack.admin.personnal.reponse.PersonnalReponse;
 import com.fstack.phong_tro_fstack.admin.users.moders.RoleDtoModel;
+import com.fstack.phong_tro_fstack.base.entity.UserEntity;
 
 @Service
 public class PersonnalService {
@@ -50,6 +51,12 @@ public class PersonnalService {
 		
 		return listPersonnalDTOs;
 		
+	}
+	
+	public UserEntity saveUserEntity(UserEntity userEntity) {
+		
+		UserEntity userEntitySave = personnalService.save(userEntity);
+		return userEntitySave;
 	}
 	
 	

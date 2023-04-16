@@ -15,6 +15,13 @@ public interface UserRepos extends CrudRepository<UserEntity, Long> {
 			+ "INNER JOIN user u ON u.id = ur.id_user "
 			+ "INNER JOIN role r on r.id = ur.id_role" , nativeQuery = true)
 	List<Object[]> findAllUserRole();
+	
+	@Query(value = "SELECT balance FROM user WHERE id = ?", nativeQuery = true)
+	Float findBankAccountById(Long id);
+	
+	@Query(value = "UPDATE user SET balance = ? WHERE id = ?",nativeQuery = true)
+	Object updateBankAccont(float bank, Long id);
+	
 
 
 }
