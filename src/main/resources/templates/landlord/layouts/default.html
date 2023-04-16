@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FStack - Chủ Trọ</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" th:href="@{/landlord/images/favicon.ico}"/>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/landlord/css/bootstrap.min.css}"/>
+  <!-- Typography CSS -->
+  <link rel="stylesheet" th:href="@{/landlord/css/typography.css}"/>
+  <!-- Style CSS -->
+  <link rel="stylesheet" th:href="@{/landlord/css/style.css}"/>
+  <!-- Responsive CSS -->
+  <link rel="stylesheet" th:href="@{/landlord/css/responsive.css}"/>
+
+  <link rel="stylesheet" th:href="@{/landlord/assets/step/style.step.css}"/>
+
+</head>
+
+<body style="">
+<!-- loader Start -->
+<div id="loading" style="display: none;">
+  <div id="loading-center">
+    <div class="loader">
+      <div class="cube">
+        <div class="sides">
+          <div class="top"></div>
+          <div class="right"></div>
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="front"></div>
+          <div class="back"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="wrapper">
+  <!-- loader END -->
+  <!-- Sidebar  -->
+  <div th:replace="~{/landlord/fragments/sidebar}"></div>
+  <!-- TOP Nav Bar -->
+  <div th:replace="~{/landlord/fragments/header}"></div>
+  <!-- TOP Nav Bar END -->
+  <!-- Page Content  -->
+  <div id="content-page" class="content-page">
+    <div class="container-fluid" layout:fragment="content">
+
+    </div>
+  </div>
+</div>
+<!-- Wrapper END -->
+<!-- Footer -->
+<div th:replace="~{/landlord/fragments/footer}"></div>
+<!-- Footer END -->
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script th:src="@{/landlord/js/jquery.min.js}"></script>
+<script th:src="@{/landlord/js/popper.min.js}"></script>
+<script th:src="@{/landlord/js/bootstrap.min.js}"></script>
+<!-- Appear JavaScript -->
+<script th:src="@{/landlord/js/jquery.appear.js}"></script>
+<!-- Countdown JavaScript -->
+<script th:src="@{/landlord/js/countdown.min.js}"></script>
+<!-- Counterup JavaScript -->
+<script th:src="@{/landlord/js/waypoints.min.js}"></script>
+<script th:src="@{/landlord/js/jquery.counterup.min.js}"></script>
+<!-- Wow JavaScript -->
+<script th:src="@{/landlord/js/wow.min.js}"></script>
+<!-- Apexcharts JavaScript -->
+<script th:src="@{/landlord/js/apexcharts.js}"></script>
+<!-- Slick JavaScript -->
+<script th:src="@{/landlord/js/slick.min.js}"></script>
+<!-- Select2 JavaScript -->
+<script th:src="@{/landlord/js/select2.min.js}"></script>
+<!-- Owl Carousel JavaScript -->
+<script th:src="@{/landlord/js/owl.carousel.min.js}"></script>
+<!-- Magnific Popup JavaScript -->
+<script th:src="@{/landlord/js/jquery.magnific-popup.min.js}"></script>
+<!-- Smooth Scrollbar JavaScript -->
+<script th:src="@{/landlord/js/smooth-scrollbar.js}"></script>
+<!-- lottie JavaScript -->
+<script th:src="@{/landlord/js/lottie.js}"></script>
+<!-- Chart Custom JavaScript -->
+<script th:src="@{/landlord/js/chart-custom.js}"></script>
+<script th:src="@{/landlord/js/custom.js}"></script>
+<script th:src="@{/landlord/js/jquery.validate.min.js}"></script>
+<!--<script th:src="@{/client/assets/js/bootstrap-select.min.js}"></script>-->
+
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyZ7Ai2CrGPrlw5GNav8tuhGkY3vLR9xo&callback=updateMap"></script>
+
+</body>
+</html>

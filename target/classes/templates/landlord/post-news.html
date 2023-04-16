@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+      layout:decorate="~{landlord/layouts/default}">
+
+<div class="container-fluid" layout:fragment="content">
+  <script th:src="@{/landlord/js/jquery.min.js}"></script>
+  <script th:src="@{/landlord/assets/step/jquery-steps/save.jquery.steps.js}"></script>
+
+  <section class="signup-step-container">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+          <div class="wizard">
+            <div class="wizard-inner">
+              <div class="connecting-line"></div>
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                  <a href="#" data-toggle="tab" aria-controls="step1" role="tab"
+                     aria-expanded="true"
+                     style="cursor: default; pointer-events: none; text-decoration: none; color: #999;">
+                    <span class="round-tab">1 </span> <i>Thông tin cơ bản</i>
+                  </a>
+                </li>
+                <li role="presentation" class="disabled">
+                  <a href="javascript:void(0)" data-toggle="tab" aria-controls="step2" role="tab"
+                     aria-expanded="false"
+                     style="cursor: default; pointer-events: none; text-decoration: none; color: #999;"><span
+                      class="round-tab">2</span> <i>Dãy trọ</i></a>
+                </li>
+                <li role="presentation" class="disabled">
+                  <a href="javascript:void(0)" data-toggle="tab" aria-controls="step3" role="tab"
+                     style="cursor: default; pointer-events: none; text-decoration: none; color: #999;"><span
+                      class="round-tab">3</span> <i>Phòng trọ</i></a>
+                </li>
+                <li role="presentation" class="disabled">
+                  <a href="javascript:void(0)" data-toggle="tab" aria-controls="step4" role="tab"
+                     style="cursor: default; pointer-events: none; text-decoration: none; color: #999;"><span
+                      class="round-tab">4</span> <i>Đăng bài</i></a>
+                </li>
+              </ul>
+            </div>
+
+            <form method="post" role="form" class="login-box" id="form-save-post-news">
+              <div class="tab-content" id="main_form">
+                <div th:replace="~{/landlord/fragments/step/step1}">
+                  <!-- Các trường input trong step 1 -->
+                </div>
+                <div th:replace="~{/landlord/fragments/step/step2}">
+                  <!-- Các trường input trong step 2 -->
+                </div>
+                <div th:replace="~{/landlord/fragments/step/step3}">
+                  <!-- Các trường input trong step 3 -->
+                </div>
+                <div th:replace="~{/landlord/fragments/step/step4}">
+                  <!-- Các trường input trong step 4 -->
+                </div>
+              </div>
+              <ul class="list-inline pull-right">
+                <li>
+                  <button id="btn-back" type="button" class="default-btn prev-step">Quay lại
+                  </button>
+                </li>
+                <li>
+                  <button id="btn-next" type="button" class="default-btn next-step">Tiếp tục
+                  </button>
+                </li>
+                <li>
+                  <button id="btn-finish" type="button" class="default-btn next-step">Xác nhận
+                  </button>
+                </li>
+              </ul>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+</html>

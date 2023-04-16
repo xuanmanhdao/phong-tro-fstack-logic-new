@@ -1,0 +1,72 @@
+<div class="tab-pane active" role="tabpanel" id="step1">
+  <h4 class="text-center">Thông tin cơ bản</h4>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Tiêu đề *</label>
+        <input class="form-control" required="" type="text" name="name"
+               placeholder="Vui lòng điền tiêu đề"
+               id="post-title"/>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center"> <!-- Thêm class justify-content-center ở đây -->
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Số điện thoại</label>
+              <input class="form-control" type="text" name="name" placeholder="" id="post-phone">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label>Số Zalo</label>
+              <input class="form-control" type="text" name="name" placeholder="" id="post-zalo">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Mô tả *</label>
+              <textarea class="form-control" rows="4" type="text" name="name" required
+                        minlength="30" data-msg-minlength="Tiêu đề quá ngắn"
+                        data-msg-required="Mô tả không được để trống"
+                        data-msg-maxlength="Mô tả quá dài" placeholder="Vui lòng nhập mô tả"
+                        id="post-content"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 border p-3 text-center">
+        <label for="image" style="display: inline-block; margin-bottom: 10px;">Chọn ảnh</label>
+        <input type="file" onchange="preview(event)" id="image" accept=".jpg,.gpn,.pdf,.png"
+               style="display: none;"/>
+        <div id="galerias" class="d-flex justify-content-center">
+          <!-- Hiển thị ảnh -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--        <div class="col-md-6 d-flex flex-column justify-content-center">-->
+<!--            <div class="form-group ">-->
+<!--                <label>Số điện thoại *</label>-->
+<!--                <input class="form-control" type="tel" name="name" placeholder=""-->
+<!--                       id="post-phone"/>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label>Số zalo *</label>-->
+<!--                <input class="form-control" type="tel" name="name" placeholder=""-->
+<!--                       id="post-zalo"/>-->
+<!--            </div>-->
+
+<!--        </div>-->
+
+
+<!--    <ul class="list-inline pull-right">-->
+<!--        <li>-->
+<!--            <button type="button" class="default-btn next-step">Tiếp tục-->
+<!--            </button>-->
+<!--        </li>-->
+<!--    </ul>-->
