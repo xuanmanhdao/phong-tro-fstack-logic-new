@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{client/layout/default}"
+      class="no-js">
+<head layout:fragment="head-content">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="GARO is a real-estate template">
+  <meta name="author" content="Kimarotec">
+  <meta name="keyword"
+        content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tất cả bài đăng</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet'
+        type='text/css'>
+
+  <!-- Place favicon.ico  the root directory -->
+  <link rel="shortcut icon" th:href="@{/client/favicon.ico}" type="image/x-icon">
+  <link rel="icon" th:href="@{/client/favicon.ico}" type="image/x-icon">
+
+  <link rel="stylesheet" th:href="@{/client/assets/css/normalize.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/font-awesome.min.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/fontello.css}">
+  <link th:href="@{/client/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css}" rel="stylesheet">
+  <link th:href="@{/client/assets/fonts/icon-7-stroke/css/helper.css}" rel="stylesheet">
+  <link th:href="@{/client/assets/css/animate.css}" rel="stylesheet" media="screen">
+  <link rel="stylesheet" th:href="@{/client/assets/css/bootstrap-select.min.css}">
+  <link rel="stylesheet" th:href="@{/client/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/icheck.min_all.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/price-range.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.carousel.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.theme.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.transitions.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/style.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/responsive.css}">
+</head>
+<body>
+<!-- property area -->
+<div layout:fragment="content">
+  <style>
+    .active-page {
+      background-color: #f5f5f5;
+      color: #1f2222
+    }
+  </style>
+  <div class="page-head">
+    <div class="container">
+      <div class="row">
+        <div class="page-head-content">
+          <h1 class="page-title">Bài đăng mới nhất</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End page header -->
+
+  <!-- property area -->
+  <div class="properties-area recent-property" style="background-color: #FFF;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-9 padding-top-40 properties-page">
+          <div class="section clear">
+            <div class="col-xs-10 page-subheader sorting pl0">
+              <ul class="sort-by-list">
+                <li class="active">
+                  <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date"
+                     data-order="ASC">
+                    Property Date <i class="fa fa-sort-amount-asc"></i>
+                  </a>
+                </li>
+                <li class="">
+                  <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price"
+                     data-order="DESC">
+                    Property Price <i class="fa fa-sort-numeric-desc"></i>
+                  </a>
+                </li>
+              </ul><!--/ .sort-by-list-->
+              <div class="items-per-page">
+                <label for="items_per_page"><b>Property per page :</b></label>
+                <div class="sel">
+                  <select id="items_per_page" name="per_page">
+                    <option value="3">3</option>
+                    <option value="6">6</option>
+                    <option selected="selected" value="9">9</option>
+                    <option value="12">12</option>
+                    <option value="15">15</option>
+                    <option value="30">30</option>
+                    <option value="45">45</option>
+                    <option value="60">60</option>
+                  </select>
+                </div><!--/ .sel-->
+              </div><!--/ .items-per-page-->
+            </div>
+
+            <div class="col-xs-2 layout-switcher">
+              <a class="layout-list" href="javascript:void(0);"> <i class="fa fa-th-list"></i> </a>
+              <a class="layout-grid active" href="javascript:void(0);"> <i class="fa fa-th"></i>
+              </a>
+            </div><!--/ .layout-switcher-->
+          </div>
+
+          <div class="section clear">
+            <div id="list-type" class="proerty-th">
+              <div id="post-new"></div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="pull-right">
+              <div class="pagination">
+                <ul id="post_pagination"></ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 pl0 padding-top-40">
+          <div class="blog-asside-right pl0">
+            <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+              <div class="panel-heading">
+                <h3 class="panel-title">Smart search</h3>
+              </div>
+              <div class="panel-body search-widget">
+                <form class="form-inline" id="form-search">
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <input type="text" id="exact-address" class="form-control"
+                               placeholder="Số nhà, địa chỉ cụ thể nhà trọ">
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <select id="property_city__select" class="selectpicker"
+                                data-live-search="true"
+                                title="Tỉnh/Thành Phố">
+                          <option disabled>--Chọn một tùy chọn--</option>
+                        </select>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <select id="property_district__select" class="selectpicker"
+                                data-live-search="true"
+                                title="Quận/Huyện">
+                          <option disabled>--Chọn một tùy chọn--</option>
+                        </select>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <select id="property_ward__select" class="selectpicker"
+                                data-live-search="true"
+                                title="Phường/Xã">
+                          <option disabled>--Chọn một tùy chọn--</option>
+                        </select>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="padding-5">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label for="price-range">Khoảng giá (₫):</label>
+                        <input type="text" class="span2" value="" data-slider-min="0"
+                               data-slider-max="10000000" data-slider-step="5"
+                               data-slider-value="[500000,2000000]" id="price-range"><br/>
+                        <b class="pull-left color">0₫</b>
+                        <b class="pull-right color">10.000.000₫</b>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="padding-5">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label for="acreage-range">Khoảng diện tích (m2) :</label>
+                        <input type="text" class="span2" value="" data-slider-min="0"
+                               data-slider-max="200" data-slider-step="5"
+                               data-slider-value="[15,30]" id="acreage-range"><br/>
+                        <b class="pull-left color">0m2</b>
+                        <b class="pull-right color">200m2</b>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <input class="button btn largesearch-btn" value="Search" type="submit">
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+
+            <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+              <div class="panel-heading">
+                <h3 class="panel-title">Recommended</h3>
+              </div>
+              <div class="panel-body recent-property-widget">
+                <ul>
+                  <li>
+                    <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                      <a href="single.html"><img
+                          th:src="@{/client/assets/img/demo/small-property-2.jpg}"></a>
+                      <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                      <h6><a href="single.html">Super nice villa </a></h6>
+                      <span class="property-price">3000000$</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
+                      <a href="single.html"><img
+                          th:src="@{/client/assets/img/demo/small-property-1.jpg}"></a>
+                      <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                      <h6><a href="single.html">Super nice villa </a></h6>
+                      <span class="property-price">3000000$</span>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                      <a href="single.html"><img
+                          th:src="@{/client/assets/img/demo/small-property-3.jpg}"></a>
+                      <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                      <h6><a href="single.html">Super nice villa </a></h6>
+                      <span class="property-price">3000000$</span>
+                    </div>
+                  </li>
+
+                  <li>
+                    <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                      <a href="single.html"><img
+                          th:src="@{/client/assets/img/demo/small-property-2.jpg}"></a>
+                      <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                      <h6><a href="single.html">Super nice villa </a></h6>
+                      <span class="property-price">3000000$</span>
+                    </div>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Script area -->
+  <script th:src="@{/client/assets/js/modernizr-2.6.2.min.js}"></script>
+  <script th:src="@{/client/assets/js/jquery-1.10.2.min.js}"></script>
+  <script th:src="@{/client/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{/client/assets/js/bootstrap-select.min.js}"></script>
+  <script th:src="@{/client/assets/js/bootstrap-hover-dropdown.js}"></script>
+  <script th:src="@{/client/assets/js/easypiechart.min.js}"></script>
+  <script th:src="@{/client/assets/js/jquery.easypiechart.min.js}"></script>
+  <script th:src="@{/client/assets/js/owl.carousel.min.js}"></script>
+  <script th:src="@{/client/assets/js/wow.js}"></script>
+  <script th:src="@{/client/assets/js/icheck.min.js}"></script>
+  <script th:src="@{/client/assets/js/price-range.js}"></script>
+  <script th:src="@{/client/assets/js/main.js}"></script>
+
+  <!--Script handler area -->
+  <script th:src="@{/client/assets/js/handler-search-show-posts.js}"></script>
+  <script th:inline="javascript">
+    let dataResponse = /*[[${postsResponse.postResponses}]]*/'';
+    let result = "";
+    let maxLengthShortDescription = 130;
+    let maxLengthTitle = 32;
+    if (dataResponse.length === 0) {
+      let errorMessage = `<div class="row justify-content-center mt-5">
+                                 <div class="col-md-12">
+                                       <div class="alert alert-danger text-center" role="alert">
+                                            <h4 class="alert-heading">Không tìm thấy kết quả</h4>
+                                            <p>Xin lỗi, chúng tôi không tìm thấy kết quả phù hợp với yêu cầu của bạn.</p>
+                                            <p class="mb-0">Vui lòng thử lại với các tiêu chí tìm kiếm khác hoặc liên hệ với chúng tôi nếu bạn cần hỗ trợ.</p>
+                                       </div>
+                                 </div>
+                              </div>`;
+      $("#post-new").append(errorMessage);
+    }
+    $.each(dataResponse, function (index, option) {
+      let postTitle = option.title;
+      let postContent = option.content;
+      if (postTitle.length > maxLengthTitle) {
+        let shortTitle = postTitle.substring(0, maxLengthTitle) + "...";
+        postTitle = shortTitle;
+      }
+      if (postContent.length > maxLengthShortDescription) {
+        let shortDescription = postContent.substring(0, maxLengthShortDescription) + ".....";
+        postContent = shortDescription;
+      }
+
+      let thumbnail = option.thumbnail;
+      let webContentLink = "";
+      if (typeof thumbnail !== 'undefined' && thumbnail !== '') {
+        let json = JSON.parse(thumbnail);
+        webContentLink = json[0].webContentLink;
+      }
+
+      let postArea = option.areaResponse;
+      let exactAddress = postArea.exactAddress.trim();
+      let wardName = postArea.wardName.trim();
+      let districtName = postArea.districtName.trim();
+      let provinceName = postArea.provinceName.trim();
+      let address = `${exactAddress} - ${wardName} - ${districtName} - ${provinceName}`;
+
+      let postArrayRoom = postArea.roomResponses;
+      let minAcreage = postArrayRoom[0]['acreage'];
+      let maxAcreage = postArrayRoom[0]['acreage'];
+      let minPrice = postArrayRoom[0]['rentPrice'];
+      let maxPrice = postArrayRoom[0]['rentPrice'];
+      for (let i = 0; i < postArrayRoom.length; i++) {
+        if (minAcreage > postArrayRoom[i]['acreage']) {
+          minAcreage = postArrayRoom[i]['acreage'];
+        }
+
+        if (maxAcreage < postArrayRoom[i]['acreage']) {
+          maxAcreage = postArrayRoom[i]['acreage'];
+        }
+
+        if (minPrice > postArrayRoom[i]['rentPrice']) {
+          minPrice = postArrayRoom[i]['rentPrice'];
+        }
+
+        if (maxPrice < postArrayRoom[i]['rentPrice']) {
+          maxPrice = postArrayRoom[i]['rentPrice'];
+        }
+      }
+      let formattedMinPrice = minPrice.toLocaleString('vi-VN',
+          {style: 'currency', currency: 'VND'});
+      let formattedMaxPrice = maxPrice.toLocaleString('vi-VN',
+          {style: 'currency', currency: 'VND'});
+
+      let divAdd = `<div class="col-sm-6 col-md-4 p0">
+                       <div class="box-two proerty-item">
+                            <div class="item-thumb">
+                                 <a href="/show-posts/post/${option.id}">
+                                     <img src="${webContentLink}">
+                                 </a>
+                            </div>
+                            <div class="item-entry overflow">
+                                  <h5>
+                                      <a href="/show-posts/post/${option.id}" class="post_title">
+                                           ${postTitle}
+                                      </a>
+                                  </h5>
+                                  <div class="dot-hr"></div>
+                                  <span class="pull-left"><b>Diện tích: </b>${minAcreage}m2 - ${maxAcreage}m2</span>
+                                  <span class="proerty-price pull-left"><b>Giá: </b>${formattedMinPrice} - ${formattedMaxPrice}</span>
+                                  <span class="pull-left" style="font-size: 12px; display: block"><b>Địa chỉ: </b>${address}</span>
+                                  <p style="display: none; font-size: 13px;" class="post_short-description">${postContent}</p>
+                            </div>
+                       </div>
+                  </div>`;
+      result += divAdd;
+    });
+    $("#post-new").append(result);
+
+    let totalPageResponse =/*[[${postsResponse.totalPage}]]*/;
+    let pageNumberResponse =/*[[${postsResponse.pageNumber}]]*/;
+    let pageSizeResponse =/*[[${postsResponse.pageSize}]]*/;
+    let searchRequest =/*[[${postsResponse.searchRequest}]]*/;
+
+    let pagingPrev = `<li><a href="javascript:void(0);" id="prevPage">Trước</a></li>`;
+    let pagingNext = `<li><a href="javascript:void(0);" id="nextPage">Sau</a></li>`;
+
+    if (pageNumberResponse > 1) {
+      // Thay đổi URL khi nhấn thẻ a trang trước
+      pagingPrev = `<li><a href="/show-posts?${searchRequest}&pageNumber=${pageNumberResponse
+      - 1}" id="prevPage">Trước</a></li>`;
+    }
+    if (pageNumberResponse < totalPageResponse) {
+      // Thay đổi URL khi nhấn thẻ a trang sau
+      pagingNext = `<li><a href="/show-posts?${searchRequest}&pageNumber=${pageNumberResponse
+      + 1}" id="nextPage">Sau</a></li>`;
+    }
+
+    let pagingContent = '';
+    for (let i = 1; i <= totalPageResponse; i++) {
+      let pagingRequest = `/show-posts?${searchRequest}&pageNumber=${i}`;
+      if (i === pageNumberResponse) {
+        console.log("Trang hien tai: " + i);
+        pagingContent += `<li><a href="javascript:void(0);" class="active-page">${i}</a></li>`;
+      } else {
+        pagingContent += `<li><a href="${pagingRequest}">${i}</a></li>`;
+      }
+    }
+    let paging = pagingPrev + pagingContent + pagingNext;
+    let ulParent = document.getElementById("post_pagination");
+    ulParent.innerHTML = paging;
+  </script>
+</div>
+</body>
+</html>

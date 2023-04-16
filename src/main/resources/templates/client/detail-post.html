@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{client/layout/default}"
+      class="no-js">
+<head layout:fragment="head-content">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="GARO is a real-estate template">
+  <meta name="author" content="Kimarotec">
+  <meta name="keyword"
+        content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chi tiết bài đăng</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet'
+        type='text/css'>
+
+  <!-- Place favicon.ico  the root directory -->
+  <link rel="shortcut icon" th:href="@{/client/favicon.ico}" type="image/x-icon">
+  <link rel="icon" th:href="@{/client/favicon.ico}" type="image/x-icon">
+
+  <link rel="stylesheet" th:href="@{/client/assets/css/normalize.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/font-awesome.min.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/fontello.css}">
+  <link th:href="@{/client/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css}" rel="stylesheet">
+  <link th:href="@{/client/assets/fonts/icon-7-stroke/css/helper.css}" rel="stylesheet">
+  <link th:href="@{/client/assets/css/animate.css}" rel="stylesheet" media="screen">
+  <link rel="stylesheet" th:href="@{/client/assets/css/bootstrap-select.min.css}">
+  <link rel="stylesheet" th:href="@{/client/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/icheck.min_all.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/price-range.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.carousel.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.theme.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.transitions.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/lightslider.min.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/style.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/responsive.css}">
+</head>
+<body>
+<!-- property area -->
+<div layout:fragment="content">
+  <style>
+    .video-container {
+      position: relative;
+      padding-bottom: 50%;
+      height: 0;
+      overflow: hidden;
+      max-width: 100%;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    @media (min-width: 768px) {
+      .video-container {
+        padding-bottom: 50%;
+        max-width: 730px;
+      }
+    }
+
+    @media (min-width: 992px) {
+      .video-container {
+        padding-bottom: 40%;
+        max-width: 730px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .video-container {
+        padding-bottom: 32.5%;
+        max-width: 730px;
+      }
+    }
+  </style>
+  <div class="page-head">
+    <div class="container">
+      <div class="row">
+        <div class="page-head-content">
+          <h1 class="page-title" th:text="${postResponse.title}"></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End page header -->
+
+  <!-- property area -->
+  <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
+    <div class="container">
+
+      <div class="clearfix padding-top-40">
+
+        <div class="col-md-8 single-property-content prp-style-1 ">
+          <div class="row">
+            <div class="light-slide-item">
+              <div class="clearfix">
+                <div class="favorite-and-print">
+                  <a class="add-to-fav" href="#login-modal" data-toggle="modal">
+                    <i class="fa fa-star-o" style="color: red !important;"></i>
+                  </a>
+                  <a class="printer-icon" href="javascript:window.print()">
+                    <i class="fa fa-print" style="color: red !important;"></i>
+                  </a>
+                </div>
+
+                <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="single-property-wrapper">
+            <div class="single-property-header">
+              <h1 class="property-title pull-left" id="room-name"></h1>
+              <span class="property-price pull-right" id="room-rent_price"></span>
+            </div>
+
+            <div class="property-meta entry-meta clearfix ">
+
+              <div class="col-xs-4 col-sm-3 col-md-3 p-b-15">
+                 <span class="property-info-icon icon-tag">
+                     <img th:src="@{/client/assets/img/icon/sale-orange.png}">
+                 </span>
+                <span class="property-info-entry">
+                    <span class="property-info-label">Giá điện</span>
+                    <span class="property-info-value" id="room-electric_service"></span>
+                </span>
+              </div>
+
+              <div class="col-xs-4 col-sm-3 col-md-3 p-b-15">
+                 <span class="property-info-icon icon-tag">
+                     <img th:src="@{/client/assets/img/icon/sale-orange.png}">
+                 </span>
+                <span class="property-info-entry">
+                    <span class="property-info-label">Giá nước</span>
+                    <span class="property-info-value" id="room-water_service"></span>
+                </span>
+              </div>
+
+              <div class="col-xs-4 col-sm-3 col-md-3 p-b-15">
+                                    <span class="property-info icon-area">
+                                        <img th:src="@{/client/assets/img/icon/room-orange.png}">
+                                    </span>
+                <span class="property-info-entry">
+                                        <span class="property-info-label">Diện tích</span>
+                                        <span class="property-info-value" id="room-acreage"></span>
+                                    </span>
+              </div>
+            </div>
+            <!-- .property-meta -->
+
+            <div class="section">
+              <h4 class="s-property-title">Nội dung</h4>
+              <div class="s-property-content">
+                <p id="area-description" th:text="${postResponse.content}"></p>
+              </div>
+            </div>
+            <!-- End description area  -->
+
+            <div class="section">
+              <h4 class="s-property-title">Chi tiết phòng</h4>
+              <div class="s-property-content">
+                <p id="room-description"></p>
+              </div>
+            </div>
+            <!-- End description room  -->
+
+            <div class="section additional-details">
+              <h4 class="s-property-title">Thông tin bổ sung</h4>
+              <ul class="additional-details-list clearfix">
+                <li>
+                  <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Địa chỉ</span>
+                  <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"
+                        id="additional-area_address"></span>
+                </li>
+                <li>
+                  <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Ngày đăng</span>
+                  <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"
+                        id="additional-post_created_at"></span>
+                </li>
+                <li>
+                  <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Bài đăng còn khả dụng</span>
+                  <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"
+                        id="additional-post_number_date"
+                        th:text="${postResponse.numberDate}"></span>
+                </li>
+                <li>
+                  <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Số di động</span>
+                  <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"
+                        id="additional-post_phone_number"
+                        th:text="${postResponse.phoneNumber}"></span>
+                </li>
+                <li>
+                  <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Số Zalo</span>
+                  <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry"
+                        id="additional-post_phone_zalo" th:text="${postResponse.phoneZalo}"></span>
+                </li>
+              </ul>
+            </div>
+            <!-- End additional-details area  -->
+
+            <div class="section property-video">
+              <h4 class="s-property-title">Video phòng</h4>
+              <div class="video-thumb">
+                <div class="video-container">
+                  <iframe id="room-video"
+                          width="730" height="365"
+                          src="https://www.youtube.com/embed/10msILHmtIM"
+                          title="YouTube video player" frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowfullscreen>
+                  </iframe>
+                </div>
+              </div>
+            </div>
+            <!-- End video area  -->
+
+
+            <div class="section property-share">
+              <h4 class="s-property-title">Share width your friends </h4>
+              <div class="roperty-social">
+                <ul>
+                  <li><a title="Share this on dribbble " href="#"><img
+                      th:src="@{/client/assets/img/social_big/dribbble_grey.png}"></a></li>
+                  <li><a title="Share this on facebok " href="#"><img
+                      th:src="@{/client/assets/img/social_big/facebook_grey.png}"></a></li>
+                  <li><a title="Share this on delicious " href="#"><img
+                      th:src="@{/client/assets/img/social_big/delicious_grey.png}"></a></li>
+                  <li><a title="Share this on tumblr " href="#"><img
+                      th:src="@{/client/assets/img/social_big/tumblr_grey.png}"></a></li>
+                  <li><a title="Share this on digg " href="#"><img
+                      th:src="@{/client/assets/img/social_big/digg_grey.png}"></a></li>
+                  <li><a title="Share this on twitter " href="#"><img
+                      th:src="@{/client/assets/img/social_big/twitter_grey.png}"></a></li>
+                  <li><a title="Share this on linkedin " href="#"><img
+                      th:src="@{/client/assets/img/social_big/linkedin_grey.png}"></a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- End video area  -->
+
+          </div>
+        </div>
+
+
+        <div class="col-md-4 p0">
+          <aside class="sidebar sidebar-property blog-asside-right">
+            <div class="dealer-widget">
+              <div class="dealer-content">
+                <div class="inner-wrapper">
+
+                  <div class="clear">
+                    <div class="col-xs-4 col-sm-4 dealer-face">
+                      <a href="">
+                        <img th:src="@{/client/assets/img/client-face1.png}" class="img-circle">
+                      </a>
+                    </div>
+                    <div class="col-xs-8 col-sm-8 ">
+                      <h3 class="dealer-name">
+                        <a href="javascript:void(0)"
+                           th:text="${postResponse.userResponse.fullName}"></a>
+                        <span style="display: block">Người đăng bài</span>
+                      </h3>
+                      <div class="dealer-social-media">
+                        <a class="twitter" target="_blank" href="">
+                          <i class="fa fa-twitter"></i>
+                        </a>
+                        <a class="facebook" target="_blank" href="">
+                          <i class="fa fa-facebook"></i>
+                        </a>
+                        <a class="gplus" target="_blank" href="">
+                          <i class="fa fa-google-plus"></i>
+                        </a>
+                        <a class="linkedin" target="_blank" href="">
+                          <i class="fa fa-linkedin"></i>
+                        </a>
+                        <a class="instagram" target="_blank" href="">
+                          <i class="fa fa-instagram"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+                class="panel panel-default sidebar-menu similar-property-wdg wow fadeInRight animated">
+              <div class="panel-heading">
+                <h3 class="panel-title">Danh sách phòng</h3>
+              </div>
+              <div class="panel-body recent-property-widget">
+                <ul id="list-room"></ul>
+              </div>
+            </div>
+
+            <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+              <div class="panel-heading">
+                <h3 class="panel-title">Quảng cáo</h3>
+              </div>
+              <div class="panel-body recent-property-widget">
+                <img th:src="@{/client/assets/img/ads.jpg}">
+              </div>
+            </div>
+
+            <div class="panel panel-default sidebar-menu wow fadeInRight animated">
+              <div class="panel-heading">
+                <h3 class="panel-title">Smart search</h3>
+              </div>
+              <div class="panel-body search-widget">
+                <form class="form-inline" id="form-search">
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <input type="text" id="exact-address" class="form-control"
+                               placeholder="Số nhà, địa chỉ cụ thể nhà trọ">
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <select id="property_city__select" class="selectpicker"
+                                data-live-search="true"
+                                title="Tỉnh/Thành Phố">
+                          <option disabled>--Chọn một tùy chọn--</option>
+                        </select>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <select id="property_district__select" class="selectpicker"
+                                data-live-search="true"
+                                title="Quận/Huyện">
+                          <option disabled>--Chọn một tùy chọn--</option>
+                        </select>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <select id="property_ward__select" class="selectpicker"
+                                data-live-search="true"
+                                title="Phường/Xã">
+                          <option disabled>--Chọn một tùy chọn--</option>
+                        </select>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="padding-5">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label for="price-range">Khoảng giá (₫):</label>
+                        <input type="text" class="span2" value="" data-slider-min="0"
+                               data-slider-max="10000000" data-slider-step="5"
+                               data-slider-value="[500000,2000000]" id="price-range"><br/>
+                        <b class="pull-left color">0₫</b>
+                        <b class="pull-right color">10.000.000₫</b>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset class="padding-5">
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <label for="acreage-range">Khoảng diện tích (m2) :</label>
+                        <input type="text" class="span2" value="" data-slider-min="0"
+                               data-slider-max="200" data-slider-step="5"
+                               data-slider-value="[15,30]" id="acreage-range"><br/>
+                        <b class="pull-left color">0m2</b>
+                        <b class="pull-right color">200m2</b>
+                      </div>
+                    </div>
+                  </fieldset>
+
+                  <fieldset>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <input class="button btn largesearch-btn" value="Search" type="submit">
+                      </div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+
+          </aside>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Script area -->
+  <script th:src="@{/client/assets/js/modernizr-2.6.2.min.js}"></script>
+  <script th:src="@{/client/assets/js/jquery-1.10.2.min.js}"></script>
+  <script th:src="@{/client/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{/client/assets/js/bootstrap-select.min.js}"></script>
+  <script th:src="@{/client/assets/js/bootstrap-hover-dropdown.js}"></script>
+  <script th:src="@{/client/assets/js/easypiechart.min.js}"></script>
+  <script th:src="@{/client/assets/js/jquery.easypiechart.min.js}"></script>
+  <script th:src="@{/client/assets/js/owl.carousel.min.js}"></script>
+  <script th:src="@{/client/assets/js/wow.js}"></script>
+  <script th:src="@{/client/assets/js/icheck.min.js}"></script>
+  <script th:src="@{/client/assets/js/price-range.js}"></script>
+  <script type="text/javascript" th:src="@{/client/assets/js/lightslider.min.js}"></script>
+  <script th:src="@{/client/assets/js/main.js}"></script>
+
+  <script th:src="@{/client/assets/js/handler-search-show-posts.js}"></script>
+  <script th:inline="javascript">
+    $(document).ready(function () {
+      var slider = $('#image-gallery').lightSlider({
+        gallery: true,
+        item: 1,
+        thumbItem: 9,
+        slideMargin: 0,
+        speed: 500,
+        auto: true,
+        loop: true,
+        onSliderLoad: function () {
+          $('#image-gallery').removeClass('cS-hidden');
+        }
+      });
+
+      let postResponse =/*[[${postResponse}]]*/;
+      let postContent = postResponse.content;
+
+      let areaResponse = postResponse.areaResponse;
+      let exactAddress = areaResponse.exactAddress.trim();
+      let wardName = areaResponse.wardName.trim();
+      let districtName = areaResponse.districtName.trim();
+      let provinceName = areaResponse.provinceName.trim();
+      let longitude = areaResponse.longitude;
+      let latitude = areaResponse.latitude;
+      let nameArea = areaResponse.name;
+      let address = `${exactAddress} - ${wardName} - ${districtName} - ${provinceName}`;
+
+      let postCreatedAt = postResponse.createdAt;
+      let postDate = new Date(postCreatedAt);
+      // Lấy ngày và thêm 0 vào đầu nếu ngày có 1 chữ số
+      let postDay = postDate.getDate().toString().padStart(2, "0");
+      // Lấy tháng và thêm 0 vào đầu nếu tháng có 1 chữ số
+      let postMonth = (postDate.getMonth() + 1).toString().padStart(2, "0");
+      // Lấy năm
+      let postYear = postDate.getFullYear().toString();
+      // Lấy giờ và thêm 0 vào đầu nếu giờ có 1 chữ số
+      let postHour = postDate.getHours().toString().padStart(2, "0");
+      // Lấy phút và thêm 0 vào đầu nếu phút có 1 chữ số
+      const postMinute = postDate.getMinutes().toString().padStart(2, "0");
+      // Định dạng đầy đủ theo dd-mm-yyyy hh:mm
+      const postFormattedCreatedAt = `${postDay}-${postMonth}-${postYear} ${postHour}:${postMinute}`;
+
+      let postNumberDate = postResponse.numberDate;
+      let postPhoneNumber = postResponse.phoneNumber;
+      let postPhoneZalo = postResponse.phoneNumber;
+
+      let userResponse = postResponse.userResponse;
+      let userFullName = userResponse.fullName;
+
+      document.getElementById("additional-area_address").innerText = address;
+      document.getElementById("additional-post_created_at").innerText = postFormattedCreatedAt;
+
+      console.log(postResponse);
+
+      let roomResponses = areaResponse.roomResponses;
+      let ulChilder = '';
+      for (let i = 0; i < roomResponses.length; i++) {
+        let idRoom = roomResponses[i].id;
+        let thumbnail = roomResponses[i].image;
+        let name = roomResponses[i].name;
+        let rentPrice = roomResponses[i].rentPrice;
+        let formattedRentPrice = rentPrice.toLocaleString('vi-VN',
+            {style: 'currency', currency: 'VND'});
+        let webContentLink = "";
+        if (typeof thumbnail !== 'undefined' && thumbnail !== '') {
+          let json = JSON.parse(thumbnail);
+          webContentLink = json[0].webContentLink;
+        }
+
+        // let liAdd = `<li>
+        //             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+        //               <a href="javascript:void(0)" class="room-number" data-value="${idRoom}">
+        //                 <img src="${webContentLink}">
+        //               </a>
+        //             </div>
+        //             <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+        //               <h6><a href="javascript:void(0)" class="room-number" data-value="${idRoom}">${name}</a></h6>
+        //               <span class="property-price">${formattedRentPrice}</span>
+        //             </div>
+        //           </li>`;
+
+        let liAdd = `<li>
+                    <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                      <button class="room-number" data-value="${idRoom}">
+                        <img src="${webContentLink}">
+                      </button>
+                    </div>
+                    <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                      <h6><button class="room-number" data-value="${idRoom}">${name}</button></h6>
+                      <span class="property-price">${formattedRentPrice}</span>
+                    </div>
+                  </li>`;
+        ulChilder += liAdd;
+
+        if (i === 0) {
+          let acreage = roomResponses[0].acreage;
+          let electricService = roomResponses[0].electricService;
+          let description = roomResponses[0].description;
+          let waterService = roomResponses[0].waterService;
+          let video = roomResponses[0].video;
+          let image = roomResponses[0].image;
+          let ulChilder = "";
+          if (typeof image !== 'undefined' && image !== '') {
+            let json = JSON.parse(image);
+            for (let i = 0; i < json.length; i++) {
+              let webContentLink = json[i].webContentLink;
+              console.log(webContentLink);
+              let liAdd = `<li class="slide-item-custom" data-thumb="${webContentLink}">
+                              <img src="${webContentLink}"/>
+                            </li>`;
+              ulChilder += liAdd;
+            }
+          }
+          initSlider(ulChilder);
+          //end slider
+
+          document.getElementById("room-name").innerText = `Phòng: ${name}`;
+          document.getElementById("room-rent_price").innerText = `${formattedRentPrice} / tháng`;
+          document.getElementById(
+              "room-electric_service").innerHTML = `${electricService} <b class="property-info-unit"> đồng/số</b>`;
+          document.getElementById(
+              "room-water_service").innerHTML = `${waterService} <b class="property-info-unit"> đồng/khối</b>`;
+          document.getElementById(
+              "room-acreage").innerHTML = `${acreage} <b class="property-info-unit"> mét vuông</b>`;
+          document.getElementById("room-description").innerText = description;
+          document.getElementById("room-video").src = video;
+        }
+      }
+      $("#list-room").append(ulChilder);
+
+      $('button.room-number').click(function (event) {
+        event.preventDefault();
+        let dataValue = $(this).data('value');
+        console.log("Ấn vào room có id: " + dataValue);
+        $.ajax({
+          url: "/api/v1/rest/room",
+          type: "Get",
+          data: {
+            id: dataValue
+          },
+          success: function (response) {
+            console.log("Find room");
+            let name = response.name;
+            let acreage = response.acreage;
+            let electricService = response.electricService;
+            let description = response.description;
+            let waterService = response.waterService;
+            let video = response.video;
+            let image = response.image;
+            let rentPrice = response.rentPrice;
+            let formattedRentPrice = rentPrice.toLocaleString('vi-VN',
+                {style: 'currency', currency: 'VND'});
+            let ulChilder = "";
+            if (typeof image !== 'undefined' && image !== '') {
+              let json = JSON.parse(image);
+              for (let i = 0; i < json.length; i++) {
+                let webContentLink = json[i].webContentLink;
+                console.log(webContentLink);
+                let liAdd = `<li data-thumb="${webContentLink}">
+                              <img src="${webContentLink}"/>
+                            </li>`;
+                ulChilder += liAdd;
+              }
+            }
+            initSlider(ulChilder);
+
+            document.getElementById("room-name").innerText = `Phòng: ${name}`;
+            document.getElementById("room-rent_price").innerText = `${formattedRentPrice} / tháng`;
+            document.getElementById(
+                "room-electric_service").innerHTML = `${electricService} <b class="property-info-unit"> đồng/số</b>`;
+            document.getElementById(
+                "room-water_service").innerHTML = `${waterService} <b class="property-info-unit"> đồng/khối</b>`;
+            document.getElementById(
+                "room-acreage").innerHTML = `${acreage} <b class="property-info-unit"> mét vuông</b>`;
+            document.getElementById("room-description").innerText = description;
+            document.getElementById("room-video").src = video;
+          },
+          error: function (xhr) {
+            console.log(xhr.responseText);
+          }
+        });
+      });
+
+      function initSlider(data) {
+        console.log("a....");
+        // slider.empty();
+        // slider.append(data);
+        // slider.refresh();
+
+        // Xóa slider hiện tại
+        slider.destroy();
+        $('#image-gallery').html(data);
+        slider = $('#image-gallery').lightSlider({
+          gallery: true,
+          item: 1,
+          thumbItem: 9,
+          slideMargin: 0,
+          speed: 500,
+          auto: true,
+          loop: true,
+          onSliderLoad: function () {
+            $('#image-gallery').removeClass('cS-hidden');
+          }
+        });
+      }
+    });
+  </script>
+</div>
+</body>
+</html>

@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostEntity extends BaseEntity{
-    @Column(name = "thumbnail", length = 255)
+    @Column(name = "thumbnail", columnDefinition = "text")
     private String thumbnail;
 
     @Column(name = "title", length = 50, nullable = false)
@@ -45,7 +45,7 @@ public class PostEntity extends BaseEntity{
     @Column(name = "number_date")
     private Integer numberDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_user")
     private UserEntity userEntity;
 

@@ -7,13 +7,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomePageController {
     @GetMapping("/")
-    public ModelAndView index(){
+    public ModelAndView index() {
         ModelAndView modelAndView = new ModelAndView("client/index");
         return modelAndView;
     }
 
     @GetMapping("/test-template")
-    public ModelAndView test(){
+    public ModelAndView test() {
         ModelAndView modelAndView = new ModelAndView("client/test");
         return modelAndView;
     }

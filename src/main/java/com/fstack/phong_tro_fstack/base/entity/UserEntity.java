@@ -13,6 +13,7 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class UserEntity extends BaseEntity{
     @Column(name = "email", length = 50, nullable = false, unique = true)
     private String email;
@@ -38,16 +39,25 @@ public class UserEntity extends BaseEntity{
 
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
     @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
-    @ToString.Exclude // không sử dụng trong toString()
-    @JsonIgnore
+//    @ToString.Exclude // không sử dụng trong toString()
+//    @JsonIgnore
     private Set<UserRoleEntity> userRoleEntities;
 
     @OneToMany(mappedBy = "userEntity")
+    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
+    @ToString.Exclude // không sử dụng trong toString()
+    @JsonIgnore
     private Set<PostEntity> postEntities;
 
     @OneToMany(mappedBy = "userEntity")
+    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
+    @ToString.Exclude // không sử dụng trong toString()
+    @JsonIgnore
     private Set<RateEntity> rateEntities;
 
     @OneToMany(mappedBy = "userEntity")
+    @EqualsAndHashCode.Exclude // không sử dụng trường này trong equals và hashcode
+    @ToString.Exclude // không sử dụng trong toString()
+    @JsonIgnore
     private Set<TransactionEntity> transactionEntities;
 }

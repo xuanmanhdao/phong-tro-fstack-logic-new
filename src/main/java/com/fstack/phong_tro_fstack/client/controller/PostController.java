@@ -1,35 +1,26 @@
-package com.fstack.phong_tro_fstack.client.api.v1;
+package com.fstack.phong_tro_fstack.client.controller;
 
-import com.fstack.phong_tro_fstack.base.dto.PostDTO;
 import com.fstack.phong_tro_fstack.client.output.post.PagedPostResponse;
 import com.fstack.phong_tro_fstack.client.output.post.PostResponse;
 import com.fstack.phong_tro_fstack.client.service.PostService;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-import java.util.Optional;
-
-@RestController
-@RequestMapping("api/v1/rest/post")
-public class PostAPI {
+@Controller
+@RequestMapping("/show-posts")
+public class PostController {
 
   @Autowired
   private PostService postService;
 
-//    @GetMapping
-//    public ResponseEntity<?> findAllNumberDateOtherZeroOrderByCreatedAt() {
-//        List<PostDTO> result = postService.getAllByNumberDateOtherZeroOrderByCreatedAt();
-//        return ResponseEntity.ok(result);
-//    }
-
   @GetMapping()
-  public ResponseEntity<?> findAllNumberDateOtherZeroOrderByCreatedAt(
+  public ModelAndView show(
       @Param("idProvince") Optional<String> idProvince,
       @Param("idDistrict") Optional<String> idDistrict,
       @Param("idWard") Optional<String> idWard,
@@ -43,7 +34,8 @@ public class PostAPI {
       @Param(value = "pageNumber") Optional<Integer> pageNumber,
       @Param(value = "pageSize") Optional<Integer> pageSize
   ) {
-    PagedPostResponse result = postService.getAllByNumberDateOtherZeroOrderByCreatedAt(
+    ModelAndView modelAndView = new ModelAndView("client/posts");
+    PagedPostResponse data = postService.getAllByNumberDateOtherZeroOrderByCreatedAt(
         idProvince,
         idDistrict,
         idWard,
@@ -57,11 +49,18 @@ public class PostAPI {
         pageNumber,
         pageSize
     );
-    return ResponseEntity.ok(result);
+    modelAndView.addObject("postsResponse", data);
+    return modelAndView;
   }
 
-  @GetMapping("/search")
-  public ResponseEntity<?> searchPost(@RequestParam String keyword) {
-    return null;
+  @GetMapping("/post/{id}")
+  public ModelAndView showDetailPost(
+      @PathVariable("id") Long id
+  ) {
+    System.out.println("id post: " + id);
+    ModelAndView modelAndView = new ModelAndView("client/detail-post");
+    PostResponse data = postService.getDetailPost(id);
+    modelAndView.addObject("postResponse", data);
+    return modelAndView;
   }
 }

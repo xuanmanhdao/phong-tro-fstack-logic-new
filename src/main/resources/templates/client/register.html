@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{client/layout/default}"
+      class="no-js">
+<head layout:fragment="head-content">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="GARO is a real-estate template">
+  <meta name="author" content="Kimarotec">
+  <meta name="keyword"
+        content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Đăng nhập - Đăng ký</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet'
+        type='text/css'>
+
+  <!-- Place favicon.ico  the root directory -->
+  <link rel="shortcut icon" th:href="@{/client/favicon.ico}" type="image/x-icon">
+  <link rel="icon" th:href="@{/client/favicon.ico}" type="image/x-icon">
+
+  <link rel="stylesheet" th:href="@{/client/assets/css/normalize.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/font-awesome.min.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/fontello.css}">
+  <link th:href="@{/client/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css}" rel="stylesheet">
+  <link th:href="@{/client/assets/fonts/icon-7-stroke/css/helper.css}" rel="stylesheet">
+  <link th:href="@{/client/assets/css/animate.css}" rel="stylesheet" media="screen">
+  <link rel="stylesheet" th:href="@{/client/assets/css/bootstrap-select.min.css}">
+  <link rel="stylesheet" th:href="@{/client/bootstrap/css/bootstrap.min.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/icheck.min_all.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/price-range.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.carousel.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.theme.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/owl.transitions.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/style.css}">
+  <link rel="stylesheet" th:href="@{/client/assets/css/responsive.css}">
+</head>
+<body>
+<!-- property area -->
+<div layout:fragment="content">
+  <div class="page-head">
+    <div class="container">
+      <div class="row">
+        <div class="page-head-content">
+          <h1 class="page-title">Đăng ký / Đăng nhập</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End page header -->
+
+  <!-- register-area -->
+  <div class="register-area" style="background-color: rgb(249, 249, 249);">
+    <div class="container">
+      <div class="col-md-6">
+        <div class="box-for overflow">
+          <div class="col-md-12 col-xs-12 register-blocks">
+            <h2>New account : </h2>
+            <form action="" method="post" id="form-register">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" class="form-control" id="name">
+              </div>
+              <div class="form-group">
+                <label for="email-register">Email</label>
+                <input type="email" class="form-control" id="email-register">
+              </div>
+              <div class="form-group">
+                <label for="password-register">Password</label>
+                <input type="password" class="form-control" id="password-register">
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-default">Register</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="box-for overflow">
+          <div class="col-md-12 col-xs-12 login-blocks">
+            <h2>Login : </h2>
+            <form action="" method="post" id="form-login">
+              <div class="form-group">
+                <label for="email-login">Email</label>
+                <input type="email" class="form-control" id="email-login">
+              </div>
+              <div class="form-group">
+                <label for="password-login">Password</label>
+                <input type="password" class="form-control" id="password-login">
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-default"> Log in</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!--Script area -->
+  <script th:src="@{/client/assets/js/modernizr-2.6.2.min.js}"></script>
+
+  <script th:src="@{/client/assets/js/jquery-1.10.2.min.js}"></script>
+  <script th:src="@{/client/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{/client/assets/js/bootstrap-select.min.js}"></script>
+  <script th:src="@{/client/assets/js/bootstrap-hover-dropdown.js}"></script>
+
+  <script th:src="@{/client/assets/js/easypiechart.min.js}"></script>
+  <script th:src="@{/client/assets/js/jquery.easypiechart.min.js}"></script>
+
+  <script th:src="@{/client/assets/js/owl.carousel.min.js}"></script>
+
+  <script th:src="@{/client/assets/js/wow.js}"></script>
+
+  <script th:src="@{/client/assets/js/icheck.min.js}"></script>
+  <script th:src="@{/client/assets/js/price-range.js}"></script>
+
+  <script th:src="@{/client/assets/js/main.js}"></script>
+
+  <!--Script handler area -->
+  <script>
+    $(document).ready(function () {
+      $("#form-login").submit(function (event) {
+        event.preventDefault();
+        let email = $("#email-login").val().trim();
+        let password = $("#password-login").val().trim();
+        let data = JSON.stringify({email: email, password: password});
+        console.log(email + password);
+        $.ajax({
+          url: "/api/v1/rest/user/login",
+          type: "POST",
+          contentType: "application/json",
+          data: data,
+          success: function (response) {
+            console.log("Success");
+            console.log(response);
+            // Lưu thông tin đăng nhập vào sessionStorage
+            sessionStorage.setItem("idUser", response.id);
+            sessionStorage.setItem("fullNameUser", response.fullName);
+            sessionStorage.setItem("emailUser", response.email);
+            window.location.href = "/";
+          },
+          error: function (error) {
+            console.log("Looxi");
+          }
+        });
+      });
+    });
+  </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload File to Google Drive</title>
+    <link href="webjars/bootstrap/4.6.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="webjars/bootstrap/4.6.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container my-5">
+    <h1 class="mb-4">Upload File to Google Drive</h1>
+
+    <form method="post" id="form-upload" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="files">Chọn file</label>
+            <input type="file" class="form-control-file" id="files" name="file" required multiple>
+        </div>
+        <button type="submit" class="btn btn-primary">Tải lên</button>
+    </form>
+
+    <div id="message" class="my-3"></div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#form-upload").submit(function (event) {
+            event.preventDefault();
+            // let formData = new FormData($(this)[0]);
+            let formData = new FormData();
+            let files = $('#files')[0].files;
+            for (let i = 0; i < files.length; i++) {
+                formData.append('files', files[i]);
+            }
+
+            $.ajax({
+                url: '/api/v1/rest/file-on-google-drive',
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    $('#message').html('<div class="alert alert-success" role="alert">' + response + '</div>');
+                },
+                error: function (xhr, status, error) {
+                    $('#message').html('<div class="alert alert-danger" role="alert">' + error + '</div>');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
