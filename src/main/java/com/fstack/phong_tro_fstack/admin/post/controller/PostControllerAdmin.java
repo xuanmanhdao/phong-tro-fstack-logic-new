@@ -12,7 +12,7 @@ import com.fstack.phong_tro_fstack.admin.post.service.PostService;
 
 @RestController
 @RequestMapping("post")
-public class PostController {
+public class PostControllerAdmin {
 	
 	@Autowired
 	PostService postService;

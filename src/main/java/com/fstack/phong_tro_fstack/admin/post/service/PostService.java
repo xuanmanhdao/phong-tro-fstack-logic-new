@@ -3,16 +3,15 @@ package com.fstack.phong_tro_fstack.admin.post.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.fstack.phong_tro_fstack.admin.post.respostory.PostResponstory;
+import com.fstack.phong_tro_fstack.admin.post.respostory.PostResponstoryAdmin;
 import com.fstack.phong_tro_fstack.admin.users.service.UserRepos;
-import com.fstack.phong_tro_fstack.base.entity.PostEntity;
 
 @Service
 public class PostService {
 
 	
 	@Autowired
-	PostResponstory postResponstory;
+  PostResponstoryAdmin postResponstory;
 	
 	@Autowired
 	UserRepos userRepos;

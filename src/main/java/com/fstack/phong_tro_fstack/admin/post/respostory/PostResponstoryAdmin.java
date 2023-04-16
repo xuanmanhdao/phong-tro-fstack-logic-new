@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import com.fstack.phong_tro_fstack.base.entity.PostEntity;
 
-public interface PostResponstory extends CrudRepository<PostEntity, Long>{
+public interface PostResponstoryAdmin extends CrudRepository<PostEntity, Long>{
 	
 	@Query(value = "UPDATE post SET STATUS = ? WHERE id = ?" , nativeQuery = true)
 	Object updatePost(int status, Long id);

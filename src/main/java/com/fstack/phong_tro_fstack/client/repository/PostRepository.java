@@ -72,4 +72,13 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
   List<Object[]> getDetailPost(
       @Param("id") Long id
   );
+
+  @Query(
+      "SELECT p.content, p.status, p.title, p.thumbnail,p.id, CAST(AVG(r.ratingStarts) AS FLOAT) " +
+          "FROM PostEntity p " +
+          "INNER JOIN p.areaEntity a " +
+          "LEFT JOIN a.rateEntities r " +
+          "WHERE p.userEntity.id = :idUser " +
+          "GROUP BY p.id, p.content, p.status, p.title, p.thumbnail")
+  List<Object[]> getPostandRatebyUser(@Param("idUser") long idUser);
 }

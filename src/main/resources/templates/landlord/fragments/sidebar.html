@@ -1,0 +1,54 @@
+<div class="iq-sidebar">
+    <div class="iq-sidebar-logo d-flex justify-content-between">
+        <a th:href="@{home}">
+            <img th:src="@{/landlord/images/logo.png}" class="img-fluid" alt="">
+            <span>FStack</span>
+        </a>
+        <div class="iq-menu-bt align-self-center">
+            <div class="wrapper-menu">
+                <div class="line-menu half start"></div>
+                <div class="line-menu"></div>
+                <div class="line-menu half end"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="sidebar-scrollbar" data-scrollbar="true" tabindex="-1" style="overflow: hidden; outline: none;">
+        <div class="scroll-content">
+            <nav class="iq-sidebar-menu">
+                <ul id="iq-sidebar-toggle" class="iq-menu">
+                    <li class="iq-menu-title"><i class="ri-separator"></i><span>Chức năng</span></li>
+                    <li class="active">
+                        <a th:href="@{home}" class="iq-waves-effect"><i class="ri-home-4-line"></i><span>Trang chủ</span></a>
+                    </li>
+<!--                    <li>-->
+<!--                        <a href="#QuanLyTin" class="iq-waves-effect collapsed" data-toggle="collapse"-->
+<!--                           aria-expanded="false"><i class="ri-file-text-line"></i><span>Quản lý tin đăng</span><i-->
+<!--                                class="ri-arrow-right-s-line iq-arrow-right"></i></a>-->
+<!--                        <ul id="QuanLyTin" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">-->
+<!--                            <li><a th:href="@{post-news}">Đăng tin mới</a></li>-->
+<!--                            <li><a th:href="@{home}">Quản lý tin</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+                    <li><a th:href="@{post-news}" class="iq-waves-effect"><i class="ri-file-text-line"></i><span>Đăng tin mới</span></a>
+                    </li>
+                    <li><a th:href="@{profile}" class="iq-waves-effect"><i class="ri-edit-box-line"></i><span>Thông tin cá nhân</span></a>
+                    </li>
+                    <li><a th:href="@{chat}" class="iq-waves-effect"><i class="ri-message-line"></i><span>Liên hệ</span></a>
+                    </li>
+                    <li><a th:href="@{sign-in}" class="iq-waves-effect"><i class="iq-bg-danger ri-login-box-line"></i><span>Đăng xuất</span></a>
+                    </li>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="scrollbar-track scrollbar-track-x" style="display: none;">
+            <div class="scrollbar-thumb scrollbar-thumb-x"
+                 style="width: 260px; transform: translate3d(0px, 0px, 0px);"></div>
+        </div>
+        <div class="scrollbar-track scrollbar-track-y" style="display: block;">
+            <div class="scrollbar-thumb scrollbar-thumb-y"
+                 style="height: 320.181px; transform: translate3d(0px, 0px, 0px);"></div>
+        </div>
+    </div>
+</div>

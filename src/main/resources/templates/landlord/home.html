@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{landlord/layouts/default}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Trang chủ - FStack</title>
+</head>
+<body>
+<div class="container-fluid" layout:fragment="content">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="iq-card">
+        <div class="iq-card-header d-flex justify-content-between">
+          <div class="iq-header-title">
+            <h4 class="card-title">Danh sách bài đăng gần đây</h4>
+          </div>
+        </div>
+        <div class="iq-card-body" th:each="post : ${posts}">
+          <div class="row">
+            <div class="col-sm-8">
+              <div class="media-sellers">
+                <div class="media-sellers-img">
+                  <img
+                      th:src="${post.thumbnail != null && post.thumbnail != '' ? post.thumbnail : '../landlord/images/area-post.jpg'}"
+                      id="thumbnail" class="mr-3 rounded" alt="">
+                </div>
+                <div class="media-sellers-media-info">
+                  <h5 class="mb-0">
+                    <a class="text-dark" href="#" th:text="${post.title}"
+                       th:onclick="|getPostId('${post.id}');|
+                    "></a>
+                    <!--                    <a class="text-dark" href="#" th:text="${post.title}"></a>-->
+                    <script>
+                      function getPostId(id) {
+                        window.location.replace(`/leo/update-post-news?id=`+id);
+                      }
+                    </script>
+                  </h5>
+                  <p class="mb-3"
+                     style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;"
+                     th:text="${post.content}">
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2 text-center mt-3">
+              <h5 class="mb-0">Trạng thái</h5>
+              <span th:text="${post.status == 1 ? 'Đã duyệt' : 'Chờ duyệt'}"></span>
+            </div>
+            <div class="col-sm-2 text-center mt-3">
+              <ul class="list-inline mb-0 list-star">
+                <span class="d-none list-rating" id="rating"
+                      th:text="${post.ratetingStart}"></span>
+              </ul>
+              <span>Đánh giá</span>
+            </div>
+          </div>
+          <script>
+            var rating = parseFloat(document.getElementById("rating").textContent);
+            console.log(rating);
+            var floorRating = Math.floor(rating); // Lấy phần nguyên của số sao
+            var starHtml = '';
+            for (var i = 1; i <= 5; i++) {
+              if (i <= floorRating) {
+                starHtml += '<li class="list-inline-item text-warning"><i class="ri-star-fill"></i></li>';
+              } else if (i - 0.5 <= rating) {
+                starHtml += '<li class="list-inline-item text-warning"><i class="ri-star-half-line"></i></li>';
+              } else {
+                starHtml += '<li class="list-inline-item text-secondary"><i class="ri-star-line"></i></li>';
+              }
+            }
+            if (rating === 0) {
+              starHtml = '<li class="list-inline-item text-secondary"><i class="ri-star-line"></i></li>'.repeat(
+                  5);
+            }
+            document.querySelectorAll('.list-rating').forEach(function (element) {
+              element.parentNode.innerHTML = starHtml;
+            });
+          </script>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+
+</body>
+</html>
