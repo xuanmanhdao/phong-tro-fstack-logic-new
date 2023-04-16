@@ -68,8 +68,8 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
       "inner join province prov on a.id_province=prov.id " +
       "inner join ward w on a.id_ward=w.id " +
       "where p.number_date <> 0 " +
-      "AND (:idArea IS NULL OR a.id = :idArea) ", nativeQuery = true)
+      "AND p.id = :id", nativeQuery = true)
   List<Object[]> getDetailPost(
-      @Param("idArea") Optional<Long> idArea
+      @Param("id") Long id
   );
 }

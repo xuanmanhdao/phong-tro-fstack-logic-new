@@ -191,8 +191,8 @@ public class PostServiceImpl implements PostService {
   }
 
   @Override
-  public PostResponse getDetailPost(Optional<Long> idArea) {
-    List<Object[]> queryResults = postRepository.getDetailPost(idArea);
+  public PostResponse getDetailPost(Long id) {
+    List<Object[]> queryResults = postRepository.getDetailPost(id);
     Map<Long, PostResponse> map = new HashMap<>();
 
     for (Object[] objects : queryResults) {

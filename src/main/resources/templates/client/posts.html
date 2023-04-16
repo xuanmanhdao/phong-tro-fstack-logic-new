@@ -8,10 +8,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="GARO is a real-estate template">
   <meta name="author" content="Kimarotec">
-  <meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
+  <meta name="keyword"
+        content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tất cả bài đăng</title>
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet'
+        type='text/css'>
 
   <!-- Place favicon.ico  the root directory -->
   <link rel="shortcut icon" th:href="@{/client/favicon.ico}" type="image/x-icon">
@@ -209,7 +211,8 @@
                 <ul>
                   <li>
                     <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                      <a href="single.html"><img th:src="@{/client/assets/img/demo/small-property-2.jpg}"></a>
+                      <a href="single.html"><img
+                          th:src="@{/client/assets/img/demo/small-property-2.jpg}"></a>
                       <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -222,7 +225,8 @@
                   </li>
                   <li>
                     <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
-                      <a href="single.html"><img th:src="@{/client/assets/img/demo/small-property-1.jpg}"></a>
+                      <a href="single.html"><img
+                          th:src="@{/client/assets/img/demo/small-property-1.jpg}"></a>
                       <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -235,7 +239,8 @@
                   </li>
                   <li>
                     <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                      <a href="single.html"><img th:src="@{/client/assets/img/demo/small-property-3.jpg}"></a>
+                      <a href="single.html"><img
+                          th:src="@{/client/assets/img/demo/small-property-3.jpg}"></a>
                       <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -249,7 +254,8 @@
 
                   <li>
                     <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                      <a href="single.html"><img th:src="@{/client/assets/img/demo/small-property-2.jpg}"></a>
+                      <a href="single.html"><img
+                          th:src="@{/client/assets/img/demo/small-property-2.jpg}"></a>
                       <span class="property-seeker">
                                                     <b class="b-1">A</b>
                                                     <b class="b-2">S</b>
@@ -323,6 +329,12 @@
       }
 
       let postArea = option.areaResponse;
+      let exactAddress = postArea.exactAddress.trim();
+      let wardName = postArea.wardName.trim();
+      let districtName = postArea.districtName.trim();
+      let provinceName = postArea.provinceName.trim();
+      let address = `${exactAddress} - ${wardName} - ${districtName} - ${provinceName}`;
+
       let postArrayRoom = postArea.roomResponses;
       let minAcreage = postArrayRoom[0]['acreage'];
       let maxAcreage = postArrayRoom[0]['acreage'];
@@ -353,20 +365,21 @@
       let divAdd = `<div class="col-sm-6 col-md-4 p0">
                        <div class="box-two proerty-item">
                             <div class="item-thumb">
-                                 <a href="/show-posts/area/${postArea.id}">
+                                 <a href="/show-posts/post/${option.id}">
                                      <img src="${webContentLink}">
                                  </a>
                             </div>
                             <div class="item-entry overflow">
                                   <h5>
-                                      <a href="/show-posts/area/${postArea.id}" class="post_title">
+                                      <a href="/show-posts/post/${option.id}" class="post_title">
                                            ${postTitle}
                                       </a>
                                   </h5>
                                   <div class="dot-hr"></div>
                                   <span class="pull-left"><b>Diện tích: </b>${minAcreage}m2 - ${maxAcreage}m2</span>
                                   <span class="proerty-price pull-left"><b>Giá: </b>${formattedMinPrice} - ${formattedMaxPrice}</span>
-                                  <p style="display: none;" class="post_short-description">${postContent}</p>
+                                  <span class="pull-left" style="font-size: 12px; display: block"><b>Địa chỉ: </b>${address}</span>
+                                  <p style="display: none; font-size: 13px;" class="post_short-description">${postContent}</p>
                             </div>
                        </div>
                   </div>`;
@@ -384,11 +397,13 @@
 
     if (pageNumberResponse > 1) {
       // Thay đổi URL khi nhấn thẻ a trang trước
-      pagingPrev=`<li><a href="/show-posts?${searchRequest}&pageNumber=${pageNumberResponse - 1}" id="prevPage">Trước</a></li>`;
+      pagingPrev = `<li><a href="/show-posts?${searchRequest}&pageNumber=${pageNumberResponse
+      - 1}" id="prevPage">Trước</a></li>`;
     }
     if (pageNumberResponse < totalPageResponse) {
       // Thay đổi URL khi nhấn thẻ a trang sau
-      pagingNext=`<li><a href="/show-posts?${searchRequest}&pageNumber=${pageNumberResponse + 1}" id="nextPage">Sau</a></li>`;
+      pagingNext = `<li><a href="/show-posts?${searchRequest}&pageNumber=${pageNumberResponse
+      + 1}" id="nextPage">Sau</a></li>`;
     }
 
     let pagingContent = '';

@@ -53,13 +53,13 @@ public class PostController {
     return modelAndView;
   }
 
-  @GetMapping("/area/{idArea}")
+  @GetMapping("/post/{id}")
   public ModelAndView showDetailPost(
-      @PathVariable("idArea") Optional<Long> idArea
+      @PathVariable("id") Long id
   ) {
-    System.out.println("id area: " + idArea);
+    System.out.println("id post: " + id);
     ModelAndView modelAndView = new ModelAndView("client/detail-post");
-    PostResponse data = postService.getDetailPost(idArea);
+    PostResponse data = postService.getDetailPost(id);
     modelAndView.addObject("postResponse", data);
     return modelAndView;
   }

@@ -28,5 +28,5 @@ public interface PostService {
       Optional<Integer> pageSize
   );
 
-  PostResponse getDetailPost(Optional<Long> idArea);
+  PostResponse getDetailPost(Long id);
 }
