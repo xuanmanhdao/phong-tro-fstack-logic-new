@@ -2,125 +2,43 @@
      xmlns:th="http://www.thymeleaf.org"
      th:fragment="navbar"
      class="navbar navbar-default ">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"><img th:src="@{/client/assets/img/logo-fstack-version-2-300x75-version-2.png}" alt=""></a>
-        </div>
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+              data-target="#navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><img
+          th:src="@{/client/assets/img/logo-fstack-version-2-300x75-version-2.png}" alt=""></a>
+    </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse yamm" id="navigation">
-            <div class="button navbar-right">
-                <button class="navbar-btn nav-button wow bounceInRight login" onclick=" window.open('register.html')" data-wow-delay="0.4s">Login</button>
-            </div>
-            <ul class="main-nav nav navbar-nav navbar-right">
-                <li class="dropdown ymm-sw " data-wow-delay="0.1s">
-                    <a th:href="@{client/index.html}" class="dropdown-toggle active" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Home <b class="caret"></b></a>
-                    <ul class="dropdown-menu navbar-nav">
-                        <li>
-                            <a th:href="@{client/index-2.html}">Home Style 2</a>
-                        </li>
-                        <li>
-                            <a th:href="@{client/index-3.html}">Home Style 3</a>
-                        </li>
-                        <li>
-                            <a th:href="@{client/index-4.html}">Home Style 4</a>
-                        </li>
-                        <li>
-                            <a th:href="@{client/index-5.html}">Home Style 5</a>
-                        </li>
-
-                    </ul>
-                </li>
-
-                <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" th:href="@{client/properties.html}">Properties</a></li>
-                <li class="wow fadeInDown" data-wow-delay="0.1s"><a class="" th:href="@{client/property.html}">Property</a></li>
-                <li class="dropdown yamm-fw" data-wow-delay="0.1s">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="200">Template <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <div class="yamm-content">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <h5>Home pages</h5>
-                                        <ul>
-                                            <li>
-                                                <a th:href="@{client/index.html}">Home Style 1</a>
-                                            </li>
-                                            <li>
-                                                <a th:href="@{client/index-2.html}">Home Style 2</a>
-                                            </li>
-                                            <li>
-                                                <a th:href="@{client/index-3.html}">Home Style 3</a>
-                                            </li>
-                                            <li>
-                                                <a th:href="@{client/index-4.html}">Home Style 4</a>
-                                            </li>
-                                            <li>
-                                                <a th:href="@{client/index-5.html}">Home Style 5</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <h5>Pages and blog</h5>
-                                        <ul>
-                                            <li><a th:href="@{client/blog.html}">Blog listing</a>  </li>
-                                            <li><a th:href="@{client/single.html}">Blog Post (full)</a>  </li>
-                                            <li><a th:href="@{client/single-right.html}">Blog Post (Right)</a>  </li>
-                                            <li><a th:href="@{client/single-left.html}">Blog Post (left)</a>  </li>
-                                            <li><a th:href="@{client/contact.html}">Contact style (1)</a> </li>
-                                            <li><a th:href="@{client/contact-3.html}">Contact style (2)</a> </li>
-                                            <li><a th:href="@{client/contact_3.html}">Contact style (3)</a> </li>
-                                            <li><a th:href="@{client/faq.html}">FAQ page</a> </li>
-                                            <li><a th:href="@{client/404.html}">404 page</a>  </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <h5>Property</h5>
-                                        <ul>
-                                            <li><a th:href="@{client/property-1.html}">Property pages style (1)</a> </li>
-                                            <li><a th:href="@{client/property-2.html}">Property pages style (2)</a> </li>
-                                            <li><a th:href="@{client/property-3.html}">Property pages style (3)</a> </li>
-                                        </ul>
-
-                                        <h5>Properties list</h5>
-                                        <ul>
-                                            <li><a th:href="@{client/properties.html}">Properties list style (1)</a> </li>
-                                            <li><a th:href="@{client/properties-2.html}">Properties list style (2)</a> </li>
-                                            <li><a th:href="@{client/properties-3.html}">Properties list style (3)</a> </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <h5>Property process</h5>
-                                        <ul>
-                                            <li><a th:href="@{client/submit-property.html}">Submit - step 1</a> </li>
-                                            <li><a th:href="@{client/submit-property.html}">Submit - step 2</a> </li>
-                                            <li><a th:href="@{client/submit-property.html}">Submit - step 3</a> </li>
-                                        </ul>
-                                        <h5>User account</h5>
-                                        <ul>
-                                            <li><a th:href="@{client/register.html}">Register / login</a>   </li>
-                                            <li><a th:href="@{client/user-properties.html}">Your properties</a>  </li>
-                                            <li><a th:href="@{client/submit-property.html}">Submit property</a>  </li>
-                                            <li><a th:href="@{client/change-password.html}">Change password</a> </li>
-                                            <li><a th:href="@{client/user-profile.html}">Your profile</a>  </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- /.yamm-content -->
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="wow fadeInDown" data-wow-delay="0.4s"><a th:href="@{client/contact.html}">Contact</a></li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse yamm" id="navigation">
+      <div class="button navbar-right" id="login-button">
+        <button class="navbar-btn nav-button wow bounceInRight login"
+                onclick=" window.open('/login-register')" data-wow-delay="0.4s">Login
+        </button>
+      </div>
+      <ul class="main-nav nav navbar-nav navbar-right" id="user-box" style="display: none">
+        <li class="wow fadeInDown" data-wow-delay="0.4s">
+          <a href="/leo/home">Quản lý tài khoản</a></li>
+        <li class="wow fadeInDown" data-wow-delay="0.4s">
+          <a style="font-weight: bold;" id="user-name" href="javascript:void(0)"></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+  <script>
+    // Lấy thông tin đăng nhập từ sessionStorage
+    let idUser = sessionStorage.getItem("idUser");
+    if (idUser != null) {
+      let userName = sessionStorage.getItem("fullNameUser");
+      document.getElementById("login-button").style.display = "none";
+      document.getElementById("user-box").style.display = "block";
+      document.getElementById("user-name").innerHTML = userName;
+    }
+  </script>
 </nav>
