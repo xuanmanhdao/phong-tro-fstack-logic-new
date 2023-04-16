@@ -26,7 +26,7 @@ public class UserRoleService {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
+    @Autowired 
     private UserRoleConverter userRoleConverter;
 
     public List<UserRoleEntity> getAll() {

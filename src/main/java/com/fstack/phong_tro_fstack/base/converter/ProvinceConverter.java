@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProvinceConverter {
     public ProvinceEntity toEntity(ProvinceDTO provinceDTO){
-        ProvinceEntity provinceEntity=new ProvinceEntity();
+        ProvinceEntity provinceEntity= new ProvinceEntity();
         provinceEntity.setId(provinceDTO.getId());
         provinceEntity.setName(provinceDTO.getName());
         provinceEntity.setType(provinceDTO.getType());

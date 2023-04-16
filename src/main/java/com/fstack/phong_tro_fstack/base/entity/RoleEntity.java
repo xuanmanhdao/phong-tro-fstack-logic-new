@@ -28,4 +28,12 @@ public class RoleEntity extends BaseEntity{
 //    @ToString.Exclude // không sử dụng trong toString()
 //    @JsonIgnore
     private Set<UserRoleEntity> userRoleEntities;
+
+//	public RoleEntity(Long id, String name, Set<UserRoleEntity> userRoleEntities) {
+//		super(id);
+//		this.name = name;
+//		this.userRoleEntities = userRoleEntities;
+//	}
+//    
+    
 }

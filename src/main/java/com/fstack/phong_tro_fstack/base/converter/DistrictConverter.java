@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DistrictConverter {
     public DistrictEntity toEntity(DistrictDTO districtDTO){
-        DistrictEntity districtEntity=new DistrictEntity();
+        DistrictEntity districtEntity= new DistrictEntity();
         districtEntity.setId(districtDTO.getId());
         districtEntity.setName(districtDTO.getName());
         districtEntity.setType(districtDTO.getType());
