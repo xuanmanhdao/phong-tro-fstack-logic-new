@@ -17,9 +17,9 @@ public class PostService {
 	@Autowired
 	UserRepos userRepos;
 	
-	public String updatePost(int status, Long id) {
+	public String updatePost(int status, Long id, Long idUser) {
 		
-		float bankAccount = userRepos.findBankAccountById(id);
+		float bankAccount = userRepos.findBankAccountById(idUser);
 		if(bankAccount > 0) {
 			float bank = bankAccount - 2000;
 			Object updateBank = userRepos.updateBankAccont(bank, id);
