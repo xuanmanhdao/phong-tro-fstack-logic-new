@@ -22,8 +22,9 @@ public class PostControllerAdmin {
 		
 		Long id = json.get("idPost").asLong();
 		int status = json.get("status").asInt();
-		
-		String messent = postService.updatePost(status, id);
+		Long idUser =json.get("idUser").asLong();
+
+		String messent = postService.updatePost(status, id, idUser);
 		return ResponseEntity.ok(messent);
 	}
 

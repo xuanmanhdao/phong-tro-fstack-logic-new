@@ -18,10 +18,8 @@ public interface UserRepos extends CrudRepository<UserEntity, Long> {
 	
 	@Query(value = "SELECT balance FROM user WHERE id = ?", nativeQuery = true)
 	Float findBankAccountById(Long id);
-	
-	@Query(value = "UPDATE user SET balance = ? WHERE id = ?",nativeQuery = true)
-	Object updateBankAccont(float bank, Long id);
-	
 
+//	@Query(value = "UPDATE user SET balance = ? WHERE id = ?",nativeQuery = true)
+//	Object updateBankAccont(float bank, Long id);
 
 }
