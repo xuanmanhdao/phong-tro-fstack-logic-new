@@ -1,0 +1,45 @@
+<div class="tab-pane" role="tabpanel" id="step4">
+
+  <h4 class="text-center">Thanh toán và đăng bài</h4>
+  <div class="">
+    <div class="row">
+      <div class="col-md-12 d-flex justify-content-center">
+        <div class="form-group payment_method_group">
+          <div class="form-check js-payment-item js-payment-account mb-2">
+            <input type="radio" name="payment_method"
+                   id="payment_from_account" value="account"
+                   checked="checked" class="form-check-input"/>
+            <label for="payment_from_account" class="form-check-label">
+              Trừ tiền trong tài khoản (Bạn đang có: TK Chính 200.000)
+              <p style="color: red;" class="js-note-outofmoney">Số tiền
+                trong tài khoản của bạn không đủ để thực hiện thanh
+                toán, vui lòng chọn phương thức khác bên dưới</p>
+            </label>
+          </div>
+          <!--                                                    <div class="form-check js-payment-item js-payment-momo mb-2">-->
+          <!--                                                        <input type="radio" name="payment_method" id="payment_from_momo"-->
+          <!--                                                               value="momo" class="form-check-input">-->
+          <!--                                                        <label for="payment_from_momo" class="form-check-label">-->
+          <!--                                                            Thanh toán qua ví điện tử MOMO-->
+          <!--                                                        </label>-->
+          <!--                                                    </div>-->
+          <div class="form-check js-payment-item js-payment-bank-transfer mb-2">
+            <input type="radio" name="payment_method"
+                   id="payment_from_bank_transfer" value="bank_transfer"
+                   class="form-check-input"/>
+            <p class="js-note-transfer-money">Nội dung chuyển khoản:
+              <span style="color: red;">FStack THANHTOAN <span
+                  class="js-package-title-ck">621599</span> </span>
+            </p>
+            <p>Số tiền chuyển khoản: <span style="color: red;"
+                                           class="js-package-grand-total">10.000đ</span>
+            </p>
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{landlord/layouts/default}">
+
+<div class="container-fluid" layout:fragment="content">
+
+  <section class="signup-step-container">
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+          <div class="wizard">
+            <div class="wizard-inner">
+              <div class="connecting-line"></div>
+              <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                  <a href="#" data-toggle="tab" aria-controls="step1" role="tab"
+                     aria-expanded="true"
+                     style="cursor: default; pointer-events: none; text-decoration: none; color: #999;">
+                    <span class="round-tab">1 </span> <i>Thông tin cơ bản</i>
+                  </a>
+                </li>
+                <li role="presentation" class="disabled">
+                  <a href="javascript:void(0)" data-toggle="tab" aria-controls="step2" role="tab"
+                     aria-expanded="false"
+                     style="cursor: default; pointer-events: none; text-decoration: none; color: #999;"><span
+                      class="round-tab">2</span> <i>Dãy trọ</i></a>
+                </li>
+                <li role="presentation" class="disabled">
+                  <a href="javascript:void(0)" data-toggle="tab" aria-controls="step3" role="tab"
+                     style="cursor: default; pointer-events: none; text-decoration: none; color: #999;"><span
+                      class="round-tab">3</span> <i>Phòng trọ</i></a>
+                </li>
+                <li role="presentation" class="disabled">
+                  <a href="javascript:void(0)" data-toggle="tab" aria-controls="step4" role="tab"
+                     style="cursor: default; pointer-events: none; text-decoration: none; color: #999;"><span
+                      class="round-tab">4</span> <i>Đăng bài</i></a>
+                </li>
+              </ul>
+            </div>
+
+            <form method="post" role="form" class="login-box" id="form-update-post-news">
+              <div class="tab-content" id="main_form">
+                <div class="tab-pane active" role="tabpanel" id="step1">
+                  <h4 class="text-center">Thông tin cơ bản</h4>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Tiêu đề *</label>
+                        <input class="form-control" required=""
+                               type="text" name="name"
+                               placeholder="Vui lòng điền tiêu đề"
+                               id="post-title" th:value="${area.postDTO.title}"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container">
+                    <div class="row justify-content-center">
+                      <!-- Thêm class justify-content-center ở đây -->
+                      <div class="col-md-8">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Số điện thoại</label>
+                              <input th:value="${area.postDTO.phoneNumber}" class="form-control"
+                                     type="text" name="name" placeholder=""
+                                     id="post-phone">
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label>Số Zalo</label>
+                              <input th:value="${area.postDTO.phoneZalo}" class="form-control"
+                                     type="text" name="name" placeholder=""
+                                     id="post-zalo">
+                            </div>
+                          </div>
+                          <div class="col-md-12">
+                            <div class="form-group">
+                              <label>Mô tả *</label>
+                              <textarea th:utext="${area.postDTO.content}" class="form-control"
+                                        rows="4" type="text" name="name"
+                                        required
+                                        minlength="30" data-msg-minlength="Tiêu đề quá ngắn"
+                                        data-msg-required="Mô tả không được để trống"
+                                        data-msg-maxlength="Mô tả quá dài"
+                                        placeholder="Vui lòng nhập mô tả"
+                                        id="post-content"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 border p-3 text-center">
+                        <label for="image" style="display: inline-block; margin-bottom: 10px;">Chọn
+                          ảnh</label>
+                        <input type="file" onchange="preview(event)" id="image"
+                               accept=".jpg,.gpn,.pdf,.png"
+                               style="display: none;"/>
+                        <div id="galerias" class="d-flex justify-content-center">
+                          <img th:src="${area.postDTO.thumbnail}" alt="Preview Image"
+                               style="max-width: 100%; max-height: 200px; object-fit: contain; display: block; margin: 0 auto;">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" role="tabpanel" id="step2">
+                  <h4 class="text-center">Thông tin dãy trọ</h4>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Tên dãy trọ *</label>
+                        <input th:value="${area.name}" class="form-control" type="text" name="name"
+                               placeholder=""
+                               id="area-name">
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Thành phố/Tỉnh thành *</label>
+                        <select name="province" class="form-control" id="province">
+                          <option>Vui lòng chọn thành phố/Tỉnh thành</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Quận/Huyện *</label>
+                        <select name="district" class="form-control" id="district">
+                          <option disabled>Chọn Quận/ Huyện</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Xã/Phường *</label>
+                        <select name="ward" class="form-control" id="ward">
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Địa chỉ cụ thể *</label>
+                        <input th:value="${area.exactAddress}" class="form-control"
+                               id="exact-address" type="text" name="name"
+                               placeholder=""/>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div id="map" style="width:100%;height:100%;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" role="tabpanel" id="step3"
+                     th:each="room : ${area.roomDTOList}">
+                  <h4 class="text-center">Phòng trọ</h4>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Tên phòng *</label>
+                        <input th:value="${room.name}" class="form-control" type="text" name="name"
+                               placeholder=""
+                               id="room-name"/>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Tiền điện</label>
+                            <input th:value="${room.electricService}" class="form-control"
+                                   type="text" name="name"
+                                   placeholder=""
+                                   id="room-electricService"/>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Tiền nước</label>
+                            <input th:value="${room.waterService}" class="form-control" type="text"
+                                   name="name"
+                                   placeholder=""
+                                   id="room-waterService"/>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Diện tích</label>
+                            <input th:value="${room.acreage}" class="form-control" type="text"
+                                   name="name"
+                                   placeholder="" id="room-rentPrice"
+                            />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Giá phòng</label>
+                            <input th:value="${room.rentPrice}" class="form-control" type="text"
+                                   name="name"
+                                   placeholder="" id="room-acreage"/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label>Mô tả *</label>
+                        <textarea th:utext="${room.description}" class="form-control" rows="5"
+                                  type="text" name="name"
+                                  required minlength="30" data-msg-minlength="Tiêu đề quá ngắn"
+                                  data-msg-required="Mô tả không được để trống"
+                                  data-msg-maxlength="Mô tả quá dài"
+                                  placeholder="Vui lòng nhập mô tả"
+                                  id="room-description"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-md-12">
+                      <div class="row justify-content-center">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label>Link video phòng Youtube</label>
+                            <input th:value="${room.video}" class="form-control" type="text"
+                                   name="name"
+                                   placeholder="" id="room-video"/>
+                          </div>
+                        </div>
+                        <div class="col-md-6 border p-3 text-center">
+                          <label for="images" style="display: inline-block; margin-bottom: 10px;">Chọn
+                            ảnh</label>
+                          <input type="file" multiple onchange="previewMultiple(event)"
+                                 id="images" accept=".jpg,.gpn,.pdf,.png" style="display: none;"/>
+                          <div id="galeria" class="d-flex justify-content-center"
+                               th:each="img : ${imageRoom}">
+                            <img th:src=" ${img !=null && img !='' ? img :
+                          '../landlord/images/area-post.jpg'}" id="imageRoom" class="mr-3 rounded"
+                                 alt="">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tab-pane" role="tabpanel" id="step4">
+
+                  <h4 class="text-center">Bạn có muốn sửa hay xóa</h4>
+                  <div class="">
+                    <div class="row">
+                      <div class="col-md-12 d-flex justify-content-center">
+                        <div class="form-group ">
+                          <div class="form-check mb-2">
+                            <input type="radio" id="deletePost" name="action" value="delete"/>
+                            <label class="form-check-label" for="deletePost">
+                              Số tiền sẽ không được hoàn trả.
+                              <p style="color: red;" class="js-note-outofmoney"> Tích vào đây bài
+                                của bạn sẽ bị xóa</p>
+                            </label>
+                          </div>
+                          <div class="form-check mb-2">
+                            <input type="radio" id="editPost" name="action" value="edit"/>
+                            <label class="form-check-label" for="editPost">
+                              Tích vào đây bài của bạn sẽ được sửa lại
+                            </label>
+                          </div>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <ul class="list-inline pull-right">
+                <li>
+                  <button id="btn-back" type="button" class="default-btn prev-step">Quay lại
+                  </button>
+                </li>
+                <li>
+                  <button id="btn-next" type="button" class="default-btn next-step">Tiếp tục
+                  </button>
+                </li>
+                <li>
+                  <button id="btn-finish" type="button" class="default-btn next-step">Xác nhận
+                  </button>
+                </li>
+              </ul>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</html>

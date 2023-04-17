@@ -1,0 +1,65 @@
+<div class="tab-pane" role="tabpanel" id="step2">
+  <h4 class="text-center">Thông tin dãy trọ</h4>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label>Tên trọ *</label>
+        <input class="form-control" type="text" name="name" placeholder=""
+               id="area-name">
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Thành phố/Tỉnh thành *</label>
+        <select name="province" class="form-control" id="province">
+          <option>Vui lòng chọn thành phố/Tỉnh thành</option>
+
+          <!--                                                    <option th:each="province  : ${provinceList}"-->
+          <!--                                                            th:value="${province.id}"-->
+          <!--                                                            th:text="${province.name}"></option>-->
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Quận/Huyện *</label>
+        <select name="district" class="form-control" id="district">
+          <option disabled>Chọn Quận/ Huyện</option>
+          <!--                                                    <option th:each="district  : ${districtList}"-->
+          <!--                                                            th:value="${district.id}"-->
+          <!--                                                            th:text="${district.name}"></option>-->
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Xã/Phường *</label>
+        <select name="ward" class="form-control" id="ward">
+          <option disabled>Chọn Xã/ Phường</option>
+          <!--                                                    <option th:each="ward  : ${wardList}"-->
+          <!--                                                            th:value="${ward.id}"-->
+          <!--                                                            th:text="${ward.name}"></option>-->
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Địa chỉ cụ thể *</label>
+        <input class="form-control" id="exact-address" type="text" name="name"
+               placeholder=""/>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div id="map" style="width:100%;height:100%;">
+      </div>
+    </div>
+  </div>
+
+  <!--    <ul class="list-inline pull-right">-->
+  <!--        <li>-->
+  <!--            <button type="button" class="default-btn prev-step">Quay lại</button>-->
+  <!--        </li>-->
+  <!--        &lt;!&ndash;                                        <li>&ndash;&gt;-->
+  <!--        &lt;!&ndash;                                            <button type="button" class="default-btn next-step skip-btn">Skip</button>&ndash;&gt;-->
+  <!--        &lt;!&ndash;                                        </li>&ndash;&gt;-->
+  <!--        <li>-->
+  <!--            <button type="button" class="default-btn next-step">Tiếp tục</button>-->
+  <!--        </li>-->
+  <!--    </ul>-->
+</div>

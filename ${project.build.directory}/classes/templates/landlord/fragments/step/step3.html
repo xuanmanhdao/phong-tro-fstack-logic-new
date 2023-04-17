@@ -1,0 +1,96 @@
+<div class="tab-pane" role="tabpanel" id="step3">
+  <h4 class="text-center">Phòng trọ</h4>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Tên phòng *</label>
+        <input class="form-control" type="text" name="name" placeholder=""
+               id="room-name"/>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Tiền điện</label>
+            <input class="form-control" type="text" name="name"
+                   placeholder=""
+                   id="room-electricService"/>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Tiền nước</label>
+            <input class="form-control" type="text" name="name"
+                   placeholder=""
+                   id="room-waterService"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Diện tích</label>
+            <input class="form-control" type="text" name="name"
+                   placeholder="" id="room-rentPrice"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Giá phòng</label>
+            <input class="form-control" type="text" name="name"
+                   placeholder="" id="room-acreage"/>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label>Mô tả *</label>
+        <textarea class="form-control" rows="5" type="text" name="name"
+                  required minlength="30" data-msg-minlength="Tiêu đề quá ngắn"
+                  data-msg-required="Mô tả không được để trống"
+                  data-msg-maxlength="Mô tả quá dài"
+                  placeholder="Vui lòng nhập mô tả"
+                  id="room-description"></textarea>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Link video phòng Youtube</label>
+            <input class="form-control" type="text" name="name"
+                   placeholder="" id="room-video"/>
+          </div>
+          <!--                    <input type="file" id="videoUpload" style="display: none;"/>-->
+          <!--                    <label for="videoUpload"-->
+          <!--                           style="display: inline-block; margin-bottom: 10px;">Chọn-->
+          <!--                        video</label>-->
+          <!--                    <div class="d-flex justify-content-center">-->
+          <!--                        <video width="320" height="240" style="display:none">-->
+          <!--                        </video>-->
+          <!--                    </div>-->
+        </div>
+        <div class="col-md-6 border p-3 text-center">
+          <label for="images" style="display: inline-block; margin-bottom: 10px;">Chọn ảnh</label>
+          <input type="file" multiple onchange="previewMultiple(event)"
+                 id="images" accept=".jpg,.gpn,.pdf,.png" style="display: none;"/>
+          <div id="galeria" class="d-flex justify-content-center">
+            <!-- Hiển thị ảnh -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <!--    <ul class="list-inline pull-right">-->
+  <!--        <li>-->
+  <!--            <button type="button" class="default-btn prev-step">Quay lại</button>-->
+  <!--        </li>-->
+  <!--        <li>-->
+  <!--            <button type="button" class="default-btn next-step">Tiếp tục</button>-->
+  <!--        </li>-->
+  <!--    </ul>-->
+</div>
