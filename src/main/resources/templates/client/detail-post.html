@@ -220,6 +220,20 @@
             <!-- End video area  -->
 
 
+            <div class="section">
+              <h4 class="s-property-title">Định vị</h4>
+              <div class="s-property-content">
+                <!--                <div id="map"></div>-->
+                <div class="video-container">
+                  <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14900.942263993364!2d105.7828052890653!3d20.983192341629692!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acc16024080b%3A0x29125bc4d8d8c4e!2zOCBOZy4gMTExIFRyaeG7gXUgS2jDumMsIFTDom4gVHJp4buBdSwgVGhhbmggWHXDom4sIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1681751828444!5m2!1svi!2s"
+                      width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+              </div>
+            </div>
+            <!--  End map area -->
+
             <div class="section property-share">
               <h4 class="s-property-title">Share width your friends </h4>
               <div class="roperty-social">
@@ -241,8 +255,6 @@
                 </ul>
               </div>
             </div>
-            <!-- End video area  -->
-
           </div>
         </div>
 
@@ -303,7 +315,8 @@
                 <h3 class="panel-title">Quảng cáo</h3>
               </div>
               <div class="panel-body recent-property-widget">
-                <img th:src="@{/client/assets/img/ads.jpg}">
+                <!--                <img th:src="@{/client/assets/img/ads.jpg}">-->
+                <img th:src="@{/client/assets/img/ads-buy-2.jpg}">
               </div>
             </div>
 
@@ -418,6 +431,7 @@
   <script th:src="@{/client/assets/js/main.js}"></script>
 
   <script th:src="@{/client/assets/js/handler-search-show-posts.js}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
   <script th:inline="javascript">
     $(document).ready(function () {
       var slider = $('#image-gallery').lightSlider({
@@ -445,6 +459,7 @@
       let latitude = areaResponse.latitude;
       let nameArea = areaResponse.name;
       let address = `${exactAddress} - ${wardName} - ${districtName} - ${provinceName}`;
+      // initMap(latitude, longitude);
 
       let postCreatedAt = postResponse.createdAt;
       let postDate = new Date(postCreatedAt);
@@ -610,6 +625,21 @@
           onSliderLoad: function () {
             $('#image-gallery').removeClass('cS-hidden');
           }
+        });
+      }
+
+      function initMap(lat, lng) {
+        let myLatLng = {lat: lat, lng: lng};
+
+        let map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: myLatLng
+        });
+
+        let marker = new google.maps.Marker({
+          position: myLatLng,
+          map: map,
+          title: 'Hello World!'
         });
       }
     });
