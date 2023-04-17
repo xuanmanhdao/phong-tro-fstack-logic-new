@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PagedPostResponse {
-    private List<PostResponse> postResponses;
     private int totalPage;
     private int pageNumber;
     private int pageSize;
     private String searchRequest;
+    private List<PostResponse> postResponses;
 }
