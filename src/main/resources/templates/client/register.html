@@ -38,6 +38,18 @@
 <body>
 <!-- property area -->
 <div layout:fragment="content">
+  <style>
+    .form-control.is-invalid {
+      border-width: 2px;
+      border-color: #f10a0a;
+      background-color: #d99c2c;
+    }
+
+    .form-control:focus.is-invalid {
+      border-color: #151414;
+      box-shadow: 0 0 0 0.2rem rgba(220,53,69,.25);
+    }
+  </style>
   <div class="page-head">
     <div class="container">
       <div class="row">
@@ -58,16 +70,17 @@
             <h2>New account : </h2>
             <form action="" method="post" id="form-register">
               <div class="form-group">
-                <label for="name">Full Name</label>
-                <input type="text" class="form-control" id="name">
+                <label for="name-register">Full Name</label>
+                <input type="text" class="form-control" id="name-register" required>
               </div>
               <div class="form-group">
                 <label for="email-register">Email</label>
-                <input type="email" class="form-control" id="email-register">
+                <input type="email" class="form-control" id="email-register" required>
+                <span id="email-exists" style="display:none;color:red;">Email đã tồn tại.</span>
               </div>
               <div class="form-group">
                 <label for="password-register">Password</label>
-                <input type="password" class="form-control" id="password-register">
+                <input type="password" class="form-control" id="password-register" required>
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-default">Register</button>
@@ -83,11 +96,11 @@
             <form action="" method="post" id="form-login">
               <div class="form-group">
                 <label for="email-login">Email</label>
-                <input type="email" class="form-control" id="email-login">
+                <input type="email" class="form-control" id="email-login" required>
               </div>
               <div class="form-group">
                 <label for="password-login">Password</label>
-                <input type="password" class="form-control" id="password-login">
+                <input type="password" class="form-control" id="password-login" required>
               </div>
               <div class="text-center">
                 <button type="submit" class="btn btn-default"> Log in</button>
@@ -145,6 +158,38 @@
           },
           error: function (error) {
             console.log("Looxi");
+          }
+        });
+      });
+
+      $("#form-register").submit(function (event) {
+        event.preventDefault();
+        let fullName = $("#name-register").val().trim();
+        let email = $("#email-register").val().trim();
+        let password = $("#password-register").val().trim();
+        let data = JSON.stringify({fullName: fullName, email: email, password: password});
+        console.log(email + password + fullName);
+        $.ajax({
+          url: "/api/v1/rest/user/register",
+          type: "POST",
+          contentType: "application/json",
+          data: data,
+          success: function (response) {
+            console.log("Success");
+            console.log(response);
+            // Lưu thông tin đăng nhập vào sessionStorage
+            sessionStorage.setItem("idUser", response.id);
+            sessionStorage.setItem("fullNameUser", response.fullName);
+            sessionStorage.setItem("emailUser", response.email);
+            window.location.href = "/";
+          },
+          error: function (error) {
+            console.log("Looxi");
+            console.log(error);
+            const emailRegisterInput=document.getElementById("email-register");
+            emailRegisterInput.classList.add('is-invalid');
+            const emailExistsMsg = document.getElementById('email-exists');
+            emailExistsMsg.style.display = 'inline';
           }
         });
       });

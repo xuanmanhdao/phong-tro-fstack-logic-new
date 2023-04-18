@@ -19,5 +19,8 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
           + "where u.email = :email "
           + "and u.password = :password "
           + "LIMIT 1", nativeQuery = true)
-  List<Object[]> findByEmailAndPassword(@Param("email") String email, @Param("password") String password);
+  List<Object[]> findByEmailAndPassword(@Param("email") String email,
+      @Param("password") String password);
+
+  UserEntity findByEmail(String email);
 }

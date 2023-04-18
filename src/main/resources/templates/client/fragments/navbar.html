@@ -26,8 +26,16 @@
       <ul class="main-nav nav navbar-nav navbar-right" id="user-box" style="display: none">
         <li class="wow fadeInDown" data-wow-delay="0.4s">
           <a href="/leo/home">Quản lý tài khoản</a></li>
-        <li class="wow fadeInDown" data-wow-delay="0.4s">
-          <a style="font-weight: bold;" id="user-name" href="javascript:void(0)"></a></li>
+        <li class="dropdown ymm-sw" data-wow-delay="0.1s">
+          <a id="user-name" href="javascript:void(0)" class="dropdown-toggle"
+             data-toggle="dropdown"
+             data-hover="dropdown" data-delay="200"><b class="caret"></b></a>
+          <ul class="dropdown-menu navbar-nav">
+            <li>
+              <a href="javascript:void(0)" id="button-logout">Đăng xuất</a>
+            </li>
+          </ul>
+        </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -40,5 +48,13 @@
       document.getElementById("user-box").style.display = "block";
       document.getElementById("user-name").innerHTML = userName;
     }
+
+    const buttonLogout = document.getElementById('button-logout');
+
+    buttonLogout.addEventListener('click', () => {
+      console.log('Button clicked');
+      sessionStorage.clear();
+      window.location.href = '/logout';
+    });
   </script>
 </nav>

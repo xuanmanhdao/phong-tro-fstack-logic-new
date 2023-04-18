@@ -37,8 +37,8 @@ public class PersonnalService {
 			PersonnalDTO.setFullName(result[2].toString());
 			PersonnalDTO.setIdRole((Long) result[3]);
 			PersonnalDTO.setNameRole(result[4].toString());
-			PersonnalDTO.setPhoneNumber(result[5].toString());
-			PersonnalDTO.setBankAccount((Float) result[6]);
+			PersonnalDTO.setPhoneNumber(result[5] != null ? result[5].toString() : "");
+			PersonnalDTO.setBankAccount( (Float) result[6]);
 //			if(map.containsKey(id)) {
 //				if(map.get(id).getNameRole()=="ADMIN_HT") {
 //					map.get(id).setNameRole("ADMIN_HT");
